@@ -1,7 +1,7 @@
 <!doctype html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>WYLO — Gantt et base de données détaillée</title><style>
-@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;500;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;500;600;700;800;900&display=swap");
 :root{--bg:#1e1e22;--side:#26262b;--side2:#2f2f35;--line:#414148;--text:#fff;--muted:#adadb7;--purple:#85c83e;--blue:#3f5af6;--cyan:#1fb2cc;--pink:#ff3f86;--orange:#f4a03a}
-*{box-sizing:border-box}html,body{margin:0;height:100%;background:var(--bg);color:var(--text);font-family:'Montserrat Alternates',Montserrat,Arial,sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}button:disabled{opacity:.35;cursor:not-allowed}.app{height:100vh;display:flex;flex-direction:column;overflow:hidden}.top{height:100px;display:flex;align-items:center;gap:26px;padding:0 32px;border-bottom:1px solid #35353c;flex:none}.brand{font-size:26px;letter-spacing:-1.5px;font-weight:800;white-space:nowrap}.brand small{display:block;font-size:10px;letter-spacing:2.4px;color:#a9a9b3;margin-bottom:5px;font-weight:600}.controls{display:flex;align-items:center;gap:9px;margin-left:auto;flex-wrap:wrap}.pill{border:1px solid #73737c;background:transparent;color:#e9e9ed;padding:11px 17px;border-radius:100px;font-size:12px;font-weight:700;white-space:nowrap}.pill.active{color:#17171c;background:white;border-color:white}.pill.subtle{border-color:#47474e}.pill:hover{border-color:#fff}.workspace{display:grid;grid-template-columns:minmax(0,1fr) 235px;min-height:0;flex:1}.main{min-width:0;display:flex;flex-direction:column;overflow:hidden}.timebar{height:82px;display:flex;border-bottom:1px solid #44434b;align-items:stretch}.labels-head{width:var(--label-width, 345px);flex:none;padding:27px 22px 13px;font-size:11px;letter-spacing:.12em;font-weight:700;color:#aaaab3;border-right:1px solid #46464d}.axis-head{min-width:0;flex:1;overflow:hidden;position:relative}.axis-major{position:absolute;top:10px;height:26px;white-space:nowrap;font-weight:800;font-size:13px;color:#dedee4;left:0}.axis-days{position:absolute;top:39px;left:0;display:flex;white-space:nowrap}.axis-day{border-left:1px solid #47474d;padding:0 4px;height:40px;font-size:9px;color:#b6b6bf;display:flex;flex-direction:column;align-items:center;gap:2px;justify-content:flex-start}.axis-day b{font-size:11px;color:#fff}.viewport{position:relative;flex:1;min-height:0;overflow:auto;scrollbar-color:#4c4c55 transparent}.gantt-inner{position:relative;min-height:100%;width:100%;}.gantt-grid{position:relative;min-height:100%;width:100%;}.gantt-body{position:relative;min-width:100%;}.gantt-row{min-height:64px;display:flex;border-bottom:1px solid #34343b;position:relative}.gantt-label{flex:none;width:var(--label-width, 345px);padding:13px 18px 12px 27px;display:flex;align-items:center;font-size:11px;line-height:1.5;font-weight:600;background:#232327;z-index:3;border-right:1px solid #42424a;cursor:pointer}.gantt-label:hover{background:#35353b}.gantt-timeline{position:relative;flex:1;min-width:0}.gantt-bar{position:absolute;height:24px;top:20px;border-radius:99px;box-shadow:0 1px 8px #0004;border:0;min-width:10px;z-index:2;cursor:pointer}.gantt-bar:hover{outline:2px solid white;outline-offset:2px}.gantt-rail{position:absolute;top:32px;height:2px;right:0;background:#505057;z-index:0}.grid-lines{position:absolute;top:0;bottom:0;left:var(--label-width, 345px);right:0;pointer-events:none;background-image:linear-gradient(to right,#34343b 1px,transparent 1px);z-index:0}.axis-today{position:absolute;top:0;bottom:0;width:2px;background:#fff8;pointer-events:none;z-index:1}.dep-svg{position:absolute;top:0;left:var(--label-width, 345px);overflow:visible;pointer-events:none;z-index:2}.empty{padding:85px 28px;text-align:center;margin:20px auto;max-width:650px}.empty-icon{font-size:48px;margin-bottom:16px;opacity:.5}.empty h2{font-size:22px;margin-bottom:12px}.empty p{font-size:13px;line-height:2;color:var(--muted)}.empty button{margin-top:18px}.side{border-left:1px solid #45454d;background:#242428;padding:20px 15px 20px;display:flex;flex-direction:column;gap:11px;overflow:auto}.side-btn{width:100%;min-height:98px;border-radius:13px;border:0;background:#547f27;color:white;text-align:center;padding:18px 14px;font-weight:800;font-size:32px}.side-btn span{display:block;font-size:11px;font-weight:700;line-height:1.5;margin-top:7px}.side-btn.gray{background:#414148}.side-btn.gray b{font-size:28px}.families{display:grid;gap:8px}.family{display:flex;align-items:center;gap:9px;border:1px solid #46464d;background:#2d2d32;padding:11px 10px;color:#eee;border-radius:12px;text-align:left;font-weight:700;font-size:11px}.family.off{opacity:.35}.dot{width:12px;height:12px;border-radius:50%;flex:none}.family span{flex:1}.family small{font-size:10px;color:#aaa}.filter-dep{border:1px solid #60606b;border-radius:13px;background:#2d2d32;color:#fff;padding:11px;text-align:left;font-size:11px;font-weight:700}.filter-dep.on{border-color:white;background:#48484f}.filter-dep:before{content:'↳';margin-right:9px}.side-tip{margin-top:auto;font-size:10px;line-height:1.7;color:#95959d}.overlay{position:fixed;inset:0;background:#101014ad;z-index:15;display:none}.overlay.open{display:block}.database{position:fixed;inset:4vh 3vw;z-index:16;background:#242429;border:1px solid #5b5b64;border-radius:18px;display:none;flex-direction:column;box-shadow:0 30px 100px #0009;overflow:hidden}.database.open{display:flex}.db-head{display:flex;gap:18px;align-items:center;padding:21px 28px;border-bottom:1px solid #494950;flex:none}.db-head h2{font-size:20px;letter-spacing:-.7px;margin:0}.db-head p{font-size:11px;margin:6px 0 0;color:var(--muted)}.db-head .close{margin-left:auto}.db-filters{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:16px 26px;border-bottom:1px solid #414149}.input{background:#1d1d22;border:1px solid #55555e;border-radius:10px;color:#fff;padding:11px 12px;font-size:12px;min-height:41px}.input:focus{outline:2px solid #fff}.input.search{width:min(330px,100%)}.db-results{overflow:auto;flex:1}.db-table{width:100%;border-collapse:collapse;text-align:left;min-width:940px;font-size:11px}.db-table th{position:sticky;top:0;z-index:5;background:#36363d;color:#d1d1d9;padding:12px 14px;border-bottom:1px solid #55555b;white-space:nowrap;cursor:pointer}.db-table th:hover{color:white}.db-table td{padding:10px 14px;vertical-align:middle;border-bottom:1px solid #34343b}.db-table tr:hover td{background:#313139}.db-table .title{font-weight:700;line-height:1.55;max-width:620px}.db-table .chip{border:1px solid #55555f;display:inline-block;border-radius:90px;padding:5px 9px;white-space:nowrap}.db-table .state{color:#b9b9c2}.db-table .mini{padding:7px 12px;border-radius:50px;background:transparent;border:1px solid #6c6c75;color:white;font-size:10px}.db-table .mini:hover{background:white;color:#1d1d22}.db-group td{background:#35353e!important;font-size:12px;font-weight:800;padding:14px!important}.db-group small{font-weight:500;color:#bdbdc6}.db-footer{padding:11px 26px;color:#aaa;font-size:10px;border-top:1px solid #4b4b53}.modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);background:#292930;border:1px solid #62626e;border-radius:18px;width:min(760px,94vw);max-height:91vh;overflow:auto;z-index:32;display:none;box-shadow:0 30px 100px #000c;padding:26px}.modal.open{display:block}.modal h2{font-size:19px;margin:2px 0 18px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.field{display:flex;flex-direction:column;gap:7px}.field.wide{grid-column:1/-1}.field label{font-size:10px;font-weight:800;color:#c4c4cd}.field input,.field select,.field textarea{width:100%}.field textarea{resize:vertical;min-height:60px}.actions{display:flex;gap:10px;justify-content:space-between;margin-top:22px}.actions .right{display:flex;gap:10px}.danger{color:#ff8796!important;border-color:#e9556c!important}.notice{font-size:11px;line-height:1.65;padding:11px 13px;background:#1b1b20;border-left:3px solid #ecb054;border-radius:7px;color:#d1cbbd}.alert{position:fixed;right:25px;bottom:26px;background:#342a2e;border:1px solid #ff7886;z-index:60;border-radius:12px;padding:16px;max-width:430px;font-size:12px;line-height:1.6;display:none;box-shadow:0 15px 60px #0009}.alert.open{display:block}.alert button{margin-top:8px}.sub{font-size:11px;color:#c9c9d2;line-height:1.6}.help{color:#9292a0;font-size:10px;line-height:1.6}.tag-alert{color:#ffbb77}.secondary{font-size:11px;color:#999}.right-tools{display:flex;align-items:center;gap:10px}.low{font-size:10px;color:#9696a0}.fullscreen{font-size:20px;padding:7px 13px}.side-caption{font-size:11px;letter-spacing:.08em;color:#a4a4af;font-weight:800;margin:9px 4px 4px}.filterperson{width:100%;margin-top:3px}.hintbar{position:fixed;bottom:0;left:0;right:0;z-index:3;background:#323239;border-top:1px solid #62626b;padding:9px 25px;color:#eee;font-size:11px;display:none}.hintbar.on{display:block}
+*{box-sizing:border-box}html,body{margin:0;height:100%;background:var(--bg);color:var(--text);font-family:"Montserrat Alternates",Montserrat,Arial,sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}button:disabled{opacity:.35;cursor:not-allowed}.app{height:100vh;display:flex;flex-direction:column;overflow:hidden}.top{height:100px;display:flex;align-items:center;gap:26px;padding:0 32px;border-bottom:1px solid #35353c;flex:none}.brand{font-size:26px;letter-spacing:-1.5px;font-weight:800;white-space:nowrap}.brand small{display:block;font-size:10px;letter-spacing:2.4px;color:#a9a9b3;margin-bottom:5px;font-weight:600}.controls{display:flex;align-items:center;gap:9px;margin-left:auto;flex-wrap:wrap}.pill{border:1px solid #73737c;background:transparent;color:#e9e9ed;padding:11px 17px;border-radius:100px;font-size:12px;font-weight:700;white-space:nowrap}.pill.active{color:#17171c;background:white;border-color:white}.pill.subtle{border-color:#47474e}.pill:hover{border-color:#fff}.workspace{display:grid;grid-template-columns:minmax(0,1fr) 235px;min-height:0;flex:1}.main{min-width:0;display:flex;flex-direction:column;overflow:hidden}.timebar{height:82px;display:flex;border-bottom:1px solid #44434b;align-items:stretch}.labels-head{width:var(--label-width, 345px);flex:none;padding:27px 22px 13px;font-size:11px;letter-spacing:.12em;font-weight:700;color:#aaaab3;border-right:1px solid #46464d}.axis-head{min-width:0;flex:1;overflow:hidden;position:relative}.axis-major{position:absolute;top:10px;height:26px;white-space:nowrap;font-weight:800;font-size:13px;color:#dedee4;left:0}.axis-days{position:absolute;top:39px;left:0;display:flex;white-space:nowrap}.axis-day{border-left:1px solid #47474d;padding:0 4px;height:40px;font-size:9px;color:#b6b6bf;display:flex;flex-direction:column;align-items:center;gap:2px;justify-content:flex-start}.axis-day b{font-size:11px;color:#fff}.viewport{position:relative;flex:1;min-height:0;overflow:auto;scrollbar-color:#4c4c55 transparent}.gantt-inner{position:relative;min-height:100%;width:100%;}.gantt-grid{position:relative;min-height:100%;width:100%;}.gantt-body{position:relative;min-width:100%;}.gantt-row{min-height:64px;display:flex;border-bottom:1px solid #34343b;position:relative}.gantt-label{flex:none;width:var(--label-width, 345px);padding:13px 18px 12px 27px;display:flex;align-items:center;font-size:11px;line-height:1.5;font-weight:600;background:#232327;z-index:3;border-right:1px solid #42424a;cursor:pointer}.gantt-label:hover{background:#35353b}.gantt-timeline{position:relative;flex:1;min-width:0}.gantt-bar{position:absolute;height:24px;top:20px;border-radius:99px;box-shadow:0 1px 8px #0004;border:0;min-width:10px;z-index:2;cursor:pointer}.gantt-bar:hover{outline:2px solid white;outline-offset:2px}.gantt-rail{position:absolute;top:32px;height:2px;right:0;background:#505057;z-index:0}.grid-lines{position:absolute;top:0;bottom:0;left:var(--label-width, 345px);right:0;pointer-events:none;background-image:linear-gradient(to right,#34343b 1px,transparent 1px);z-index:0}.axis-today{position:absolute;top:0;bottom:0;width:2px;background:#fff8;pointer-events:none;z-index:1}.dep-svg{position:absolute;top:0;left:var(--label-width, 345px);overflow:visible;pointer-events:none;z-index:2}.empty{padding:85px 28px;text-align:center;margin:20px auto;max-width:650px}.empty-icon{font-size:48px;margin-bottom:16px;opacity:.5}.empty h2{font-size:22px;margin-bottom:12px}.empty p{font-size:13px;line-height:2;color:var(--muted)}.empty button{margin-top:18px}.side{border-left:1px solid #45454d;background:#242428;padding:20px 15px 20px;display:flex;flex-direction:column;gap:11px;overflow:auto}.side-btn{width:100%;min-height:98px;border-radius:13px;border:0;background:#547f27;color:white;text-align:center;padding:18px 14px;font-weight:800;font-size:32px}.side-btn span{display:block;font-size:11px;font-weight:700;line-height:1.5;margin-top:7px}.side-btn.gray{background:#414148}.side-btn.gray b{font-size:28px}.families{display:grid;gap:8px}.family{display:flex;align-items:center;gap:9px;border:1px solid #46464d;background:#2d2d32;padding:11px 10px;color:#eee;border-radius:12px;text-align:left;font-weight:700;font-size:11px}.family.off{opacity:.35}.dot{width:12px;height:12px;border-radius:50%;flex:none}.family span{flex:1}.family small{font-size:10px;color:#aaa}.filter-dep{border:1px solid #60606b;border-radius:13px;background:#2d2d32;color:#fff;padding:11px;text-align:left;font-size:11px;font-weight:700}.filter-dep.on{border-color:white;background:#48484f}.filter-dep:before{content:"↳";margin-right:9px}.side-tip{margin-top:auto;font-size:10px;line-height:1.7;color:#95959d}.overlay{position:fixed;inset:0;background:#101014ad;z-index:15;display:none}.overlay.open{display:block}.database{position:fixed;inset:4vh 3vw;z-index:16;background:#242429;border:1px solid #5b5b64;border-radius:18px;display:none;flex-direction:column;box-shadow:0 30px 100px #0009;overflow:hidden}.database.open{display:flex}.db-head{display:flex;gap:18px;align-items:center;padding:21px 28px;border-bottom:1px solid #494950;flex:none}.db-head h2{font-size:20px;letter-spacing:-.7px;margin:0}.db-head p{font-size:11px;margin:6px 0 0;color:var(--muted)}.db-head .close{margin-left:auto}.db-filters{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:16px 26px;border-bottom:1px solid #414149}.input{background:#1d1d22;border:1px solid #55555e;border-radius:10px;color:#fff;padding:11px 12px;font-size:12px;min-height:41px}.input:focus{outline:2px solid #fff}.input.search{width:min(330px,100%)}.db-results{overflow:auto;flex:1}.db-table{width:100%;border-collapse:collapse;text-align:left;min-width:940px;font-size:11px}.db-table th{position:sticky;top:0;z-index:5;background:#36363d;color:#d1d1d9;padding:12px 14px;border-bottom:1px solid #55555b;white-space:nowrap;cursor:pointer}.db-table th:hover{color:white}.db-table td{padding:10px 14px;vertical-align:middle;border-bottom:1px solid #34343b}.db-table tr:hover td{background:#313139}.db-table .title{font-weight:700;line-height:1.55;max-width:620px}.db-table .chip{border:1px solid #55555f;display:inline-block;border-radius:90px;padding:5px 9px;white-space:nowrap}.db-table .state{color:#b9b9c2}.db-table .mini{padding:7px 12px;border-radius:50px;background:transparent;border:1px solid #6c6c75;color:white;font-size:10px}.db-table .mini:hover{background:white;color:#1d1d22}.db-group td{background:#35353e!important;font-size:12px;font-weight:800;padding:14px!important}.db-group small{font-weight:500;color:#bdbdc6}.db-footer{padding:11px 26px;color:#aaa;font-size:10px;border-top:1px solid #4b4b53}.modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);background:#292930;border:1px solid #62626e;border-radius:18px;width:min(760px,94vw);max-height:91vh;overflow:auto;z-index:32;display:none;box-shadow:0 30px 100px #000c;padding:26px}.modal.open{display:block}.modal h2{font-size:19px;margin:2px 0 18px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.field{display:flex;flex-direction:column;gap:7px}.field.wide{grid-column:1/-1}.field label{font-size:10px;font-weight:800;color:#c4c4cd}.field input,.field select,.field textarea{width:100%}.field textarea{resize:vertical;min-height:60px}.actions{display:flex;gap:10px;justify-content:space-between;margin-top:22px}.actions .right{display:flex;gap:10px}.danger{color:#ff8796!important;border-color:#e9556c!important}.notice{font-size:11px;line-height:1.65;padding:11px 13px;background:#1b1b20;border-left:3px solid #ecb054;border-radius:7px;color:#d1cbbd}.alert{position:fixed;right:25px;bottom:26px;background:#342a2e;border:1px solid #ff7886;z-index:60;border-radius:12px;padding:16px;max-width:430px;font-size:12px;line-height:1.6;display:none;box-shadow:0 15px 60px #0009}.alert.open{display:block}.alert button{margin-top:8px}.sub{font-size:11px;color:#c9c9d2;line-height:1.6}.help{color:#9292a0;font-size:10px;line-height:1.6}.tag-alert{color:#ffbb77}.secondary{font-size:11px;color:#999}.right-tools{display:flex;align-items:center;gap:10px}.low{font-size:10px;color:#9696a0}.fullscreen{font-size:20px;padding:7px 13px}.side-caption{font-size:11px;letter-spacing:.08em;color:#a4a4af;font-weight:800;margin:9px 4px 4px}.filterperson{width:100%;margin-top:3px}.hintbar{position:fixed;bottom:0;left:0;right:0;z-index:3;background:#323239;border-top:1px solid #62626b;padding:9px 25px;color:#eee;font-size:11px;display:none}.hintbar.on{display:block}
 @media(max-width:1100px){.top{height:auto;min-height:93px;gap:10px;padding:17px;flex-wrap:wrap}.controls{margin-left:0}.workspace{grid-template-columns:minmax(0,1fr) 200px}.labels-head,.gantt-label{width:var(--label-width, 345px)}.grid-lines{left:var(--label-width, 345px)}.dep-svg{left:var(--label-width, 345px)}}
 @media(max-width:750px){.workspace{grid-template-columns:minmax(0,1fr)}.side{height:230px;border-left:0;border-top:1px solid #444;display:block}.families{grid-template-columns:repeat(2,1fr)}.side-btn{min-height:60px}.database{inset:1vh 1vw}.formgrid{grid-template-columns:1fr}.field.wide{grid-column:1}.top .brand{font-size:20px}.pill{padding:9px 12px}}
 
@@ -17,7 +17,7 @@
 .family:hover,.filter-dep:hover{opacity:1;}
 .filter-dep{display:flex;align-items:center;justify-content:flex-start;width:100%;border:1px solid #707079;background:#34343b;color:white;font-size:11px;font-weight:700;opacity:.32;}
 .filter-dep.on{opacity:1;border-color:#a6a6b0;background:#45454e;}
-.filter-dep:before{content:'↳';display:inline-block;font-size:15px;margin-right:11px;line-height:1;}
+.filter-dep:before{content:"↳";display:inline-block;font-size:15px;margin-right:11px;line-height:1;}
 @media(max-width:750px){.side{height:auto;min-height:220px;display:flex;}.side-btn{min-height:72px}.families{grid-template-columns:1fr}.filter-dep{min-height:42px}}
 
 /* Mise à l'échelle verticale de la colonne latérale : occuper tout l'espace utile. */
@@ -90,7 +90,7 @@
 .family .dot{border:1px solid #0002}
 .filter-dep:before{color:inherit}
 .label-resizer{position:absolute;top:0;right:-7px;width:14px;height:100%;cursor:col-resize;z-index:20;touch-action:none}
-.label-resizer::before{content:'';display:block;position:absolute;left:6px;top:0;bottom:0;width:2px;background:#62626c;opacity:.55}
+.label-resizer::before{content:"";display:block;position:absolute;left:6px;top:0;bottom:0;width:2px;background:#62626c;opacity:.55}
 .label-resizer:hover::before,.label-resizer.dragging::before,.label-resizer:focus-visible::before{background:#fff;opacity:1}
 .labels-head{width:var(--label-width);position:relative;overflow:visible}
 .gantt-label{width:var(--label-width);padding:10px 17px 10px 23px}
@@ -1042,7 +1042,7 @@ select.input:focus-visible,.database select:focus-visible,.modal select:focus-vi
   width:100%;height:42px;min-height:42px;min-width:0;border-radius:999px!important;
   border:1px solid #55555e!important;background:#1d1d22!important;color:#f4f4f7!important;
   display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 14px 0 16px!important;
-  font-family:'Montserrat Alternates',Montserrat,Arial,sans-serif!important;font-size:12px!important;font-weight:600!important;
+  font-family:"Montserrat Alternates",Montserrat,Arial,sans-serif!important;font-size:12px!important;font-weight:600!important;
   text-align:left;white-space:nowrap;cursor:pointer;box-shadow:none!important;
 }
 .wylo-select-trigger .wylo-select-value{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
@@ -1053,7 +1053,7 @@ select.input:focus-visible,.database select:focus-visible,.modal select:focus-vi
  position:fixed;z-index:1000;display:flex;flex-direction:column;overflow-y:auto;overscroll-behavior:contain;
  max-height:min(360px,55vh);background:#292930;border:1px solid #63636d;border-radius:20px;
  padding:7px;box-shadow:0 18px 60px #000a;scrollbar-color:#676772 #292930;
- font-family:'Montserrat Alternates',Montserrat,Arial,sans-serif;
+ font-family:"Montserrat Alternates",Montserrat,Arial,sans-serif;
  opacity:0;transform:translateY(-5px);transition:opacity 145ms ease,transform 145ms ease;
 }
 .wylo-select-menu.is-visible{opacity:1;transform:translateY(0);}
@@ -1351,7 +1351,7 @@ select.input:focus-visible,.database select:focus-visible,.modal select:focus-vi
   border-radius:9999px!important;
   box-shadow:none!important;
   flex:0 0 42px!important;
-  font:600 12px/1.3 'Montserrat Alternates',Montserrat,Arial,sans-serif!important;
+  font:600 12px/1.3 "Montserrat Alternates",Montserrat,Arial,sans-serif!important;
 }
 .wylo-select-menu.wylo-anchored-menu.wylo-handoff-fade {
   opacity:0!important;
@@ -1388,7 +1388,7 @@ select.input:focus-visible,.database select:focus-visible,.modal select:focus-vi
 .wylo-select-menu .wylo-select-option,
 .wylo-select-menu.wylo-anchored-menu .wylo-select-option,
 .wylo-select-menu.wylo-anchored-menu .wylo-select-option[aria-selected="true"] {
-  font-family:'Montserrat Alternates',Montserrat,Arial,sans-serif!important;
+  font-family:"Montserrat Alternates",Montserrat,Arial,sans-serif!important;
   font-size:12px!important;font-weight:400!important;font-style:normal!important;
   letter-spacing:normal!important;line-height:1.3!important;
 }
@@ -1627,7 +1627,7 @@ select.input:focus-visible,.database select:focus-visible,.modal select:focus-vi
   height:42px!important;
   min-height:42px!important;
   max-height:42px!important;
-  font:400 12px/1.3 'Montserrat Alternates',Montserrat,Arial,sans-serif!important;
+  font:400 12px/1.3 "Montserrat Alternates",Montserrat,Arial,sans-serif!important;
 }
 /* Le cartouche et sa sélection blanche s'éteignent en même temps. */
 .wylo-select-menu.wylo-anchored-menu.wylo-collapse-choice.wylo-simultaneous-fade{
@@ -2286,7 +2286,7 @@ button,
 #modal .formgrid .field > label,
 #modal .formgrid .wylo-four-fields .field > label,
 #modal .formgrid #wyloLinkHeading{
-  font-family:'Montserrat Alternates',Montserrat,Arial,sans-serif!important;
+  font-family:"Montserrat Alternates",Montserrat,Arial,sans-serif!important;
   font-size:10px!important;
   font-weight:700!important;
   letter-spacing:.025em!important;
@@ -2385,7 +2385,7 @@ button,
 #modal .formgrid .field:has(#fstart) > label,
 #modal .formgrid .field:has(#fend) > label,
 #modal .formgrid .field:has(#fduration) > label {
-  font-family:'Montserrat Alternates',Montserrat,Arial,sans-serif!important;
+  font-family:"Montserrat Alternates",Montserrat,Arial,sans-serif!important;
   font-size:10px!important;
   font-weight:700!important;
   letter-spacing:.025em!important;
@@ -2403,7 +2403,7 @@ button,
   box-sizing:border-box!important;flex:1 1 auto!important;min-width:0!important;width:100%!important;
   height:100%!important;background:transparent!important;border:0!important;outline:0!important;
   border-radius:0!important;box-shadow:none!important;
-  color:#f5f5f9!important;font-family:'Montserrat Alternates',Montserrat,Arial,sans-serif!important;
+  color:#f5f5f9!important;font-family:"Montserrat Alternates",Montserrat,Arial,sans-serif!important;
   font-size:12px!important;font-weight:400!important;padding:0 12px!important;
   appearance:textfield!important;-moz-appearance:textfield!important;
 }
@@ -2442,11 +2442,11 @@ button,
 #modal .wylo-link-lag .wylo-lag-composite{height:44px!important}
 #modal .wylo-link-lag #fdepLag{
   flex:0 0 32px!important;width:32px!important;min-width:32px!important;max-width:32px!important;
-  padding-left:10px!important;font-family:'Montserrat Alternates',Montserrat,Arial,sans-serif!important;
+  padding-left:10px!important;font-family:"Montserrat Alternates",Montserrat,Arial,sans-serif!important;
   font-size:12px!important;font-weight:400!important;
 }
 #modal .wylo-lag-unit{
-  font-family:'Montserrat Alternates',Montserrat,Arial,sans-serif!important;
+  font-family:"Montserrat Alternates",Montserrat,Arial,sans-serif!important;
   font-size:11px!important;font-weight:400!important;letter-spacing:-.03em!important;
 }
 #modal .wylo-lag-spinner{flex-basis:24px!important;margin-right:5px!important}
@@ -2463,13 +2463,13 @@ button,
 /* La date affichée doit avoir la même graisse normale que les champs Pôle et Responsable. */
 #modal .wylo-date-trigger,
 #modal .wylo-date-trigger .wylo-date-value {
-  font-family:'Montserrat Alternates',Montserrat,Arial,sans-serif!important;
+  font-family:"Montserrat Alternates",Montserrat,Arial,sans-serif!important;
   font-size:12px!important;
   font-weight:400!important;
 }
 /* Texte du compteur à la même taille que les autres valeurs des champs. */
 #modal .wylo-link-lag .wylo-lag-unit {
-  font-family:'Montserrat Alternates',Montserrat,Arial,sans-serif!important;
+  font-family:"Montserrat Alternates",Montserrat,Arial,sans-serif!important;
   font-size:12px!important;
   font-weight:400!important;
   letter-spacing:0!important;
@@ -2527,14 +2527,375 @@ button,
 .gantt-label .gantt-task-id[data-digits="8"]{font-size:8px!important;padding-inline:4px!important}
 .gantt-label .gantt-task-id[data-digits="9"],
 .gantt-label .gantt-task-id[data-digits="10"]{font-size:7px!important;padding-inline:2px!important}
+
+/* WYLO 926 : atténuation du second niveau à l’ouverture du troisième */
+.database.open:has(~ .modal.open),.database.open.wylo-behind-ticket{
+ filter:brightness(.66);
+ transition:filter .2s ease;
+ pointer-events:none;
+}
+.modal.open{filter:none!important}
+@media(prefers-reduced-motion:reduce){.database.open.wylo-behind-ticket{transition:none}}
+
+/* Menu flottant des paramètres */
+.wylo-settings-wrap{position:relative;flex:none;display:flex;align-items:center;z-index:50}
+.wylo-settings-trigger{height:42px!important;width:42px!important;min-width:42px!important;padding:9px!important;display:grid!important;place-items:center!important;border-radius:999px!important}
+.wylo-settings-trigger svg{width:21px;height:21px;display:block}
+.wylo-settings-trigger[aria-expanded="true"]{border-color:#fff;background:#393940}
+.wylo-settings-menu{position:absolute;top:calc(100% + 10px);left:0;display:flex;flex-direction:column;gap:8px;min-width:220px;padding:0;z-index:52}
+.wylo-settings-menu[hidden]{display:none!important}
+.wylo-setting-item{display:flex!important;align-items:center!important;gap:10px!important;padding:11px 15px!important;min-height:44px!important;width:100%;text-align:left!important;border:1px solid #73737c!important;border-radius:999px!important;background:#292930!important;box-shadow:0 7px 28px #0007!important;font-size:12px!important;color:#f8f8fb!important}
+.wylo-setting-item:hover{background:#3b3b43!important;border-color:white!important}
+.wylo-setting-icon{display:flex;align-items:center;justify-content:center;width:20px;height:20px;flex:none}
+.wylo-setting-icon svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+/* Mode clair : palette lumineuse adaptée aux trois écrans, en conservant
+   la palette des catégories et les codes d'état. */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* WYLO 927 - Charte des thèmes : inversion des contrastes sans perte de texte */
+.wylo-settings-wrap {isolation:isolate;z-index:100!important}
+.wylo-settings-trigger,.wylo-settings-trigger:hover,.wylo-settings-trigger:focus-visible {
+ width:42px!important;height:42px!important;min-width:42px!important;min-height:42px!important;
+ max-width:42px!important;max-height:42px!important;padding:0!important;display:grid!important;
+ place-items:center!important;border-radius:50%!important;border:1px solid #73737c!important;
+ background:#303036!important;color:#fff!important;box-shadow:none!important;
+}
+.wylo-settings-trigger svg{width:19px!important;height:19px!important;display:block!important;flex:none!important}
+.wylo-settings-menu{width:max-content!important;min-width:0!important;max-width:min(280px,90vw)!important;align-items:flex-start!important;gap:8px!important;z-index:105!important}
+.wylo-settings-menu .wylo-setting-item{
+ box-sizing:border-box!important;min-width:0!important;max-width:100%!important;width:max-content!important;
+ display:inline-flex!important;align-items:center!important;justify-content:flex-start!important;
+ gap:9px!important;padding:10px 14px!important;height:auto!important;min-height:42px!important;
+ font-size:12px!important;line-height:1.25!important;white-space:nowrap!important;
+}
+.wylo-settings-menu .wylo-setting-icon{width:17px!important;height:17px!important;flex:0 0 17px!important}
+.wylo-settings-menu .wylo-setting-icon svg{width:17px!important;height:17px!important}
+/* La commande d'agrandissement : icône au-dessus et libellé en dessous. */
+.wylo-settings-menu .wylo-screen-option{flex-direction:column!important;gap:5px!important;align-items:center!important;padding:10px 16px!important}
+.wylo-settings-menu .wylo-screen-option .wylo-setting-icon{height:19px!important;width:19px!important;flex:0 0 19px!important}
+/* La commande de thème est ajustée à la largeur du texte : aucun vide artificiel. */
+.wylo-settings-menu #wyloThemeToggle{padding-inline:13px!important}
+
+/* Surfaces du mode clair : chaque gris sombre devient un gris clair lisible. */
+
+
+
+
+
+
+
+
+
+
+
+
+/* Tous les boutons neutres, y compris le bloc Echelle et les filtres : même gris. */
+
+
+
+
+/* Inverse du bouton tickets : noir sur gris clair, et non blanc invisible. */
+
+
+
+/* Numéros dans les ronds : assurer leur contraste dans les deux écrans. */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* WYLO 928 — roue dentée stable, menu refermé après toute action */
+
+
+
+/* WYLO 929 — mode clair, transposition uniforme des états du mode sombre.
+   En sombre : même gris pour tous les filtres et échelles, l'activité se
+   distingue par l'opacité, non par un fond noir. En clair : même règle. */
+
+
+
+
+/* Les textes d'un filtre hériteront du gris foncé, même si les règles
+   existantes du sombre avaient fixé les spans en blanc. */
+
+/* Compteur tickets : véritable inverse de la capsule blanche du mode sombre. */
+
+
+/* Les ronds du Gantt ont exactement le même contraste que ceux de la base. */
+
+/* Les éléments de commande secondaires ne doivent pas être noirs. */
+
+
+
+
+/* Même comportement discret que le mode sombre : aucune inversion au survol. */
+
+
+/* WYLO 930 — le mode clair est l'inversion chromatique exacte du mode sombre.
+   Aucune règle locale ne modifie couleurs, opacités ou états actifs. */
+html.wylo-light { filter: invert(1); }
+
+/* WYLO 931 — préserver les cinq couleurs identitaires des pôles.
+   Le mode clair conserve l’inversion chromatique générale de la V930.
+   Seuls les éléments portant les couleurs des pôles sont contre-inversés. */
+html.wylo-light #families .family .dot,
+html.wylo-light #dbrows .chip .dot,
+html.wylo-light #ganttRows .gantt-bar {
+  filter:invert(1)!important;
+}
+
+/* WYLO 932 — menu flottant : une capsule = la taille réelle de son contenu.
+   Ne pas hériter de la largeur du bouton plein écran en tête de page. */
+#wyloSettingsWrap{overflow:visible!important}
+#wyloSettingsMenu{
+ position:absolute!important;inset:auto auto auto 0!important;
+ top:calc(100% + 10px)!important;left:0!important;
+ display:flex!important;flex-direction:column!important;align-items:flex-start!important;
+ width:max-content!important;min-width:max-content!important;max-width:none!important;
+ overflow:visible!important;gap:8px!important;
+}
+#wyloSettingsMenu[hidden]{display:none!important}
+#wyloSettingsMenu > button.wylo-setting-item,
+#wyloSettingsMenu > #fullscreen,
+#wyloSettingsMenu > #wyloThemeToggle{
+ display:inline-flex!important;box-sizing:content-box!important;
+ flex:0 0 auto!important;width:max-content!important;min-width:max-content!important;
+ max-width:none!important;height:auto!important;min-height:43px!important;
+ padding:10px 14px!important;margin:0!important;
+ white-space:nowrap!important;overflow:visible!important;text-overflow:clip!important;
+ align-items:center!important;justify-content:flex-start!important;gap:9px!important;
+ border-radius:999px!important;line-height:1.3!important;
+}
+#wyloSettingsMenu > #fullscreen.wylo-screen-option{flex-direction:column!important;align-items:center!important;gap:6px!important;padding:11px 16px!important}
+#wyloSettingsMenu .wylo-setting-icon{
+ display:inline-flex!important;flex:0 0 19px!important;
+ width:19px!important;height:19px!important;
+ align-items:center!important;justify-content:center!important
+}
+#wyloSettingsMenu .wylo-setting-icon svg{height:18px!important;width:18px!important;display:block!important}
+#wyloSettingsMenu #wyloFullscreenLabel,
+#wyloSettingsMenu #wyloThemeLabel{
+ display:inline-block!important;width:max-content!important;max-width:none!important;
+ flex:none!important;white-space:nowrap!important;overflow:visible!important;
+ font-size:12px!important;line-height:1.3!important;
+}
+/* Material Symbols : certains pictogrammes sont remplis (soleil et lune). */
+#wyloThemeIcon svg{stroke:none!important;fill:currentColor!important}
+
+/* Teintes sémantiques constantes : CSS prémélangé avec l'inversion globale.
+   Les palettes des pôles sont déjà conservées par les règles 931. */
+html.wylo-light .pill.danger,
+html.wylo-light .pill.danger:hover,
+html.wylo-light .pill.danger:focus-visible{
+ color:#007869!important; /* inversion finale → #ff8796 */
+ border-color:#16aa93!important; /* → #e9556c */
+}
+html.wylo-light .pill.danger svg{stroke:#007869!important}
+html.wylo-light .notice.wylo-dep-card{
+ box-shadow:inset 4px 0 0 #104db3!important; /* → #efb24c */
+}
+html.wylo-light .schedule-warning{
+ box-shadow:inset 4px 0 0 #008579!important; /* → #ff7a86 */
+}
+html.wylo-light .alert{
+ border-color:#008779!important; /* → #ff7886 */
+}
+
+/* WYLO 933 — paramètres persistants, dimensions & pictogrammes filaires */
+#wyloSettingsWrap{overflow:visible!important}
+/* Une seule source d'état : lorsque le menu est visible, la roue dentée se comporte
+   comme un filtre désélectionné, sans modification de sa couleur ni de son fond. */
+#wyloSettingsToggle[aria-expanded="true"],
+#wyloSettingsToggle[aria-expanded="true"]:hover,
+#wyloSettingsToggle[aria-expanded="true"]:focus-visible,
+#wyloSettingsToggle[aria-expanded="true"]:active{
+ opacity:.35!important;
+ filter:none!important;
+ transform:none!important;
+}
+#wyloSettingsToggle svg{width:20px!important;height:20px!important;stroke:currentColor!important;fill:none!important}
+#wyloSettingsMenu{display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:8px!important}
+#wyloSettingsMenu[hidden]{display:none!important}
+#wyloSettingsMenu > #fullscreen,
+#wyloSettingsMenu > #wyloThemeToggle{
+ display:inline-flex!important;
+ flex:0 0 auto!important;
+ flex-direction:row!important;
+ align-items:center!important;
+ justify-content:flex-start!important;
+ gap:9px!important;
+ box-sizing:border-box!important;
+ height:42px!important;
+ min-height:42px!important;
+ max-height:42px!important;
+ width:max-content!important;
+ min-width:max-content!important;
+ max-width:none!important;
+ padding:0 14px!important;
+ border-radius:999px!important;
+ white-space:nowrap!important;
+ line-height:1!important;
+}
+#wyloSettingsMenu > #fullscreen > .wylo-setting-icon,
+#wyloSettingsMenu > #wyloThemeToggle > .wylo-setting-icon{
+ flex:0 0 19px!important;
+ width:19px!important;height:19px!important;
+ margin:0!important;padding:0!important;
+ display:inline-flex!important;align-items:center!important;justify-content:center!important;
+}
+#wyloSettingsMenu .wylo-setting-icon svg{
+ width:19px!important;height:19px!important;
+ stroke:currentColor!important;
+ stroke-width:1.8!important;
+ stroke-linejoin:round!important;
+ stroke-linecap:round!important;
+ fill:none!important;
+}
+#wyloSettingsMenu #wyloFullscreenLabel,
+#wyloSettingsMenu #wyloThemeLabel{
+ font-size:12px!important;
+ line-height:1!important;
+ white-space:nowrap!important;
+ display:inline-block!important;
+ width:auto!important;
+ margin:0!important;
+ padding:0!important;
+ font-weight:700!important;
+}
+@media(max-width:420px){#wyloSettingsMenu{max-width:calc(100vw - 32px)!important}}
+
+/* WYLO 935 — couleurs sémantiques identiques dans les deux modes.
+   En clair, WYLO inverse chromatiquement le document complet :
+   il faut donc fournir la couleur complémentaire en amont de l'inversion. */
+:root{--wylo-danger:#ed4545;--wylo-dependency:#efb24c}
+#modal #fdelete,
+#modal #fdelete:hover,
+#modal #fdelete:focus-visible{
+ color:var(--wylo-danger)!important;
+ border-color:var(--wylo-danger)!important;
+}
+#modal #fdelete svg{stroke:var(--wylo-danger)!important}
+#modal #fdepList .wylo-dep-card{
+ box-shadow:inset 4px 0 0 var(--wylo-dependency)!important;
+ border-left:1px solid #4e4f59!important;
+}
+#modal .schedule-warning{
+ box-shadow:inset 4px 0 0 var(--wylo-danger)!important;
+}
+html.wylo-light{--wylo-danger:#12baba;--wylo-dependency:#104db3}
+/* Éviter que les anciennes exceptions du mode clair écrasent ces codes couleurs. */
+html.wylo-light #modal #fdelete,
+html.wylo-light #modal #fdelete:hover,
+html.wylo-light #modal #fdelete:focus-visible{
+ color:var(--wylo-danger)!important;
+ border-color:var(--wylo-danger)!important;
+}
+html.wylo-light #modal #fdelete svg{stroke:var(--wylo-danger)!important}
+html.wylo-light #modal #fdepList .wylo-dep-card{
+ box-shadow:inset 4px 0 0 var(--wylo-dependency)!important;
+}
+html.wylo-light #modal .schedule-warning{
+ box-shadow:inset 4px 0 0 var(--wylo-danger)!important;
+}
+
+/* WYLO 936 — laisser une colonne libre aux commandes Paramètres
+   sans recouvrir la fenêtre secondaire ; recalcul des contrôles internes. */
+@media(min-width:1051px){
+ .database{
+  left:clamp(242px,18.5vw,296px)!important;
+  right:3vw!important;
+  width:auto!important;
+  max-width:none!important;
+ }
+ .database .db-head{gap:10px!important;padding-left:20px!important;padding-right:20px!important}
+ .database .db-title-group{gap:14px!important;min-width:0!important;flex:1 1 auto!important}
+ .database .db-summary{gap:13px!important}
+ .database .db-header-actions{gap:7px!important;flex-shrink:0!important}
+ .database .db-filters{padding-left:20px!important;padding-right:20px!important;gap:10px!important;
+   grid-template-columns:minmax(190px,1.4fr) minmax(140px,1fr) minmax(140px,1fr)!important}
+ .database .db-floating-actions{right:20px!important}
+}
+@media(min-width:751px) and (max-width:1050px){
+ .database{left:clamp(214px,23vw,250px)!important;right:2vw!important;width:auto!important;max-width:none!important}
+ .database .db-head{flex-wrap:wrap!important;padding:14px 18px!important}
+ .database .db-title-group{width:100%!important;gap:12px!important;flex-wrap:wrap!important}
+ .database .db-filters{grid-template-columns:repeat(2,minmax(0,1fr))!important;padding:12px 18px!important}
+ .database .db-filters #dbsearch{grid-column:1/-1!important}
+}
+/* En petit écran, ne pas sacrifier la lisibilité de la base : le menu reste flottant
+   mais peut se superposer temporairement à l'écran secondaire. */
+@media(max-width:750px){.database{left:1vw!important;right:1vw!important;width:auto!important}}
+
+/* WYLO 937 — le bord supérieur du secondaire s’aligne précisément
+   sur la séparation du bandeau de commandes et du Gantt. */
+.database,
+.database.open{
+  top:var(--wylo-secondary-top,92px)!important;
+}
 </style></head><body>
-<div class="app"><header class="top"><div class="header-identity"><button class="pill fullscreen" id="fullscreen" title="Passer en plein écran" aria-label="Passer en plein écran" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9V3h6 M15 3h6v6 M21 15v6h-6 M9 21H3v-6"/></svg></button><div class="brand">Rétroplanning WYLO</div></div><nav class="controls" aria-label="Contrôles du calendrier"><div class="control-set nav-set" role="group" aria-label="Navigation chronologique"><button class="pill" id="previous" title="Reculer dans le temps" aria-label="Reculer">‹</button><button class="pill" id="today" title="Revenir à aujourd’hui">Aujourd’hui</button><button class="pill" id="next" title="Avancer dans le temps" aria-label="Avancer">›</button></div><div class="control-set scale-set" role="group" aria-label="Échelle"><button class="pill" data-scale="day">Jour</button><button class="pill active" data-scale="week">Semaine</button><button class="pill" data-scale="month">Mois</button><button class="pill" data-scale="year">Année</button></div></nav><div class="header-db-slot"><button class="side-btn side-catalogue" id="openDbSide" title="Ouvrir la base de données des tickets" aria-label="Ouvrir la base de données des tickets"><b id="allCount">0</b><span>tickets</span></button></div></header>
+<div class="app"><header class="top"><div class="header-identity"><div class="wylo-settings-wrap" id="wyloSettingsWrap">
+<button class="pill fullscreen wylo-settings-trigger" id="wyloSettingsToggle" type="button" aria-label="Paramètres" aria-expanded="false" aria-controls="wyloSettingsMenu" title="Paramètres"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.75 13.9 3.3l.8 2.15a7.2 7.2 0 0 1 1.45.84l2.23-.4 1.88 3.26-1.5 1.72a7.5 7.5 0 0 1 0 1.67l1.5 1.72-1.88 3.26-2.23-.4a7.2 7.2 0 0 1-1.45.84l-.8 2.15H10.1l-.8-2.15a7.2 7.2 0 0 1-1.45-.84l-2.23.4-1.88-3.26 1.5-1.72a7.5 7.5 0 0 1 0-1.67l-1.5-1.72 1.88-3.26 2.23.4a7.2 7.2 0 0 1 1.45-.84l.8-2.15Z"/><circle cx="12" cy="12" r="3.1"/></svg></button>
+<div class="wylo-settings-menu" id="wyloSettingsMenu" role="group" aria-label="Options d’affichage" hidden>
+<button class="pill wylo-setting-item" id="fullscreen" type="button" title="Agrandir l’écran" aria-pressed="false"><span class="wylo-setting-icon" id="wyloFullscreenIcon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9V3h6 M15 3h6v6 M21 15v6h-6 M9 21H3v-6"/></svg></span><span id="wyloFullscreenLabel">Agrandir l’écran</span></button>
+<button class="pill wylo-setting-item" id="wyloThemeToggle" type="button" aria-pressed="false"><span class="wylo-setting-icon" id="wyloThemeIcon"></span><span id="wyloThemeLabel">Mode clair</span></button>
+</div></div><div class="brand">WYLO</div></div><nav class="controls" aria-label="Contrôles du calendrier"><div class="control-set nav-set" role="group" aria-label="Navigation chronologique"><button class="pill" id="previous" title="Reculer dans le temps" aria-label="Reculer">‹</button><button class="pill" id="today" title="Revenir à aujourd’hui">Aujourd’hui</button><button class="pill" id="next" title="Avancer dans le temps" aria-label="Avancer">›</button></div><div class="control-set scale-set" role="group" aria-label="Échelle"><button class="pill" data-scale="day">Jour</button><button class="pill active" data-scale="week">Semaine</button><button class="pill" data-scale="month">Mois</button><button class="pill" data-scale="year">Année</button></div></nav><div class="header-db-slot"><button class="side-btn side-catalogue" id="openDbSide" title="Ouvrir la base de données des tickets" aria-label="Ouvrir la base de données des tickets"><b id="allCount">0</b><span>tickets</span></button></div></header>
 <div class="workspace" id="workspace"><button class="side-collapse-toggle" type="button" id="toggleSidebar" aria-controls="rightSidebar" aria-expanded="true" title="Masquer les filtres" aria-label="Masquer les filtres"><span id="sidebarArrow">›</span></button><main class="main"><section class="timebar"><div class="labels-head">TICKETS PLANIFIÉES<div class="label-resizer" id="labelResizer" role="separator" aria-label="Redimensionner la colonne des tickets" aria-orientation="vertical" tabindex="0" title="Glisser pour agrandir ou réduire la colonne de gauche"></div></div><div class="axis-head"><div class="axis-major" id="axisMajor"></div><div class="axis-days" id="axisDays"></div></div></section><section class="viewport" id="viewport"><div class="gantt-inner" id="ganttInner"><div class="gantt-grid" id="ganttRows"></div></div></section></main>
 <aside class="side" id="rightSidebar"><div class="competence-filter-block"><p class="side-caption">PÔLES</p><div class="families" id="families"></div></div><div class="secondary-filter-block"><p class="side-caption">ÉTATS</p><div class="filter-chips" id="stateFilters" aria-label="Filtrer par état"></div></div><div class="secondary-filter-block"><p class="side-caption">PRIORITÉS</p><div class="filter-chips" id="priorityFilters" aria-label="Filtrer par priorité"></div></div><div class="dep-section dep-row"><span class="side-caption dep-caption">DÉPENDANCES</span><button type="button" class="dep-check" id="depToggle" aria-label="Afficher les dépendances" aria-pressed="false" title="Afficher ou masquer les dépendances"><span class="dep-switch-knob" aria-hidden="true"></span></button></div></aside></div></div>
 <div class="overlay" id="overlay"></div><section class="database" id="database" aria-label="Base de données des tickets"><div class="db-head"><div class="db-title-group"><div class="db-summary"><div class="db-stat"><strong id="dbTitleCount">0</strong><span>tickets au total</span></div><div class="db-stat"><strong id="unplannedCount">0</strong><span>tickets restant à programmer</span></div></div></div><div class="db-header-actions"><button class="pill subtle" id="dbExport" title="Exporter la base en JSON" type="button">Exporter JSON</button><button class="pill subtle db-reset-head db-icon-action" id="dbReset" aria-label="Réinitialiser les données locales" title="Réinitialiser les données locales" type="button"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11a9 9 0 1 1 3.3 7"/><path d="M3 4v7h7"/></svg></button><button class="pill close db-close-icon" id="closeDb" aria-label="Fermer la base de données" title="Fermer">×</button></div></div>
 <div class="db-filters"><input class="input search" id="dbsearch" placeholder="Rechercher un ticket, un contact, une émission…" aria-label="Rechercher"><select class="input" id="dbfamily"><option value="">Tous les pôles</option></select><select class="input" id="dbowner"><option value="">Tous les responsables</option></select><input type="file" id="importfile" accept="application/json" style="display:none"></div>
 <div class="db-floating-actions"><button class="pill subtle db-import-floating" id="dbImport" type="button" title="Importer un fichier JSON">Importer JSON</button><button class="pill active db-add-floating" id="dbnew" type="button" aria-label="Nouveau ticket" title="Nouveau ticket">+</button></div><div class="db-results"><table class="db-table"><colgroup><col data-db-col="0"><col data-db-col="1"><col data-db-col="2"><col data-db-col="3"><col data-db-col="4"><col data-db-col="5"><col data-db-col="6"><col data-db-col="7"><col data-db-col="8"><col data-db-col="9"><col data-db-col="10"></colgroup><thead><tr><th data-sort="id" class="db-id-col" title="Numéro permanent de ticket">N°</th><th data-sort="title">Ticket</th><th data-sort="category">Pôle</th><th data-sort="owner">Responsable</th><th data-sort="priority" title="Basse, Normale, Haute">Priorité</th><th data-sort="status">État</th><th data-sort="before" title="Tickets qui dépendent de celle-ci (calcul automatique)">Avant</th><th data-sort="after" title="Tickets dont dépend celle-ci">Après</th><th data-sort="start">Début</th><th data-sort="end">Fin</th><th data-sort="duration">Durée</th></tr></thead><tbody id="dbrows"></tbody></table></div><span id="dbShown" hidden aria-hidden="true">0</span></section>
-<section class="modal" id="modal" aria-label="Modifier un ticket"><div class="task-modal-header"><h2 id="taskModalHeading">Modifier le ticket</h2><div class="task-modal-controls"><button class="pill danger" id="fdelete" type="button">Supprimer</button><button class="pill subtle" id="fresetCreate" type="button" style="display:none" title="Effacer les champs saisis et recommencer">Réinitialiser</button><button class="pill active" id="fsave" type="button">Enregistrer</button><button class="pill close task-close-icon" id="closeModal" type="button" aria-label="Fermer la fiche de ticket" title="Fermer">×</button></div></div><div class="schedule-warning" id="scheduleWarning" hidden></div><div class="formgrid"><div class="field wide"><label for="ftitle">INTITULÉ DE L’ACTION</label><input class="input" id="ftitle" placeholder="Commencer par un verbe à l’infinitif"></div><div class="wylo-four-fields"><div class="field"><label>PÔLE</label><select class="input" id="fcat"></select></div><div class="field"><label>RESPONSABLE</label><input class="input" id="fowner" placeholder="Yannick, Maxime, Denis…"></div><div class="field"><label>ÉTAT</label><select class="input" id="fstatus"></select></div><div class="field"><label>PRIORITÉ</label><select class="input" id="fpriority"></select></div></div><div class="field"><label>DATE DE DÉBUT SOUHAITÉE</label><input class="input" type="date" id="fstart"></div><div class="field"><label>DATE DE FIN SOUHAITÉE</label><input class="input" type="date" id="fend"></div><div class="field"><label>DURÉE ESTIMÉE EN JOURS</label><div class="wylo-duration-counter">
+<section class="modal" id="modal" aria-label="Modifier un ticket"><div class="task-modal-header"><h2 id="taskModalHeading">Ticket</h2><div class="task-modal-controls"><button class="pill danger" id="fdelete" type="button">Supprimer</button><button class="pill subtle" id="fresetCreate" type="button" style="display:none" title="Effacer les champs saisis et recommencer">Réinitialiser</button><button class="pill active" id="fsave" type="button">Enregistrer</button><button class="pill close task-close-icon" id="closeModal" type="button" aria-label="Fermer la fiche de ticket" title="Fermer">×</button></div></div><div class="schedule-warning" id="scheduleWarning" hidden></div><div class="formgrid"><div class="field wide"><label for="ftitle">INTITULÉ DU TICKET</label><input class="input" id="ftitle" placeholder="Commencer par un verbe à l’infinitif"></div><div class="wylo-four-fields"><div class="field"><label>PÔLE</label><select class="input" id="fcat"></select></div><div class="field"><label>RESPONSABLE</label><input class="input" id="fowner" placeholder="Yannick, Maxime, Denis…"></div><div class="field"><label>ÉTAT</label><select class="input" id="fstatus"></select></div><div class="field"><label>PRIORITÉ</label><select class="input" id="fpriority"></select></div></div><div class="field"><label>DATE DE DÉBUT SOUHAITÉE</label><input class="input" type="date" id="fstart"></div><div class="field"><label>DATE DE FIN SOUHAITÉE</label><input class="input" type="date" id="fend"></div><div class="field"><label>DURÉE ESTIMÉE EN JOURS</label><div class="wylo-duration-counter">
 <input class="input" type="number" min="1" id="fduration" value="1" aria-label="Durée estimée en jours">
 <span class="wylo-duration-spinner" aria-label="Ajuster la durée">
 <button type="button" class="wylo-duration-step" id="wyloDurationPlus" title="Augmenter la durée" aria-label="Augmenter la durée d’un jour"><span class="wylo-chevron-up" aria-hidden="true"></span></button>
@@ -2702,7 +3063,8 @@ function changeLagBy(delta){
 }
 function editDepList(){const t=editing,pre=t.after||[];$('fdepList').innerHTML=pre.length?pre.map((x,i)=>{const a=tasks.find(t=>t.id===Number(x.id));return `<div class="notice wylo-dep-card" style="margin-top:10px"><span class="wylo-dep-card-text"><strong>${escape(a?wyloTicketReference(a):`${Number(x.id)}`)}</strong> — ${escape(x.type||'FS')}, décalage ${Number(x.lag)||0} j${x.awaitResponse?' · réponse à confirmer':''}</span><button type="button" class="pill subtle" data-rmdep="${i}">Retirer</button></div>`}).join(''):'<span class="secondary">Aucun lien enregistré</span>';
  for(const b of $('fdepList').querySelectorAll('[data-rmdep]'))b.onclick=()=>{editing.after.splice(Number(b.dataset.rmdep),1);editDepList()}}
-function openTask(id=null){const item=id?tasks.find(t=>t.id===id):null;editing=item?structuredClone(item):normalize({id:Math.max(0,...tasks.map(t=>t.id))+1,category:'Produit',title:'',owner:OWN.Produit,status:'À faire',start:'',end:'',duration:1,after:[],source:'Ajout manuel'});$('taskModalHeading').textContent=item?'Modifier le ticket '+editing.id:'Créer le ticket '+editing.id;$('scheduleWarning').hidden=!editing.scheduleAlert;$('scheduleWarning').textContent=editing.scheduleAlert||'';$('ftitle').value=editing.title;$('fcat').value=editing.category;$('fowner').value=editing.owner;$('fstatus').value=editing.status;$('fpriority').value=editing.priority;$('fstart').value=editing.start;$('fend').value=editing.end;$('fduration').value=editing.duration;$('fsource').value=editing.source||'';$('fdescription').value=editing.description||'';$('flocked').checked=!!editing.locked;$('fdepquery').value='';$('fdepId').innerHTML='<option value="">Choisir un ticket…</option>';$('fdelete').style.display=item?'':'none';$('fresetCreate').style.display=item?'none':'';fillDepSelect();editDepList();updateLagUnit();updateLinkWording();$('overlay').classList.add('open');$('modal').classList.add('open');wyloInitialTaskState=wyloTaskState();}
+function openTask(id=null){const item=id?tasks.find(t=>t.id===id):null;editing=item?structuredClone(item):normalize({id:Math.max(0,...tasks.map(t=>t.id))+1,category:'Produit',title:'',owner:OWN.Produit,status:'À faire',start:'',end:'',duration:1,after:[],source:'Ajout manuel'});$('taskModalHeading').textContent='Ticket '+editing.id;$('scheduleWarning').hidden=!editing.scheduleAlert;$('scheduleWarning').textContent=editing.scheduleAlert||'';$('ftitle').value=editing.title;$('fcat').value=editing.category;$('fowner').value=editing.owner;$('fstatus').value=editing.status;$('fpriority').value=editing.priority;$('fstart').value=editing.start;$('fend').value=editing.end;$('fduration').value=editing.duration;$('fsource').value=editing.source||'';$('fdescription').value=editing.description||'';$('flocked').checked=!!editing.locked;$('fdepquery').value='';$('fdepId').innerHTML='<option value="">Choisir un ticket…</option>';$('fdelete').style.display=item?'':'none';$('fresetCreate').style.display=item?'none':'';fillDepSelect();editDepList();updateLagUnit();updateLinkWording();$('overlay').classList.add('open');$('modal').classList.add('open');
+$('database').classList.toggle('wylo-behind-ticket',$('database').classList.contains('open'));wyloInitialTaskState=wyloTaskState();}
 let wyloInitialTaskState=null;
 function wyloTaskState(){
  // On compare uniquement les données enregistrables, pas les filtres temporaires du sélecteur de liens.
@@ -2716,7 +3078,7 @@ function wyloTaskState(){
  });
 }
 function wyloDismissUnsaved(){const el=$('wyloUnsavedBackdrop');el.classList.remove('open');el.setAttribute('aria-hidden','true');}
-function wyloCloseTaskNow(){wyloDismissUnsaved();$('modal').classList.remove('open');wyloInitialTaskState=null;if(!$('database').classList.contains('open'))$('overlay').classList.remove('open')}
+function wyloCloseTaskNow(){wyloDismissUnsaved();$('modal').classList.remove('open');$('database').classList.remove('wylo-behind-ticket');wyloInitialTaskState=null;if(!$('database').classList.contains('open'))$('overlay').classList.remove('open')}
 function closeModal(force=false){
  // Les écouteurs transmettent parfois un objet Event : seul le booléen true contourne le dialogue.
  if(force!==true&&$('modal').classList.contains('open')&&wyloInitialTaskState!==null&&wyloTaskState()!==wyloInitialTaskState){
@@ -2894,9 +3256,45 @@ $('wyloLagMinus').addEventListener('click',()=>changeLagBy(-1));
 $('ftitle').addEventListener('input',updateLinkWording);
 $('faddDep').onclick=addDependency;$('alertClose').onclick=()=>$('alert').classList.remove('open');$('dbExport').onclick=exportJSON;$('dbImport').onclick=()=>$('importfile').click();$('importfile').onchange=e=>importJSON(e.target.files[0]);$('dbReset').onclick=()=>{if(confirm('ATTENTION : réinitialiser remplacera TOUTES les modifications locales (tickets, dates, états et dépendances) par le catalogue intégré de '+INITIAL.length+' tickets.\n\nCette action est irréversible sans sauvegarde JSON préalable.\n\nSouhaites-tu vraiment réinitialiser ?')){tasks=structuredClone(INITIAL);persist();setDbFilters();renderDatabase();renderGantt()}};$('depToggle').onclick=()=>{depVisible=!depVisible;depDrawNext=depVisible;$('depToggle').classList.toggle('on',depVisible);$('depToggle').setAttribute('aria-pressed',String(depVisible));$('depToggle').title=depVisible?'Masquer les dépendances':'Afficher les dépendances';renderGantt()};$('previous').onclick=()=>advanceTimeline(-1);$('next').onclick=()=>advanceTimeline(1);$('today').onclick=setToday;document.querySelectorAll('[data-scale]').forEach(b=>b.onclick=()=>setScale(b.dataset.scale));document.querySelectorAll('[data-sort]').forEach(b=>b.onclick=()=>setDbSort(b.dataset.sort));const fullscreenExpand='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9V3h6 M15 3h6v6 M21 15v6h-6 M9 21H3v-6"/></svg>';
 const fullscreenShrink='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3v6H3 M15 3v6h6 M21 15h-6v6 M3 15h6v6"/></svg>';
-function syncFullscreenButton(){const active=!!(document.fullscreenElement||document.webkitFullscreenElement);const btn=$('fullscreen');btn.innerHTML=active?fullscreenShrink:fullscreenExpand;btn.title=active?'Réduire l’écran':'Passer en plein écran';btn.setAttribute('aria-label',btn.title);btn.setAttribute('aria-pressed',String(active));}
+function syncFullscreenButton(){const active=!!(document.fullscreenElement||document.webkitFullscreenElement);const btn=$('fullscreen');btn.title=active?'Réduire l’écran':'Agrandir l’écran';btn.setAttribute('aria-label',btn.title);btn.setAttribute('aria-pressed',String(active));
+const label=$('wyloFullscreenLabel');if(label)label.textContent=active?'Réduire l’écran':'Agrandir l’écran';
+const ico=$('wyloFullscreenIcon');if(ico)ico.innerHTML=active?fullscreenShrink:fullscreenExpand;}
 document.addEventListener('fullscreenchange',syncFullscreenButton);document.addEventListener('webkitfullscreenchange',syncFullscreenButton);
 $('fullscreen').onclick=async()=>{try{if(document.fullscreenElement||document.webkitFullscreenElement){if(document.exitFullscreen)await document.exitFullscreen();else if(document.webkitExitFullscreen)document.webkitExitFullscreen();}else{if(document.documentElement.requestFullscreen)await document.documentElement.requestFullscreen();else if(document.documentElement.webkitRequestFullscreen)document.documentElement.webkitRequestFullscreen();}}catch(err){console.warn('Plein écran non disponible :',err);}syncFullscreenButton();};syncFullscreenButton();
+
+// WYLO 926 : paramètres de présentation, conservés entre les sessions.
+const wyloSettingsButton=$('wyloSettingsToggle'),wyloSettingsMenu=$('wyloSettingsMenu');
+function wyloCloseSettings(){
+ wyloSettingsMenu.hidden=true;
+ wyloSettingsButton.setAttribute('aria-expanded','false');
+}
+wyloSettingsButton.addEventListener('click',()=>{
+ const open=wyloSettingsMenu.hidden;
+ wyloSettingsMenu.hidden=!open;
+ wyloSettingsButton.setAttribute('aria-expanded',String(open));
+});
+// Fermer le menu par un clic ailleurs dans l'application,
+// sans l'interrompre quand on utilise ses deux commandes.
+document.addEventListener('pointerdown',event=>{
+ if(!wyloSettingsMenu.hidden && !event.target.closest('#wyloSettingsWrap')){
+  wyloCloseSettings();
+ }
+});
+
+const wyloMoon='<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.7 14.1A8.6 8.6 0 0 1 9.9 3.3 8.7 8.7 0 1 0 20.7 14.1Z"/></svg>';
+const wyloSun='<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.9 4.9l1.5 1.5m11.2 11.2 1.5 1.5m0-14.2-1.5 1.5M6.4 17.6l-1.5 1.5"/></svg>';
+function wyloApplyTheme(light){
+ document.documentElement.classList.toggle('wylo-light',light);
+ $('wyloThemeLabel').textContent=light?'Mode sombre':'Mode clair';
+ $('wyloThemeIcon').innerHTML=light?wyloMoon:wyloSun;
+ $('wyloThemeToggle').setAttribute('aria-pressed',String(light));
+ // Le choix clair/sombre est conservé uniquement pendant cette session.
+}
+// Chaque nouveau chargement commence en mode sombre, quel que soit le choix précédent.
+wyloApplyTheme(false);
+$('wyloThemeToggle').addEventListener('click',()=>wyloApplyTheme(!document.documentElement.classList.contains('wylo-light')));
+
+
 function initLabelResize(){
  const handle=$('labelResizer');
  const MIN_WIDTH=180;
@@ -3345,6 +3743,20 @@ function start(){load();familyFilters();renderChoiceFilters();setDbFilters();upd
   const originalCloseTask=wyloCloseTaskNow;
   wyloCloseTaskNow=function(...args){closeCalendar();backdrop.classList.remove('open');return originalCloseTask(...args);};
   refresh();
+})();
+
+/* WYLO 937 — mesure réelle de la ligne horizontale sous le bandeau.
+   Le calcul reste juste si le bandeau change de hauteur au redimensionnement. */
+(()=>{
+ const header=document.querySelector('.top');
+ if(!header)return;
+ const alignSecondary=()=>{
+   const bottom=Math.max(0,Math.round(header.getBoundingClientRect().bottom));
+   document.documentElement.style.setProperty('--wylo-secondary-top',bottom+'px');
+ };
+ alignSecondary();
+ window.addEventListener('resize',alignSecondary,{passive:true});
+ if(typeof ResizeObserver!=='undefined')new ResizeObserver(alignSecondary).observe(header);
 })();
 </script>
 </body></html>
