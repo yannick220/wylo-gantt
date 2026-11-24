@@ -3270,9 +3270,9 @@ function wyloDependencyPoints(a,b,type,dayWidth,obstacles=[]){
 }
 function wyloDependencyRoute(a,b,type,dayWidth,obstacles){
  const points=wyloDependencyPoints(a,b,type,dayWidth,obstacles);
- return wyloRoundedRoute(type==='SF'?points.slice().reverse():points,Math.min(12,dayWidth*.15));
+ return wyloRoundedRoute(type==='SF'?points.slice().reverse():points,Math.min(30,Math.max(12,dayWidth*.36)),obstacles);
 }
-function wyloRoundedRoute(points,radius){
+function wyloRoundedRoute(points,radius,obstacles=[]){
  const p=points.filter((v,i)=>!i||v[0]!==points[i-1][0]||v[1]!==points[i-1][1]);
  if(p.length<2)return '';
  let d=`M${p[0][0]} ${p[0][1]}`;
@@ -3280,12 +3280,27 @@ function wyloRoundedRoute(points,radius){
   const prev=p[i-1],cur=p[i],next=p[i+1];
   const before=Math.hypot(cur[0]-prev[0],cur[1]-prev[1]);
   const after=Math.hypot(next[0]-cur[0],next[1]-cur[1]);
-  const r=Math.min(radius,before/2,after/2);
+  // The first and last bends use the entire short horizontal approach.
+  // Interior segments retain half-length reservations for adjacent bends.
+  let rIn=Math.min(radius,i===1?before:before/2);
+  let rOut=Math.min(radius,i===p.length-2?after:after/2);
+  // Keep the curve inside the free space before any intermediate bar.
+  function safeVertical(a,b,limit){
+   if(a[0]!==b[0])return limit;
+   const sign=Math.sign(b[1]-a[1]);
+   for(const o of obstacles){
+    const delta=(o.y-a[1])*sign;
+    if(delta>0&&delta<Math.abs(b[1]-a[1]))limit=Math.min(limit,Math.max(.1,delta-(o.h||32)/2-2));
+   }
+   return limit;
+  }
+  rIn=safeVertical(cur,prev,rIn);rOut=safeVertical(cur,next,rOut);
+  const r=Math.min(rIn,rOut);
   if(r<.1){d+=` L${cur[0]} ${cur[1]}`;continue;}
-  const xIn=cur[0]-(cur[0]-prev[0])/before*r;
-  const yIn=cur[1]-(cur[1]-prev[1])/before*r;
-  const xOut=cur[0]+(next[0]-cur[0])/after*r;
-  const yOut=cur[1]+(next[1]-cur[1])/after*r;
+  const xIn=cur[0]-(cur[0]-prev[0])/before*rIn;
+  const yIn=cur[1]-(cur[1]-prev[1])/before*rIn;
+  const xOut=cur[0]+(next[0]-cur[0])/after*rOut;
+  const yOut=cur[1]+(next[1]-cur[1])/after*rOut;
   d+=` L${xIn} ${yIn} Q${cur[0]} ${cur[1]} ${xOut} ${yOut}`;
  }
  const last=p[p.length-1];return d+` L${last[0]} ${last[1]}`;
