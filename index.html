@@ -3024,7 +3024,7 @@ function updateLinkWording(){
  const relations={
   FS:`Le ${source} commence après la fin du ${linked}`,
   SS:`Le ${source} commence au début du ${linked}`,
-  SF:`Le ${source} se termine au début du ${linked}`,
+  SF:`Le ${source} se termine avant le début du ${linked}`,
   FF:`Le ${source} se termine à la fin du ${linked}`
  };
  const opts=$('fdepType').options;
@@ -3039,7 +3039,7 @@ function updateLinkWording(){
  const verb=type==='FF'||type==='SF'?'se termine':'commence';
  const anchor=type==='SS'||type==='SF'?'début':'fin';
  let timing;
- if(lag===0){timing=type==='FS'?`après la fin de`:`au ${anchor} de`;}
+ if(lag===0){timing=type==='FS'?`le lendemain de la fin de`:type==='SF'?`la veille du début de`:`au ${anchor} de`;}
  else{
   const amount=wyloFrenchNumber(Math.abs(lag));
   const unit=Math.abs(lag)===1?'jour':'jours';
@@ -3094,7 +3094,7 @@ function descendantsGraph(items){const g=new Map(items.map(t=>[t.id,[]]));for(co
 function hasCycle(items){const by=new Map(items.map(t=>[t.id,t]));let visiting=new Set,done=new Set;function visit(id){if(visiting.has(id))return true;if(done.has(id))return false;visiting.add(id);for(const d of by.get(id)?.after||[])if(by.has(d.id)&&visit(d.id))return true;visiting.delete(id);done.add(id);return false}return items.some(t=>visit(t.id))}
 
 function planDuration(v){return Number.isSafeInteger(Number(v))&&Number(v)>0?Number(v):null}
-function planLag(d){const n=Number(d.lag)||0;return d.type==='FS'&&n===0?1:n}
+function planLag(d){const n=Number(d.lag)||0;return d.type==='FS'&&n===0?1:d.type==='SF'&&n===0?-1:n}
 function planFields(d){return [d.type==='SS'||d.type==='SF'?'start':'end',d.type==='FF'||d.type==='SF'?'end':'start']}
 function resolveLinked(items){
  const by=new Map(items.map(t=>[Number(t.id),t])),edges=[],values=new Map(),alerts=[],seen=new Set();
@@ -3140,6 +3140,7 @@ function planDraw(result){
 function planValidate(result,display){
  const t=result.t;let ids=[],message='';
  if(result.errors.length){ids=['fstart','fend','fduration'];message=result.errors[0]}
+ else if((t.after||[]).length&&!t.duration&&!(t.start&&t.end)){ids=[!t.start?'fstart':'',!t.end?'fend':'','fduration'].filter(Boolean);message=t.end?'Information manquante : renseigner la durée ou la date de début.':t.start?'Information manquante : renseigner la durée ou la date de fin.':'Information manquante : renseigner la durée. Les dates seront calculées dès que le ticket lié sera planifié.';}
  else if((t.start||t.end)&&!(t.start&&t.end&&t.duration)){ids=[!t.start?'fstart':'',!t.end?'fend':'',!t.duration?'fduration':''].filter(Boolean);message=t.start?'Information manquante : renseigner la durée ou la date de fin.':'Information manquante : renseigner la durée ou la date de début.'}
  else if(planDraft.duration!==null&&planDraft.duration!==''&&!planDuration(planDraft.duration)){ids=['fduration'];message='Renseigner une durée entière strictement positive.'}
  if(display)planMissing(ids,message);return !message
@@ -3176,7 +3177,7 @@ function planLinkChanged(){
  else{if(!planDraft.start&&!planDraft.end){planDraft.start=a; if(!a)planDraft.end=b}}
  planUpdate();
 }
-function saveTask(){if(!$('ftitle').value.trim()){alertBox('L’intitulé est obligatoire.');return}const result=planPreview();if(!result)return;planErrorShown=true;if(!planValidate(result,true))return;const t=result.t;t.title=$('ftitle').value.trim();t.category=$('fcat').value;t.owner=$('fowner').value.trim()||OWN[t.category];t.status=$('fstatus').value;t.priority=$('fpriority').value;t.source=$('fsource').value.trim();t.description=$('fdescription').value.trim();delete t.beforePending;tasks=result.items.sort((a,b)=>a.id-b.id);persist();setDbFilters();renderDatabase();renderGantt();closeModal(true);}
+function saveTask(){if(!$('ftitle').value.trim()){alertBox('L’intitulé est obligatoire.');return}const result=planPreview();if(!result)return;planErrorShown=true;if(!result.errors.length)planDraw(result);if(!planValidate(result,true)){ $('wyloPlanAlert').scrollIntoView({block:'nearest'});return;}const t=result.t;t.title=$('ftitle').value.trim();t.category=$('fcat').value;t.owner=$('fowner').value.trim()||OWN[t.category];t.status=$('fstatus').value;t.priority=$('fpriority').value;t.source=$('fsource').value.trim();t.description=$('fdescription').value.trim();delete t.beforePending;tasks=result.items.sort((a,b)=>a.id-b.id);persist();setDbFilters();renderDatabase();renderGantt();closeModal(true);}
 function removeTask(){if(!editing||!confirm('Supprimer définitivement ce ticket du catalogue ?'))return;const remaining=tasks.filter(t=>Number(t.id)!==Number(editing.id)).sort((a,b)=>Number(a.id)-Number(b.id));const ids=new Map(remaining.map((t,i)=>[Number(t.id),i+1]));tasks=remaining.map(t=>({...t,id:ids.get(Number(t.id)),after:(t.after||[]).filter(d=>ids.has(Number(d.id))).map(d=>({...d,id:ids.get(Number(d.id))}))}));persist();setDbFilters();renderDatabase();renderGantt();closeModal(true)}
 function addDependency(){
  const id=Number($('fdepId').value);
@@ -3843,7 +3844,7 @@ let unsubscribe=null,revision=null,confirmed=[],busy=false,ready=false,editRevis
 function show(text,button=false){gate.hidden=false;msg.textContent=text;login.hidden=!button;document.querySelectorAll('body > :not(#wyloCloudGate):not(script)').forEach(el=>{el.inert=true});}
 function hide(){gate.hidden=true;document.querySelectorAll('body > :not(#wyloCloudGate):not(script)').forEach(el=>{el.inert=false});}
 function refresh(){setDbFilters();renderDatabase();renderGantt();}
-function apply(data){if(!data||!Array.isArray(data.tasks)||!Number.isSafeInteger(data.revision))throw Error('Format de données partagé invalide');confirmed=structuredClone(data.tasks).map(normalize);revision=data.revision;tasks=structuredClone(confirmed);refresh();}
+function apply(data){if(!data||!Array.isArray(data.tasks)||!Number.isSafeInteger(data.revision))throw Error('Format de données partagé invalide');confirmed=structuredClone(data.tasks).map(normalize);revision=data.revision;tasks=structuredClone(confirmed);const forecast=structuredClone(tasks);if(!hasCycle(forecast)&&!resolveLinked(forecast).length)tasks=forecast;refresh();}
 function report(text){status.textContent=text;}
 function valid(arr){const ids=new Set(arr.map(t=>Number(t.id)));return ids.size===arr.length&&arr.every(t=>Number.isSafeInteger(t.id)&&t.id>0&&typeof t.title==='string'&&t.title.trim()&&Array.isArray(t.after)&&t.after.every(d=>ids.has(Number(d.id))))}
 function downloadDraft(arr){const a=document.createElement('a');const url=URL.createObjectURL(new Blob([JSON.stringify({tasks:arr},null,2)],{type:'application/json'}));a.href=url;a.download='WYLO_modifications_non_synchronisees.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
