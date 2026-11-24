@@ -2889,18 +2889,16 @@ html.wylo-light #modal .schedule-warning{
 #wyloSettingsMenu{isolation:isolate}
 @supports not ((backdrop-filter:blur(12px)) or (-webkit-backdrop-filter:blur(12px))){#wyloSettingsMenu::before{background:rgba(30,30,34,.94)}}
 </style><style>#wyloSettingsMenu::before{opacity:0;transition:opacity 240ms ease}#wyloSettingsMenu.wylo-menu-expanded::before{opacity:1}#wyloSettingsMenu>button{transform-origin:left top;will-change:transform,opacity}@media(prefers-reduced-motion:reduce){#wyloSettingsMenu::before{transition:none}}</style><style>#wyloSettingsMenu{left:0!important;align-items:flex-start!important;gap:16px!important}#wyloSettingsMenu>button{margin-left:0!important;align-self:flex-start!important}</style><style>#wyloSettingsMenu>button,#wyloSettingsMenu #wyloFullscreenLabel,#wyloSettingsMenu #wyloThemeLabel,#wyloSettingsMenu>#wyloCloudLogout:not([hidden]),#wyloSettingsMenu>button span{font-weight:400!important}</style><style>#modal .wylo-link-searchrow{grid-template-columns:minmax(0,1fr)!important;align-items:stretch!important;gap:8px!important}#wyloDepResults{display:flex;flex-direction:column;gap:8px;width:100%;min-width:0}#wyloDepResults[hidden]{display:none!important}#modal .wylo-dep-result{display:block;width:100%;text-align:left;white-space:normal;overflow-wrap:anywhere;padding:11px 15px;border:1px solid #62626c;border-radius:20px;background:#25252d;color:#f5f5f9;font-family:"Montserrat Alternates",Montserrat,Arial,sans-serif;font-size:12px;font-weight:400;line-height:1.5;cursor:pointer}#modal .wylo-dep-result:hover,#modal .wylo-dep-result:focus-visible{border-color:#fff;background:#393940}#modal .wylo-dep-empty{padding:6px 12px;font-size:12px;color:#adadb7}</style><style>
-@media(min-width:1050px){
-#modal .wylo-link-editor{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1.65fr) 185px 145px!important;gap:12px!important;align-items:center!important}
-#modal .wylo-link-editor>#wyloLinkHeading,#modal .wylo-link-editor>#wyloLinkPreview,#modal .wylo-link-editor>#fdepList{grid-column:1/-1!important}
-#modal .wylo-link-searchrow,#modal .wylo-link-relrow{display:contents!important}
-#modal #fdepquery{grid-row:2;grid-column:1!important;min-width:0!important;width:100%!important}
-#modal .wylo-link-type{grid-row:2;grid-column:2!important;min-width:0!important}
-#modal .wylo-link-lag{grid-row:2;grid-column:3!important}
-#modal .wylo-link-add{grid-row:2;grid-column:4!important}
-#modal #wyloDepResults{grid-row:3;grid-column:1/-1!important}
-#modal .wylo-link-type select{text-overflow:ellipsis}
-}
-</style></head><body><style>#wyloCloudGate{position:fixed;inset:0;z-index:2147483647;background:#202027;display:grid;place-items:center;color:#f6f6fa;font-family:inherit}#wyloCloudGate[hidden],#wyloCloudLogin[hidden],#wyloCloudLogout[hidden]{display:none!important}#wyloCloudGate>div{max-width:420px;padding:28px;text-align:center}#wyloCloudGate button{margin-top:18px;padding:12px 20px;border-radius:24px;background:#fff;color:#222;border:0;cursor:pointer;font:inherit}</style><div id="wyloCloudGate" role="dialog" aria-modal="true"><div><h2>WYLO</h2><p id="wyloCloudMessage">Connexion à Firebase…</p><button id="wyloCloudLogin" hidden>Se connecter avec Google</button></div></div>
+#modal .field.wide.wylo-link-editor{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1.65fr) minmax(130px,185px) minmax(95px,145px)!important;gap:12px!important;align-items:center!important}
+#modal .wylo-link-editor>#wyloLinkHeading{grid-area:1/1/2/5!important}
+#modal .wylo-link-editor>#wyloLinkPreview,#modal .wylo-link-editor>#fdepList{grid-column:1/-1!important}
+#modal .wylo-link-editor #fdepquery{grid-area:2/1/3/2!important;min-width:0!important;width:100%!important}
+#modal .wylo-link-editor .wylo-link-type{grid-area:2/2/3/3!important;min-width:0!important}
+#modal .wylo-link-editor .wylo-link-lag{grid-area:2/3/3/4!important;min-width:0!important}
+#modal .wylo-link-editor .wylo-link-add{grid-area:2/4/3/5!important;min-width:0!important}
+#modal .wylo-link-editor #wyloDepResults{grid-column:1/-1!important;grid-row:3}
+#modal .wylo-link-editor .wylo-link-type select{text-overflow:ellipsis}
+</style><style>#modal .wylo-link-editor>#fdepquery,#modal .wylo-link-editor .wylo-link-type .wylo-select-wrap,#modal .wylo-link-editor .wylo-link-type .input{width:100%!important;min-width:0!important;max-width:none!important;height:44px!important}#modal .wylo-link-editor>#fdepId{display:none!important}#modal .wylo-link-editor>.wylo-link-field{width:100%!important;min-width:0!important;margin:0!important}#modal .wylo-link-editor>#wyloLinkPreview{grid-row:4!important}#modal .wylo-link-editor>#fdepList{grid-row:5!important}</style></head><body><style>#wyloCloudGate{position:fixed;inset:0;z-index:2147483647;background:#202027;display:grid;place-items:center;color:#f6f6fa;font-family:inherit}#wyloCloudGate[hidden],#wyloCloudLogin[hidden],#wyloCloudLogout[hidden]{display:none!important}#wyloCloudGate>div{max-width:420px;padding:28px;text-align:center}#wyloCloudGate button{margin-top:18px;padding:12px 20px;border-radius:24px;background:#fff;color:#222;border:0;cursor:pointer;font:inherit}</style><div id="wyloCloudGate" role="dialog" aria-modal="true"><div><h2>WYLO</h2><p id="wyloCloudMessage">Connexion à Firebase…</p><button id="wyloCloudLogin" hidden>Se connecter avec Google</button></div></div>
 <div class="app"><header class="top"><div class="header-identity"><div class="wylo-settings-wrap" id="wyloSettingsWrap">
 <button class="pill fullscreen wylo-settings-trigger" id="wyloSettingsToggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="wyloSettingsMenu" title="Menu"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
 <div class="wylo-settings-menu" id="wyloSettingsMenu" role="group" aria-label="Menu principal" hidden>
@@ -2919,12 +2917,11 @@ html.wylo-light #modal .schedule-warning{
 <button type="button" class="wylo-duration-step" id="wyloDurationMinus" title="Diminuer la durée" aria-label="Diminuer la durée d’un jour"><span class="wylo-chevron-down" aria-hidden="true"></span></button>
 </span></div></div><input type="hidden" id="fsource"><div class="field wide"><label>DESCRIPTION (FACULTATIVE)</label><textarea class="input" id="fdescription"></textarea></div><div class="field wide wylo-link-editor">
 <label id="wyloLinkHeading">LIER LE TICKET À UN AUTRE</label>
-<div class="wylo-link-searchrow">
+
   <input class="input" id="fdepquery" placeholder="Chercher un ticket ou son numéro…" aria-label="Rechercher un ticket">
   <input type="hidden" id="fdepId" value="">
   <div id="wyloDepResults" aria-label="Tickets correspondant à la recherche" hidden></div>
-</div>
-<div class="wylo-link-relrow">
+
   <div class="wylo-link-field wylo-link-type">
     <select class="input" id="fdepType">
       <option value="FS">Commence après la fin</option>
@@ -2944,7 +2941,6 @@ html.wylo-light #modal .schedule-warning{
     </div>
   </div>
   <button class="pill subtle wylo-link-add" id="faddDep" type="button">Ajouter le lien</button>
-</div>
 <div class="wylo-link-meaning" id="wyloLinkPreview" role="status" aria-live="polite">Choisir un ticket pour afficher la relation.</div>
 <div id="fdepList"></div></div><input type="checkbox" id="flocked" hidden aria-label="Verrouiller la date de début"></div></section>
 <div class="wylo-unsaved-backdrop" id="wyloUnsavedBackdrop" aria-hidden="true"><div class="wylo-unsaved-dialog" role="alertdialog" aria-modal="true" aria-labelledby="wyloUnsavedTitle" aria-describedby="wyloUnsavedText"><h3 id="wyloUnsavedTitle">Ne pas enregistrer les modifications ?</h3><p id="wyloUnsavedText">Cette fiche contient des modifications non enregistrées. Souhaites-tu vraiment la fermer sans les conserver ?</p><div class="wylo-unsaved-actions"><button class="pill subtle wylo-discard" type="button" id="wyloDiscard">Quitter sans enregistrer</button><button class="pill active" type="button" id="wyloKeepEditing">Continuer les modifications</button></div></div></div><div class="alert" id="alert" role="alert"><div id="alertText" style="white-space:pre-line"></div><button class="pill subtle" id="alertClose">Fermer</button></div><script>
