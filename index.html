@@ -3218,7 +3218,7 @@ function renderGantt(previousPeriod){const main=document.querySelector('.main');
    const route=wyloDependencyRoute(a,b,dep.type||'FS',dayWidth,[...pos.values()]);
    const path=document.createElementNS(NS,'path');
    path.dataset.from=String(dep.id);path.dataset.to=String(t.id);
-   path.setAttribute('class','dep-link');path.setAttribute('d',route);path.setAttribute('marker-end','url(#wyloArrow)');path.dataset.kind=dep.type||'FS';
+   path.setAttribute('class','dep-link');path.setAttribute('d',route);path.dataset.kind=dep.type||'FS';
    svg.appendChild(path);linkCount++;
   }
   $('ganttRows').appendChild(svg);
@@ -3331,7 +3331,7 @@ function wyloApplyFocus(){
  }
  for(const path of $('ganttRows').querySelectorAll('.dep-link')){
   const active=focus&&circuit.edges.has(path.dataset.from+':'+path.dataset.to);
-  path.classList.toggle('wylo-focus-muted',focus&&!active);path.classList.toggle('wylo-focus-link',active);path.setAttribute('marker-end',active?'url(#wyloArrowFocus)':'url(#wyloArrow)');
+  path.classList.toggle('wylo-focus-muted',focus&&!active);path.classList.toggle('wylo-focus-link',active);
  }
 }
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&wyloFocusTicket!==null&&!$('modal').classList.contains('open')&&!$('database').classList.contains('open')){wyloFocusTicket=null;wyloApplyFocus()}});
