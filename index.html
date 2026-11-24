@@ -2888,7 +2888,7 @@ html.wylo-light #modal .schedule-warning{
 #wyloSettingsMenu::before{content:"";position:absolute;inset:-85px -105px;z-index:-1;pointer-events:none;border-radius:0;background:rgba(30,30,34,.52);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);-webkit-mask-image:radial-gradient(ellipse closest-side at center,#000 0%,rgba(0,0,0,.98) 18%,rgba(0,0,0,.85) 36%,rgba(0,0,0,.58) 53%,rgba(0,0,0,.27) 71%,rgba(0,0,0,.07) 87%,transparent 100%);mask-image:radial-gradient(ellipse closest-side at center,#000 0%,rgba(0,0,0,.98) 18%,rgba(0,0,0,.85) 36%,rgba(0,0,0,.58) 53%,rgba(0,0,0,.27) 71%,rgba(0,0,0,.07) 87%,transparent 100%);-webkit-mask-size:100% 100%;mask-size:100% 100%;}
 #wyloSettingsMenu{isolation:isolate}
 @supports not ((backdrop-filter:blur(12px)) or (-webkit-backdrop-filter:blur(12px))){#wyloSettingsMenu::before{background:rgba(30,30,34,.94)}}
-</style><style>#wyloSettingsMenu::before{opacity:0;transition:opacity 240ms ease}#wyloSettingsMenu.wylo-menu-expanded::before{opacity:1}#wyloSettingsMenu>button{transform-origin:left top;will-change:transform,opacity}@media(prefers-reduced-motion:reduce){#wyloSettingsMenu::before{transition:none}}</style><style>#wyloSettingsMenu{left:0!important;align-items:flex-start!important;gap:16px!important}#wyloSettingsMenu>button{margin-left:0!important;align-self:flex-start!important}</style><style>#wyloSettingsMenu>button,#wyloSettingsMenu #wyloFullscreenLabel,#wyloSettingsMenu #wyloThemeLabel,#wyloSettingsMenu>#wyloCloudLogout:not([hidden]),#wyloSettingsMenu>button span{font-weight:400!important}</style></head><body><style>#wyloCloudGate{position:fixed;inset:0;z-index:2147483647;background:#202027;display:grid;place-items:center;color:#f6f6fa;font-family:inherit}#wyloCloudGate[hidden],#wyloCloudLogin[hidden],#wyloCloudLogout[hidden]{display:none!important}#wyloCloudGate>div{max-width:420px;padding:28px;text-align:center}#wyloCloudGate button{margin-top:18px;padding:12px 20px;border-radius:24px;background:#fff;color:#222;border:0;cursor:pointer;font:inherit}</style><div id="wyloCloudGate" role="dialog" aria-modal="true"><div><h2>WYLO</h2><p id="wyloCloudMessage">Connexion à Firebase…</p><button id="wyloCloudLogin" hidden>Se connecter avec Google</button></div></div>
+</style><style>#wyloSettingsMenu::before{opacity:0;transition:opacity 240ms ease}#wyloSettingsMenu.wylo-menu-expanded::before{opacity:1}#wyloSettingsMenu>button{transform-origin:left top;will-change:transform,opacity}@media(prefers-reduced-motion:reduce){#wyloSettingsMenu::before{transition:none}}</style><style>#wyloSettingsMenu{left:0!important;align-items:flex-start!important;gap:16px!important}#wyloSettingsMenu>button{margin-left:0!important;align-self:flex-start!important}</style><style>#wyloSettingsMenu>button,#wyloSettingsMenu #wyloFullscreenLabel,#wyloSettingsMenu #wyloThemeLabel,#wyloSettingsMenu>#wyloCloudLogout:not([hidden]),#wyloSettingsMenu>button span{font-weight:400!important}</style><style>#modal .wylo-link-searchrow{grid-template-columns:minmax(0,1fr)!important;align-items:stretch!important;gap:8px!important}#wyloDepResults{display:flex;flex-direction:column;gap:8px;width:100%;min-width:0}#wyloDepResults[hidden]{display:none!important}#modal .wylo-dep-result{display:block;width:100%;text-align:left;white-space:normal;overflow-wrap:anywhere;padding:11px 15px;border:1px solid #62626c;border-radius:20px;background:#25252d;color:#f5f5f9;font-family:"Montserrat Alternates",Montserrat,Arial,sans-serif;font-size:12px;font-weight:400;line-height:1.5;cursor:pointer}#modal .wylo-dep-result:hover,#modal .wylo-dep-result:focus-visible{border-color:#fff;background:#393940}#modal .wylo-dep-empty{padding:6px 12px;font-size:12px;color:#adadb7}</style></head><body><style>#wyloCloudGate{position:fixed;inset:0;z-index:2147483647;background:#202027;display:grid;place-items:center;color:#f6f6fa;font-family:inherit}#wyloCloudGate[hidden],#wyloCloudLogin[hidden],#wyloCloudLogout[hidden]{display:none!important}#wyloCloudGate>div{max-width:420px;padding:28px;text-align:center}#wyloCloudGate button{margin-top:18px;padding:12px 20px;border-radius:24px;background:#fff;color:#222;border:0;cursor:pointer;font:inherit}</style><div id="wyloCloudGate" role="dialog" aria-modal="true"><div><h2>WYLO</h2><p id="wyloCloudMessage">Connexion à Firebase…</p><button id="wyloCloudLogin" hidden>Se connecter avec Google</button></div></div>
 <div class="app"><header class="top"><div class="header-identity"><div class="wylo-settings-wrap" id="wyloSettingsWrap">
 <button class="pill fullscreen wylo-settings-trigger" id="wyloSettingsToggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="wyloSettingsMenu" title="Menu"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
 <div class="wylo-settings-menu" id="wyloSettingsMenu" role="group" aria-label="Menu principal" hidden>
@@ -2909,8 +2909,8 @@ html.wylo-light #modal .schedule-warning{
 <label id="wyloLinkHeading">LIER LE TICKET À UN AUTRE</label>
 <div class="wylo-link-searchrow">
   <input class="input" id="fdepquery" placeholder="Chercher un ticket ou son numéro…" aria-label="Rechercher un ticket">
-  <span class="wylo-link-or">OU</span>
-  <select class="input" id="fdepId" aria-label="Choisir le ticket à lier"></select>
+  <input type="hidden" id="fdepId" value="">
+  <div id="wyloDepResults" aria-label="Tickets correspondant à la recherche" hidden></div>
 </div>
 <div class="wylo-link-relrow">
   <div class="wylo-link-field wylo-link-type">
@@ -3012,8 +3012,27 @@ function wyloTicketReference(ticket, includeTitle=true){
  const title=(ticket.title||'').trim();
  return includeTitle&&title?`${title} (${id})`:id;
 }
-function dependencyOptions(){const q=$('fdepquery').value.toLowerCase().trim();return tasks.filter(t=>t.id!==editing?.id&&(!q||(t.title+' '+t.id).toLowerCase().includes(q))).slice(0,200).map(t=>`<option value="${t.id}">${escape(wyloTicketReference(t))}</option>`).join('')}
-function fillDepSelect(){const old=$('fdepId').value;$('fdepId').innerHTML='<option value="">Choisir un ticket…</option>'+dependencyOptions();if(old&&Array.from($('fdepId').options).some(o=>o.value===old))$('fdepId').value=old;updateLinkWording()}
+function wyloDepSearch(items,query,self){
+ const clean=v=>String(v??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('fr').trim();
+ const q=clean(query);if(q.length<2)return [];
+ const words=q.split(/\s+/);
+ return items.filter(t=>Number(t.id)!==Number(self)&&words.every(w=>clean(t.title+' '+t.id).includes(w))).sort((a,b)=>(String(b.id)===q)-(String(a.id)===q)||Number(a.id)-Number(b.id));
+}
+function fillDepSelect(){
+ const input=$('fdepquery'),selected=$('fdepId'),results=$('wyloDepResults');
+ selected.value='';results.replaceChildren();
+ const q=input.value.trim();results.hidden=q.length<2;
+ if(q.length>=2){
+  const matches=wyloDepSearch(tasks,q,editing?.id);
+  if(!matches.length){const empty=document.createElement('div');empty.className='wylo-dep-empty';empty.textContent='Aucun ticket correspondant.';results.appendChild(empty);}
+  for(const t of matches){
+   const btn=document.createElement('button');btn.type='button';btn.className='wylo-dep-result';btn.textContent=wyloTicketReference(t);
+   btn.onclick=()=>{selected.value=String(t.id);input.value=wyloTicketReference(t);results.replaceChildren();results.hidden=true;updateLinkWording();};
+   results.appendChild(btn);
+  }
+ }
+ updateLinkWording();
+}
 function wyloFrenchNumber(value){
  const words=['zéro','un','deux','trois','quatre','cinq','six','sept','huit','neuf','dix','onze','douze','treize','quatorze','quinze','seize','dix-sept','dix-huit','dix-neuf','vingt'];
  return Number.isInteger(value)&&value>=0&&value<=20?words[value]:String(value);
@@ -3068,7 +3087,7 @@ function changeLagBy(delta){
 }
 function editDepList(){const t=editing,pre=t.after||[];$('fdepList').innerHTML=pre.length?pre.map((x,i)=>{const a=tasks.find(t=>t.id===Number(x.id));return `<div class="notice wylo-dep-card" style="margin-top:10px"><span class="wylo-dep-card-text"><strong>${escape(a?wyloTicketReference(a):`${Number(x.id)}`)}</strong> — ${escape(x.type||'FS')}, décalage ${Number(x.lag)||0} j${x.awaitResponse?' · réponse à confirmer':''}</span><button type="button" class="pill subtle" data-rmdep="${i}">Retirer</button></div>`}).join(''):'<span class="secondary">Aucun lien enregistré</span>';
  for(const b of $('fdepList').querySelectorAll('[data-rmdep]'))b.onclick=()=>{editing.after.splice(Number(b.dataset.rmdep),1);editDepList();planLinkChanged()}}
-function openTask(id=null){const item=id?tasks.find(t=>t.id===id):null;editing=item?structuredClone(item):normalize({id:Math.max(0,...tasks.map(t=>t.id))+1,category:'Produit',title:'',owner:OWN.Produit,status:'À faire',start:'',end:'',duration:null,planVersion:2,after:[],source:'Ajout manuel'});$('taskModalHeading').textContent='Ticket '+editing.id;$('scheduleWarning').hidden=!editing.scheduleAlert;$('scheduleWarning').textContent=editing.scheduleAlert||'';$('ftitle').value=editing.title;$('fcat').value=editing.category;$('fowner').value=editing.owner;$('fstatus').value=editing.status;$('fpriority').value=editing.priority;$('fstart').value=editing.start;$('fend').value=editing.end;$('fduration').value=editing.duration??'';$('fsource').value=editing.source||'';$('fdescription').value=editing.description||'';$('flocked').checked=!!editing.locked;$('fdepquery').value='';$('fdepId').innerHTML='<option value="">Choisir un ticket…</option>';$('fdelete').style.display=item?'':'none';$('fresetCreate').style.display=item?'none':'';fillDepSelect();editDepList();updateLagUnit();updateLinkWording();$('overlay').classList.add('open');$('modal').classList.add('open');
+function openTask(id=null){const item=id?tasks.find(t=>t.id===id):null;editing=item?structuredClone(item):normalize({id:Math.max(0,...tasks.map(t=>t.id))+1,category:'Produit',title:'',owner:OWN.Produit,status:'À faire',start:'',end:'',duration:null,planVersion:2,after:[],source:'Ajout manuel'});$('taskModalHeading').textContent='Ticket '+editing.id;$('scheduleWarning').hidden=!editing.scheduleAlert;$('scheduleWarning').textContent=editing.scheduleAlert||'';$('ftitle').value=editing.title;$('fcat').value=editing.category;$('fowner').value=editing.owner;$('fstatus').value=editing.status;$('fpriority').value=editing.priority;$('fstart').value=editing.start;$('fend').value=editing.end;$('fduration').value=editing.duration??'';$('fsource').value=editing.source||'';$('fdescription').value=editing.description||'';$('flocked').checked=!!editing.locked;$('fdepquery').value='';$('fdepId').value='';$('fdelete').style.display=item?'':'none';$('fresetCreate').style.display=item?'none':'';fillDepSelect();editDepList();updateLagUnit();updateLinkWording();$('overlay').classList.add('open');$('modal').classList.add('open');
 $('database').classList.toggle('wylo-behind-ticket',$('database').classList.contains('open'));planInit();wyloInitialTaskState=wyloTaskState();}
 let wyloInitialTaskState=null;
 function wyloTaskState(){
@@ -3190,7 +3209,7 @@ function addDependency(){
  const type=$('fdepType').value,lag=Number($('fdepLag').value)||0;
  if(editing.after.some(d=>Number(d.id)===id)){alertBox('Cette dépendance existe déjà.');return}
  editing.after.push({id,type,lag});
- editDepList();updateLinkWording();planLinkChanged();
+ editDepList();$('fdepquery').value='';fillDepSelect();planLinkChanged();
 }
 function alertBox(s){$('alertText').textContent=s;$('alert').classList.add('open')}
 function exportJSON(){const blob=new Blob([JSON.stringify({exportedAt:new Date().toISOString(),tasks},null,2)],{type:'application/json'});const u=URL.createObjectURL(blob);const a=document.createElement('a');a.href=u;a.download='WYLO_catalogue_taches.json';a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)}
