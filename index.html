@@ -3315,12 +3315,18 @@ function wyloAnimateLinks(svg){
 function wyloDependencyCircuit(items,id){
  const upstream=new Map(),downstream=new Map();
  for(const t of items){upstream.set(Number(t.id),[]);downstream.set(Number(t.id),[])}
- for(const t of items)for(const d of t.after||[]){const a=Number(d.id),b=Number(t.id);if(upstream.has(a)&&upstream.has(b)){upstream.get(b).push(a);downstream.get(a).push(b)}}
+ for(const t of items)for(const d of t.after||[]){
+  const a=Number(d.id),b=Number(t.id);if(!upstream.has(a)||!upstream.has(b))continue;
+  // SF with zero or negative lag places the edited ticket before its reference.
+  // Keep the stored edge key for matching the existing SVG path.
+  const reverse=d.type==='SF'&&(Number(d.lag)||0)<=0;
+  const from=reverse?b:a,to=reverse?a:b,key=a+':'+b;
+  upstream.get(to).push({id:from,key});downstream.get(from).push({id:to,key});
+ }
  const nodes=new Set([id]),edges=new Set();
- function walk(graph,reverse){const visited=new Set([id]),queue=[id];while(queue.length){const n=queue.shift();for(const v of graph.get(n)||[]){nodes.add(v);edges.add(reverse?v+':'+n:n+':'+v);if(!visited.has(v)){visited.add(v);queue.push(v)}}}}
- walk(upstream,true);walk(downstream,false);return {nodes,edges};
+ function walk(graph){const visited=new Set([id]),queue=[id];while(queue.length){const n=queue.shift();for(const e of graph.get(n)||[]){nodes.add(e.id);edges.add(e.key);if(!visited.has(e.id)){visited.add(e.id);queue.push(e.id)}}}}
+ walk(upstream);walk(downstream);return {nodes,edges};
 }
-
 
 function wyloSetDepSwitch(value){
  depVisible=value;const btn=$('depToggle');btn.classList.toggle('on',value);btn.setAttribute('aria-pressed',String(value));btn.title=value?'Masquer les dépendances':'Afficher les dépendances';
