@@ -3106,7 +3106,7 @@ function saveTask(){let t=editing;t.title=$('ftitle').value.trim();if(!t.title){
  const modified=tasks.filter(x=>x.id!==t.id).map(x=>structuredClone(x)).concat(t);for(const p of t.beforePending||[]){const target=modified.find(x=>x.id===p.target);if(target&&!target.after.some(d=>d.id===p.source))target.after.push({id:p.source,type:p.type,lag:p.lag});}delete t.beforePending;if(hasCycle(modified)){alertBox('Conflit : cette relation créerait une boucle entre les tickets. Enregistrement annulé.');return}
  const msgs=resolveLinked(modified);if(msgs.some(x=>x.startsWith('Conflit de date fixe'))){alertBox(msgs.join(' '));return}
  tasks=modified.sort((a,b)=>a.id-b.id);persist();setDbFilters();renderDatabase();renderGantt();closeModal(true);if(msgs.length)alertBox(msgs.slice(0,5).join('\n'));}
-function removeTask(){if(!editing||!confirm('Supprimer définitivement ce ticket du catalogue ?'))return;tasks=tasks.filter(t=>t.id!==editing.id);for(const t of tasks)t.after=(t.after||[]).filter(d=>d.id!==editing.id);persist();setDbFilters();renderDatabase();renderGantt();closeModal(true)}
+function removeTask(){if(!editing||!confirm('Supprimer définitivement ce ticket du catalogue ?'))return;const remaining=tasks.filter(t=>Number(t.id)!==Number(editing.id)).sort((a,b)=>Number(a.id)-Number(b.id));const ids=new Map(remaining.map((t,i)=>[Number(t.id),i+1]));tasks=remaining.map(t=>({...t,id:ids.get(Number(t.id)),after:(t.after||[]).filter(d=>ids.has(Number(d.id))).map(d=>({...d,id:ids.get(Number(d.id))}))}));persist();setDbFilters();renderDatabase();renderGantt();closeModal(true)}
 function addDependency(){
  const id=Number($('fdepId').value);
  if(!id){alertBox('Choisis un ticket à relier.');return}
