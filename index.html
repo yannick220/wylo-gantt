@@ -2898,7 +2898,15 @@ html.wylo-light #modal .schedule-warning{
 #modal .wylo-link-editor .wylo-link-add{grid-area:2/4/3/5!important;min-width:0!important}
 #modal .wylo-link-editor #wyloDepResults{grid-column:1/-1!important;grid-row:3}
 #modal .wylo-link-editor .wylo-link-type select{text-overflow:ellipsis}
-</style><style>#modal .wylo-link-editor>#fdepquery,#modal .wylo-link-editor .wylo-link-type .wylo-select-wrap,#modal .wylo-link-editor .wylo-link-type .input{width:100%!important;min-width:0!important;max-width:none!important;height:44px!important}#modal .wylo-link-editor>#fdepId{display:none!important}#modal .wylo-link-editor>.wylo-link-field{width:100%!important;min-width:0!important;margin:0!important}#modal .wylo-link-editor>#wyloLinkPreview{grid-row:4!important}#modal .wylo-link-editor>#fdepList{grid-row:5!important}</style></head><body><style>#wyloCloudGate{position:fixed;inset:0;z-index:2147483647;background:#202027;display:grid;place-items:center;color:#f6f6fa;font-family:inherit}#wyloCloudGate[hidden],#wyloCloudLogin[hidden],#wyloCloudLogout[hidden]{display:none!important}#wyloCloudGate>div{max-width:420px;padding:28px;text-align:center}#wyloCloudGate button{margin-top:18px;padding:12px 20px;border-radius:24px;background:#fff;color:#222;border:0;cursor:pointer;font:inherit}</style><div id="wyloCloudGate" role="dialog" aria-modal="true"><div><h2>WYLO</h2><p id="wyloCloudMessage">Connexion à Firebase…</p><button id="wyloCloudLogin" hidden>Se connecter avec Google</button></div></div>
+</style><style>#modal .wylo-link-editor>#fdepquery,#modal .wylo-link-editor .wylo-link-type .wylo-select-wrap,#modal .wylo-link-editor .wylo-link-type .input{width:100%!important;min-width:0!important;max-width:none!important;height:44px!important}#modal .wylo-link-editor>#fdepId{display:none!important}#modal .wylo-link-editor>.wylo-link-field{width:100%!important;min-width:0!important;margin:0!important}#modal .wylo-link-editor>#wyloLinkPreview{grid-row:4!important}#modal .wylo-link-editor>#fdepList{grid-row:5!important}</style><style>
+#modal .field.wide.wylo-link-editor{grid-template-columns:minmax(0,1.15fr) minmax(0,1.85fr) minmax(0,.8fr) minmax(0,.8fr)!important;column-gap:8px!important;row-gap:10px!important}
+#modal .wylo-link-editor>#fdepquery,#modal .wylo-link-editor .wylo-link-type .wylo-select-wrap,#modal .wylo-link-editor .wylo-link-type select,#modal .wylo-link-editor .wylo-lag-composite,#modal .wylo-link-editor>#faddDep{box-sizing:border-box!important;height:44px!important;min-height:44px!important;max-height:44px!important;margin:0!important;border-radius:999px!important;align-self:center!important}
+#modal .wylo-link-editor>#faddDep{font-weight:400!important;white-space:nowrap!important;padding:0 8px!important;overflow:hidden;text-overflow:ellipsis}
+#modal .wylo-link-editor .wylo-link-type{align-self:center!important;justify-content:center!important}
+#modal .wylo-link-editor .wylo-lag-unit{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+#modal .wylo-link-editor>#fdepquery{padding-left:12px!important}
+#modal .wylo-link-editor>#wyloDepResults[hidden]{display:none!important}
+</style></head><body><style>#wyloCloudGate{position:fixed;inset:0;z-index:2147483647;background:#202027;display:grid;place-items:center;color:#f6f6fa;font-family:inherit}#wyloCloudGate[hidden],#wyloCloudLogin[hidden],#wyloCloudLogout[hidden]{display:none!important}#wyloCloudGate>div{max-width:420px;padding:28px;text-align:center}#wyloCloudGate button{margin-top:18px;padding:12px 20px;border-radius:24px;background:#fff;color:#222;border:0;cursor:pointer;font:inherit}</style><div id="wyloCloudGate" role="dialog" aria-modal="true"><div><h2>WYLO</h2><p id="wyloCloudMessage">Connexion à Firebase…</p><button id="wyloCloudLogin" hidden>Se connecter avec Google</button></div></div>
 <div class="app"><header class="top"><div class="header-identity"><div class="wylo-settings-wrap" id="wyloSettingsWrap">
 <button class="pill fullscreen wylo-settings-trigger" id="wyloSettingsToggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="wyloSettingsMenu" title="Menu"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
 <div class="wylo-settings-menu" id="wyloSettingsMenu" role="group" aria-label="Menu principal" hidden>
@@ -2918,7 +2926,7 @@ html.wylo-light #modal .schedule-warning{
 </span></div></div><input type="hidden" id="fsource"><div class="field wide"><label>DESCRIPTION (FACULTATIVE)</label><textarea class="input" id="fdescription"></textarea></div><div class="field wide wylo-link-editor">
 <label id="wyloLinkHeading">LIER LE TICKET À UN AUTRE</label>
 
-  <input class="input" id="fdepquery" placeholder="Chercher un ticket ou son numéro…" aria-label="Rechercher un ticket">
+  <input class="input" id="fdepquery" placeholder="Chercher un ticket…" aria-label="Rechercher un ticket">
   <input type="hidden" id="fdepId" value="">
   <div id="wyloDepResults" aria-label="Tickets correspondant à la recherche" hidden></div>
 
