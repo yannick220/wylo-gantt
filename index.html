@@ -2883,7 +2883,7 @@ html.wylo-light #modal .schedule-warning{
 .database.open{
   top:var(--wylo-secondary-top,92px)!important;
 }
-</style><style>#wyloPlanAlert{margin:8px 16px;padding:10px 14px;border:1px solid #e65b62;border-radius:10px;color:#ffb9bd;background:#3a242b;font-size:12px}#wyloPlanAlert[hidden]{display:none!important}#modal .wylo-plan-invalid .wylo-date-trigger,#modal .wylo-plan-invalid .wylo-duration-counter{border:1px solid #e65b62!important;box-shadow:0 0 0 1px #e65b62!important}</style><style>#ganttRows .gantt-bar{min-width:0!important}</style><style>#ganttRows .gantt-task-id[role=button]{cursor:pointer}#ganttRows .gantt-task-id[role=button]:focus-visible{outline:2px solid currentColor;outline-offset:3px}#ganttRows .gantt-row .gantt-label,#ganttRows .gantt-row .gantt-bar,#ganttRows .dep-link{transition:opacity 180ms ease}#ganttRows .wylo-focus-muted .gantt-label,#ganttRows .wylo-focus-muted .gantt-bar{opacity:.23}#ganttRows .dep-link.wylo-focus-muted{opacity:.10}#ganttRows .dep-link.wylo-focus-link{stroke:#fff;stroke-width:1.8px}#ganttRows .wylo-focus-active .gantt-bar{outline:2px solid currentColor;outline-offset:3px}</style></head><body><style>#wyloCloudGate{position:fixed;inset:0;z-index:2147483647;background:#202027;display:grid;place-items:center;color:#f6f6fa;font-family:inherit}#wyloCloudGate[hidden],#wyloCloudLogin[hidden],#wyloCloudLogout[hidden]{display:none!important}#wyloCloudGate>div{max-width:420px;padding:28px;text-align:center}#wyloCloudGate button{margin-top:18px;padding:12px 20px;border-radius:24px;background:#fff;color:#222;border:0;cursor:pointer;font:inherit}#wyloCloudBar{position:fixed;bottom:8px;right:10px;z-index:50;display:flex;align-items:center;gap:8px;background:#282831;color:#eee;padding:6px 10px;border-radius:16px;font-size:10px}#wyloCloudLogout{background:transparent;color:inherit;border:1px solid #777;border-radius:12px;padding:4px 8px;cursor:pointer}</style><div id="wyloCloudGate" role="dialog" aria-modal="true"><div><h2>WYLO</h2><p id="wyloCloudMessage">Connexion à Firebase…</p><button id="wyloCloudLogin" hidden>Se connecter avec Google</button></div></div><div id="wyloCloudBar"><span id="wyloCloudStatus">Connexion…</span><button id="wyloCloudLogout" hidden>Déconnexion</button></div>
+</style><style>#wyloPlanAlert{margin:8px 16px;padding:10px 14px;border:1px solid #e65b62;border-radius:10px;color:#ffb9bd;background:#3a242b;font-size:12px}#wyloPlanAlert[hidden]{display:none!important}#modal .wylo-plan-invalid .wylo-date-trigger,#modal .wylo-plan-invalid .wylo-duration-counter{border:1px solid #e65b62!important;box-shadow:0 0 0 1px #e65b62!important}</style><style>#ganttRows .gantt-bar{min-width:0!important}</style><style>#ganttRows .gantt-task-id[role=button]{cursor:pointer}#ganttRows .gantt-task-id[role=button]:focus-visible{outline:2px solid currentColor;outline-offset:3px}#ganttRows .gantt-row .gantt-label,#ganttRows .gantt-row .gantt-bar,#ganttRows .dep-link{transition:opacity 180ms ease}#ganttRows .wylo-focus-muted .gantt-label,#ganttRows .wylo-focus-muted .gantt-bar{opacity:.23}#ganttRows .dep-link.wylo-focus-muted{opacity:.10}#ganttRows .dep-link.wylo-focus-link{stroke:#fff;stroke-width:1.8px}#ganttRows .wylo-focus-active .gantt-bar{outline:2px solid currentColor;outline-offset:3px}</style><style>#ganttRows .gantt-row{transition:none!important}#ganttRows .dep-link{transition:none!important}#ganttRows .gantt-row[inert]{pointer-events:none}</style></head><body><style>#wyloCloudGate{position:fixed;inset:0;z-index:2147483647;background:#202027;display:grid;place-items:center;color:#f6f6fa;font-family:inherit}#wyloCloudGate[hidden],#wyloCloudLogin[hidden],#wyloCloudLogout[hidden]{display:none!important}#wyloCloudGate>div{max-width:420px;padding:28px;text-align:center}#wyloCloudGate button{margin-top:18px;padding:12px 20px;border-radius:24px;background:#fff;color:#222;border:0;cursor:pointer;font:inherit}#wyloCloudBar{position:fixed;bottom:8px;right:10px;z-index:50;display:flex;align-items:center;gap:8px;background:#282831;color:#eee;padding:6px 10px;border-radius:16px;font-size:10px}#wyloCloudLogout{background:transparent;color:inherit;border:1px solid #777;border-radius:12px;padding:4px 8px;cursor:pointer}</style><div id="wyloCloudGate" role="dialog" aria-modal="true"><div><h2>WYLO</h2><p id="wyloCloudMessage">Connexion à Firebase…</p><button id="wyloCloudLogin" hidden>Se connecter avec Google</button></div></div><div id="wyloCloudBar"><span id="wyloCloudStatus">Connexion…</span><button id="wyloCloudLogout" hidden>Déconnexion</button></div>
 <div class="app"><header class="top"><div class="header-identity"><div class="wylo-settings-wrap" id="wyloSettingsWrap">
 <button class="pill fullscreen wylo-settings-trigger" id="wyloSettingsToggle" type="button" aria-label="Paramètres" aria-expanded="false" aria-controls="wyloSettingsMenu" title="Paramètres"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.75 13.9 3.3l.8 2.15a7.2 7.2 0 0 1 1.45.84l2.23-.4 1.88 3.26-1.5 1.72a7.5 7.5 0 0 1 0 1.67l1.5 1.72-1.88 3.26-2.23-.4a7.2 7.2 0 0 1-1.45.84l-.8 2.15H10.1l-.8-2.15a7.2 7.2 0 0 1-1.45-.84l-2.23.4-1.88-3.26 1.5-1.72a7.5 7.5 0 0 1 0-1.67l-1.5-1.72 1.88-3.26 2.23.4a7.2 7.2 0 0 1 1.45-.84l.8-2.15Z"/><circle cx="12" cy="12" r="3.1"/></svg></button>
 <div class="wylo-settings-menu" id="wyloSettingsMenu" role="group" aria-label="Options d’affichage" hidden>
@@ -2935,7 +2935,7 @@ const INITIAL=[{"id":1,"category":"Produit","title":"Tester le fonctionnement de
 const CATS=['Administration','Produit','Technique','Marketing','Commercial'];
 const COLORS={'Administration':'#85c83e','Produit':'#3f5af6','Technique':'#1fb2cc','Marketing':'#ff3f86','Commercial':'#f4a03a'};
 const OWN={'Administration':'Denis','Produit':'Yannick','Technique':'Maxime','Marketing':'Yannick','Commercial':'Denis'};
-const KEY='wylo-catalogue-consolide-149-v1';let tasks=[];let editing=null;let familyEnabled=new Set(CATS);const STATUSES=['À faire','En cours','Réalisée'];const PRIORITIES=['Basse','Normale','Haute'];let statusEnabled=new Set(STATUSES);let priorityEnabled=new Set(PRIORITIES);let depVisible=false;let wyloFocusTicket=null;let depDrawNext=false;let showAllScheduled=false;let sort='id';let sortAsc=true;let scale='week';let timelineLeft=new Date();timelineLeft.setHours(0,0,0,0);let labelWidth=235;
+const KEY='wylo-catalogue-consolide-149-v1';let tasks=[];let editing=null;let familyEnabled=new Set(CATS);const STATUSES=['À faire','En cours','Réalisée'];const PRIORITIES=['Basse','Normale','Haute'];let statusEnabled=new Set(STATUSES);let priorityEnabled=new Set(PRIORITIES);let depVisible=false;let wyloFocusTicket=null;let wyloFocusFrame=0;let depDrawNext=false;let showAllScheduled=false;let sort='id';let sortAsc=true;let scale='week';let timelineLeft=new Date();timelineLeft.setHours(0,0,0,0);let labelWidth=235;
 const $=id=>document.getElementById(id);const pad=n=>String(n).padStart(2,'0');const iso=d=>{if(!d)return '';const x=d instanceof Date?d:new Date(d+'T12:00:00');return x.getFullYear()+'-'+pad(x.getMonth()+1)+'-'+pad(x.getDate())};const date=s=>new Date(s+'T12:00:00');const shift=(s,n)=>{const d=date(s);d.setDate(d.getDate()+n);return iso(d)};const dd=(a,b)=>Math.round((date(a)-date(b))/86400000);const escape=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function normalize(t){const both=t.start&&t.end&&t.end>=t.start;const legacy=t.planVersion!==2;const duration=both?dd(t.end,t.start)+1:legacy&&!t.start&&!t.end&&Number(t.duration)===1?null:planDuration(t.duration);return {...t,category:CATS.includes(t.category)?t.category:'Produit',owner:t.owner||OWN[t.category]||'Yannick',start:t.start||'',end:t.end||'',duration,after:Array.isArray(t.after)?t.after:[],priority:t.priority==='Critique'?'Haute':(PRIORITIES.includes(t.priority)?t.priority:'Normale'),status:STATUSES.includes(t.status)?t.status:'À faire',endLocked:!!t.endLocked,planVersion:2,planStart:legacy?((t.locked||!(t.after||[]).length)?t.start||'':''):t.planStart||'',planEnd:legacy?((t.endLocked||(!t.start&&!(t.after||[]).length))?t.end||'':''):t.planEnd||''};}
 function load(){tasks=[];}
@@ -3193,7 +3193,7 @@ function importJSON(file){if(!file)return;const reader=new FileReader();reader.o
 let scaleTimer=0;
 function setScale(v){if(scale===v)return;const previous=periodDays();const inner=$('ganttInner'),vp=$('viewport');const oldTotal=Number($('axisDays').dataset.totalDays);const currentWidth=inner.getBoundingClientRect().width-labelWidth;const available=Math.max(320,vp.clientWidth-labelWidth);const effectivePrevious=oldTotal>0&&currentWidth>0&&visibleTasks().length?oldTotal*available/currentWidth:previous;scale=v;document.querySelectorAll('[data-scale]').forEach(b=>b.classList.toggle('active',b.dataset.scale===v));renderGantt(effectivePrevious)}
 function periodDays(){return scale==='day'?1:scale==='week'?7:scale==='month'?31:365}
-function renderGantt(previousPeriod){const main=document.querySelector('.main');clearTimeout(scaleTimer);main.classList.remove('scale-motion');updateTodayButton();updateCounts();const all=visibleTasks();const vp=$('viewport'),content=$('ganttInner');$('axisMajor').textContent=timelineLeft.toLocaleDateString('fr-FR',{month:'long',year:'numeric'}).toLocaleUpperCase('fr-FR');const available=Math.max(320,vp.clientWidth-labelWidth),dayWidth=available/periodDays(),totalDays=Math.max(periodDays()*3,Math.max(0,...all.map(t=>dd(t.end,iso(timelineLeft))))+30),totalWidth=totalDays*dayWidth;
+function renderGantt(previousPeriod){cancelAnimationFrame(wyloFocusFrame);const main=document.querySelector('.main');clearTimeout(scaleTimer);main.classList.remove('scale-motion');updateTodayButton();updateCounts();const all=visibleTasks();const vp=$('viewport'),content=$('ganttInner');$('axisMajor').textContent=timelineLeft.toLocaleDateString('fr-FR',{month:'long',year:'numeric'}).toLocaleUpperCase('fr-FR');const available=Math.max(320,vp.clientWidth-labelWidth),dayWidth=available/periodDays(),totalDays=Math.max(periodDays()*3,Math.max(0,...all.map(t=>dd(t.end,iso(timelineLeft))))+30),totalWidth=totalDays*dayWidth;
  const axis=$('axisDays');axis.innerHTML='';const axisFragment=document.createDocumentFragment();const formatter=new Intl.DateTimeFormat('fr-FR',scale==='year'?{month:'short'}:{weekday:'long'});const step=scale==='year'?30:scale==='month'?7:1;for(let i=0;i<totalDays;i+=step){const d=new Date(timelineLeft);d.setDate(d.getDate()+i);const c=document.createElement('div');c.className='axis-day';c.dataset.days=String(Math.min(step,totalDays-i));c.style.width=(Math.min(step,totalDays-i)/totalDays*100)+'%';const a=scale==='year'?formatter.format(d).toUpperCase():scale==='month'?'SEMAINE '+Math.ceil((i+1)/7):formatter.format(d).toUpperCase();c.innerHTML=`<span>${escape(a)}</span><b>${scale==='year'?d.getFullYear():pad(d.getDate())}</b>`;axisFragment.appendChild(c)}axis.appendChild(axisFragment);axis.dataset.totalDays=String(totalDays);main.style.setProperty('--span-ratio',String(totalDays/periodDays()));axis.style.removeProperty('width');content.style.removeProperty('min-width');$('ganttRows').style.removeProperty('width');$('ganttRows').innerHTML='';if(!all.length){$('ganttRows').innerHTML=`<div class="empty"><div class="empty-icon">▰</div><h2>Le Gantt est prêt.</h2><p>Les ${tasks.length.toLocaleString('fr-FR')} tickets sont disponibles dans la base de données.<br>Tu peux les classer par pôle ou responsable, puis renseigner leurs dates et leurs dépendances.<br><b>Seules les tickets planifiés apparaîtront ici.</b></p><button class="pill active" id="openEmpty">Ouvrir la base de données</button></div>`;$('openEmpty').onclick=openDatabase;content.style.width='100%';return}
  content.style.removeProperty('width');const pos=new Map(),fragment=document.createDocumentFragment(),pending=[];for(const [i,t] of all.entries()){const l=dd(t.start,iso(timelineLeft))*dayWidth,w=dayWidth*(dd(t.end,t.start)+1),row=document.createElement('div');row.className='gantt-row';row.dataset.taskId=String(t.id);row.dataset.startDay=String(dd(t.start,iso(timelineLeft)));row.dataset.duration=String(dd(t.end,t.start)+1);row.innerHTML=`<div class="gantt-label" title="Modifier le ticket ${t.id}"><span class="gantt-task-id" data-digits="${String(t.id).length}">${t.id}</span><span class="gantt-task-title">${escape(t.title)}</span></div><div class="gantt-timeline"><span class="gantt-rail"></span><button class="gantt-bar${t.status==='Réalisée'?' is-complete':''}" style="left:${(l+wyloBarInset(dayWidth,w))/totalWidth*100}%;width:${Math.max(.1,w-2*wyloBarInset(dayWidth,w))/totalWidth*100}%;background:${COLORS[t.category]}" title="${escape(wyloTicketReference(t))} — ${t.start} → ${t.end}"></button></div>`;const badge=row.querySelector('.gantt-task-id');badge.setAttribute('role','button');badge.tabIndex=0;badge.title='Ouvrir la fiche du ticket '+t.id;badge.setAttribute('aria-label',badge.title);badge.onclick=e=>{e.stopPropagation();openTask(t.id)};badge.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();e.stopPropagation();openTask(t.id)}};row.querySelector('.gantt-label').onclick=()=>openTask(t.id);const bar=row.querySelector('.gantt-bar');bar.title+=' — Cliquer pour afficher ou masquer le circuit de dépendances';bar.setAttribute('aria-label','Afficher ou masquer le circuit de dépendances du ticket '+t.id);bar.setAttribute('aria-pressed','false');bar.onclick=()=>wyloToggleFocus(t.id);fragment.appendChild(row);pending.push({row,t,l,w})} $('ganttRows').appendChild(fragment);
  if(depVisible){const grid=$('ganttRows').getBoundingClientRect();for(const {row,t} of pending){const bar=row.querySelector('.gantt-bar').getBoundingClientRect(),timeline=row.querySelector('.gantt-timeline').getBoundingClientRect();const ratio=totalWidth/Math.max(1,timeline.width);pos.set(t.id,{x:(bar.left-timeline.left)*ratio,w:bar.width*ratio,y:bar.top+bar.height/2-grid.top,h:bar.height});}}
@@ -3316,25 +3316,69 @@ function wyloDependencyCircuit(items,id){
  function walk(graph,reverse){const visited=new Set([id]),queue=[id];while(queue.length){const n=queue.shift();for(const v of graph.get(n)||[]){nodes.add(v);edges.add(reverse?v+':'+n:n+':'+v);if(!visited.has(v)){visited.add(v);queue.push(v)}}}}
  walk(upstream,true);walk(downstream,false);return {nodes,edges};
 }
+
+
 function wyloToggleFocus(id){
- if(wyloFocusTicket===id){wyloFocusTicket=null;wyloApplyFocus();return}
+ if(wyloFocusTicket===id){wyloFocusTicket=null;wyloApplyFocus(true);return}
  wyloFocusTicket=id;
- if(!depVisible){depVisible=true;const btn=$('depToggle');btn.classList.add('on');btn.setAttribute('aria-pressed','true');btn.title='Masquer les dépendances';renderGantt();}else wyloApplyFocus();
+ if(!depVisible){depVisible=true;const btn=$('depToggle');btn.classList.add('on');btn.setAttribute('aria-pressed','true');btn.title='Masquer les dépendances';wyloFocusTicket=null;renderGantt();wyloFocusTicket=id;wyloApplyFocus(true);}else wyloApplyFocus(true);
 }
-function wyloApplyFocus(){
+function wyloFocusTargets(rows,circuit){
+ return rows.map(row=>!circuit||circuit.nodes.has(Number(row.dataset.taskId)));
+}
+function wyloUpdateFocusPaths(grid,paths,circuit,progress,initialOpacity){
+ const svg=grid.querySelector('svg.dep-svg');if(!svg)return;
+ const box=svg.viewBox.baseVal,width=box.width,height=Math.max(1,grid.offsetHeight);
+ svg.setAttribute('height',height);svg.setAttribute('viewBox','0 0 '+width+' '+height);
+ const rect=grid.getBoundingClientRect(),pos=new Map();
+ for(const row of grid.querySelectorAll('.gantt-row')){
+  if(row.offsetHeight<1)continue;
+  const bar=row.querySelector('.gantt-bar').getBoundingClientRect(),timeline=row.querySelector('.gantt-timeline').getBoundingClientRect();
+  const ratio=width/Math.max(1,timeline.width);
+  pos.set(Number(row.dataset.taskId),{x:(bar.left-timeline.left)*ratio,w:bar.width*ratio,y:bar.top+bar.height/2-rect.top,h:bar.height});
+ }
+ const dayWidth=width/Math.max(1,Number($('axisDays').dataset.totalDays)||1);
+ const obstacles=[...pos.entries()].filter(([id])=>!circuit||circuit.nodes.has(id)).map(([,p])=>p);
+ for(const [i,path] of paths.entries()){
+  const from=Number(path.dataset.from),to=Number(path.dataset.to),active=!circuit||circuit.edges.has(from+':'+to),target=active?1:0;
+  const a=pos.get(from),b=pos.get(to);
+  path.classList.toggle('wylo-focus-link',!!circuit&&active);
+  path.classList.remove('wylo-focus-muted');
+  path.style.opacity=String(initialOpacity[i]+(target-initialOpacity[i])*progress);
+  if(a&&b&&Number(path.style.opacity)>0)path.setAttribute('d',wyloDependencyRoute(a,b,path.dataset.kind||'FS',dayWidth,obstacles));
+  else path.style.opacity='0';
+ }
+}
+function wyloApplyFocus(animate=false){
+ cancelAnimationFrame(wyloFocusFrame);
+ const grid=$('ganttRows');
  if(wyloFocusTicket!==null&&!tasks.some(t=>Number(t.id)===wyloFocusTicket))wyloFocusTicket=null;
  const focus=wyloFocusTicket!==null&&depVisible,circuit=focus?wyloDependencyCircuit(tasks,wyloFocusTicket):null;
- for(const row of $('ganttRows').querySelectorAll('.gantt-row')){
-  const id=Number(row.dataset.taskId),bar=row.querySelector('.gantt-bar');
-  row.classList.toggle('wylo-focus-muted',focus&&!circuit.nodes.has(id));row.classList.toggle('wylo-focus-active',focus&&id===wyloFocusTicket);
-  bar?.setAttribute('aria-pressed',String(focus&&id===wyloFocusTicket));
+ const rows=[...grid.querySelectorAll('.gantt-row')],paths=[...grid.querySelectorAll('.dep-link')];
+ const visible=wyloFocusTargets(rows,circuit);
+ const current=rows.map(row=>row.getBoundingClientRect().height);
+ const opacity=rows.map(row=>Number(getComputedStyle(row).opacity));
+ const initialPathOpacity=paths.map(path=>Number(getComputedStyle(path).opacity));
+ for(const row of rows){row.style.removeProperty('height');row.style.removeProperty('min-height');row.style.removeProperty('overflow');row.style.removeProperty('border-bottom-width');row.style.removeProperty('visibility');row.style.removeProperty('pointer-events');}
+ const natural=rows.map(row=>row.getBoundingClientRect().height);
+ for(const row of rows){row.classList.remove('wylo-focus-muted');const id=Number(row.dataset.taskId);row.classList.toggle('wylo-focus-active',focus&&id===wyloFocusTicket);row.querySelector('.gantt-bar')?.setAttribute('aria-pressed',String(focus&&id===wyloFocusTicket));}
+ function paint(p){
+  if(!grid.isConnected||rows.some(row=>!row.isConnected))return false;
+  for(const [i,row] of rows.entries()){
+   const show=visible[i],h=current[i]+((show?natural[i]:0)-current[i])*p;
+   const alpha=opacity[i]+((show?1:0)-opacity[i])*p;
+   row.style.minHeight='0px';row.style.height=Math.max(0,h)+'px';row.style.overflow='hidden';row.style.opacity=String(alpha);row.style.borderBottomWidth=h<1?'0px':'1px';
+   row.style.visibility=h<.1?'hidden':'visible';row.style.pointerEvents=show?'':'none';row.inert=!show;
+   if(p===1&&show){for(const prop of ['height','min-height','overflow','border-bottom-width','visibility','pointer-events','opacity'])row.style.removeProperty(prop);}
+  }
+  wyloUpdateFocusPaths(grid,paths,circuit,p,initialPathOpacity);return true;
  }
- for(const path of $('ganttRows').querySelectorAll('.dep-link')){
-  const active=focus&&circuit.edges.has(path.dataset.from+':'+path.dataset.to);
-  path.classList.toggle('wylo-focus-muted',focus&&!active);path.classList.toggle('wylo-focus-link',active);
- }
+ if(!animate||matchMedia('(prefers-reduced-motion: reduce)').matches){paint(1);return}
+ let begin=null;const duration=380;paint(0);
+ function frame(now){if(begin===null)begin=now;const t=Math.min(1,(now-begin)/duration),e=t*t*(3-2*t);if(!paint(e))return;if(t<1)wyloFocusFrame=requestAnimationFrame(frame);}
+ wyloFocusFrame=requestAnimationFrame(frame);
 }
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&wyloFocusTicket!==null&&!$('modal').classList.contains('open')&&!$('database').classList.contains('open')){wyloFocusTicket=null;wyloApplyFocus()}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&wyloFocusTicket!==null&&!$('modal').classList.contains('open')&&!$('database').classList.contains('open')){wyloFocusTicket=null;wyloApplyFocus(true)}});
 
 let wyloPulseToken=0;
 function selectGanttTask(id){
