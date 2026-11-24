@@ -2916,6 +2916,14 @@ html.wylo-light #modal .schedule-warning{
 #wyloLinkControls>.wylo-link-field{margin:0!important;align-self:center!important}
 #wyloLinkControls #fdepquery,#wyloLinkControls #faddDep,#wyloLinkControls .wylo-select-wrap,#wyloLinkControls select,#wyloLinkControls .wylo-lag-composite{height:44px!important;min-height:44px!important;max-height:44px!important;box-sizing:border-box!important}
 #wyloLinkControls .wylo-select-wrap,#wyloLinkControls select{width:100%!important;min-width:0!important}
+</style><style>
+#modal #wyloLinkControls{display:flex!important;flex-wrap:wrap!important;align-items:center!important;gap:8px!important;width:100%!important;font-size:13px!important;line-height:1.6}
+#modal #wyloLinkControls>#wyloLinkSubject{font-weight:400!important;overflow-wrap:anywhere}
+#modal #wyloLinkControls>.wylo-link-type{flex:0 0 160px!important;width:160px!important}
+#modal #wyloLinkControls>#fdepquery{flex:1 1 240px!important;width:auto!important;min-width:170px!important}
+#modal #wyloLinkControls>.wylo-link-lag{flex:0 0 185px!important;width:185px!important}
+#modal #wyloLinkControls>#faddDep{flex:0 0 135px!important;width:135px!important}
+#modal #wyloLinkControls>span{white-space:nowrap}
 </style></head><body><style>#wyloCloudGate{position:fixed;inset:0;z-index:2147483647;background:#202027;display:grid;place-items:center;color:#f6f6fa;font-family:inherit}#wyloCloudGate[hidden],#wyloCloudLogin[hidden],#wyloCloudLogout[hidden]{display:none!important}#wyloCloudGate>div{max-width:420px;padding:28px;text-align:center}#wyloCloudGate button{margin-top:18px;padding:12px 20px;border-radius:24px;background:#fff;color:#222;border:0;cursor:pointer;font:inherit}</style><div id="wyloCloudGate" role="dialog" aria-modal="true"><div><h2>WYLO</h2><p id="wyloCloudMessage">Connexion à Firebase…</p><button id="wyloCloudLogin" hidden>Se connecter avec Google</button></div></div>
 <div class="app"><header class="top"><div class="header-identity"><div class="wylo-settings-wrap" id="wyloSettingsWrap">
 <button class="pill fullscreen wylo-settings-trigger" id="wyloSettingsToggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="wyloSettingsMenu" title="Menu"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
@@ -2928,29 +2936,17 @@ html.wylo-light #modal .schedule-warning{
 <div class="overlay" id="overlay"></div><section class="database" id="database" aria-label="Base de données des tickets"><div class="db-head"><div class="db-title-group"><div class="db-summary"><div class="db-stat"><strong id="dbTitleCount">0</strong><span>tickets au total</span></div><div class="db-stat"><strong id="unplannedCount">0</strong><span>tickets restant à programmer</span></div></div></div><div class="db-header-actions"><button class="pill subtle" id="dbExport" title="Exporter la base en JSON" type="button">Exporter JSON</button><button class="pill subtle db-reset-head db-icon-action" id="dbReset" aria-label="Réinitialiser les données partagées" title="Réinitialiser les données partagées" type="button"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11a9 9 0 1 1 3.3 7"/><path d="M3 4v7h7"/></svg></button><button class="pill close db-close-icon" id="closeDb" aria-label="Fermer la base de données" title="Fermer">×</button></div></div>
 <div class="db-filters"><input class="input search" id="dbsearch" placeholder="Rechercher un ticket, un contact, une émission…" aria-label="Rechercher"><select class="input" id="dbfamily"><option value="">Tous les pôles</option></select><select class="input" id="dbowner"><option value="">Tous les responsables</option></select><input type="file" id="importfile" accept="application/json" style="display:none"></div>
 <div class="db-floating-actions"><button class="pill subtle db-import-floating" id="dbImport" type="button" title="Importer un fichier JSON">Importer JSON</button><button class="pill active db-add-floating" id="dbnew" type="button" aria-label="Nouveau ticket" title="Nouveau ticket">+</button></div><div class="db-results"><table class="db-table"><colgroup><col data-db-col="0"><col data-db-col="1"><col data-db-col="2"><col data-db-col="3"><col data-db-col="4"><col data-db-col="5"><col data-db-col="6"><col data-db-col="7"><col data-db-col="8"><col data-db-col="9"><col data-db-col="10"></colgroup><thead><tr><th data-sort="id" class="db-id-col" title="Numéro permanent de ticket">N°</th><th data-sort="title">Ticket</th><th data-sort="category">Pôle</th><th data-sort="owner">Responsable</th><th data-sort="priority" title="Basse, Normale, Haute">Priorité</th><th data-sort="status">État</th><th data-sort="before" title="Tickets qui dépendent de celle-ci (calcul automatique)">Avant</th><th data-sort="after" title="Tickets dont dépend celle-ci">Après</th><th data-sort="start">Début</th><th data-sort="end">Fin</th><th data-sort="duration">Durée</th></tr></thead><tbody id="dbrows"></tbody></table></div><span id="dbShown" hidden aria-hidden="true">0</span></section>
-<section class="modal" id="modal" aria-label="Modifier un ticket"><div class="task-modal-header"><h2 id="taskModalHeading">Ticket</h2><div class="task-modal-controls"><button class="pill danger" id="fdelete" type="button">Supprimer</button><button class="pill subtle" id="fresetCreate" type="button" style="display:none" title="Effacer les champs saisis et recommencer">Réinitialiser</button><button class="pill active" id="fsave" type="button">Enregistrer</button><button class="pill close task-close-icon" id="closeModal" type="button" aria-label="Fermer la fiche de ticket" title="Fermer">×</button></div></div><div class="schedule-warning" id="scheduleWarning" hidden></div><div id="wyloPlanAlert" role="alert" hidden></div><div class="formgrid"><div class="field wide"><label for="ftitle">INTITULÉ DU TICKET</label><input class="input" id="ftitle" placeholder="Commencer par un verbe à l’infinitif"></div><div class="wylo-four-fields"><div class="field"><label>PÔLE</label><select class="input" id="fcat"></select></div><div class="field"><label>RESPONSABLE</label><input class="input" id="fowner" placeholder="Yannick, Maxime, Denis…"></div><div class="field"><label>ÉTAT</label><select class="input" id="fstatus"></select></div><div class="field"><label>PRIORITÉ</label><select class="input" id="fpriority"></select></div></div><div class="field"><label>DATE DE DÉBUT SOUHAITÉE</label><input class="input" type="date" id="fstart"></div><div class="field"><label>DATE DE FIN SOUHAITÉE</label><input class="input" type="date" id="fend"></div><div class="field"><label>DURÉE EN JOURS</label><div class="wylo-duration-counter">
+<section class="modal" id="modal" aria-label="Modifier un ticket"><div class="task-modal-header"><h2 id="taskModalHeading">Ticket</h2><div class="task-modal-controls"><button class="pill danger" id="fdelete" type="button">Supprimer</button><button class="pill subtle" id="fresetCreate" type="button" style="display:none" title="Effacer les champs saisis et recommencer">Réinitialiser</button><button class="pill active" id="fsave" type="button">Enregistrer</button><button class="pill close task-close-icon" id="closeModal" type="button" aria-label="Fermer la fiche de ticket" title="Fermer">×</button></div></div><div class="schedule-warning" id="scheduleWarning" hidden></div><div id="wyloPlanAlert" role="alert" hidden></div><div class="formgrid"><div class="field wide"><label for="ftitle">INTITULÉ</label><input class="input" id="ftitle" placeholder="Commencer par un verbe à l’infinitif"></div><div class="wylo-four-fields"><div class="field"><label>PÔLE</label><select class="input" id="fcat"></select></div><div class="field"><label>RESPONSABLE</label><input class="input" id="fowner" placeholder="Yannick, Maxime, Denis…"></div><div class="field"><label>ÉTAT</label><select class="input" id="fstatus"></select></div><div class="field"><label>PRIORITÉ</label><select class="input" id="fpriority"></select></div></div><div class="field"><label>DATE DE DÉBUT SOUHAITÉE</label><input class="input" type="date" id="fstart"></div><div class="field"><label>DATE DE FIN SOUHAITÉE</label><input class="input" type="date" id="fend"></div><div class="field"><label>DURÉE EN JOURS</label><div class="wylo-duration-counter">
 <input class="input" type="number" min="1" id="fduration" step="1" aria-label="Durée en jours">
 <span class="wylo-duration-spinner">
 <button type="button" class="wylo-duration-step" id="wyloDurationPlus" title="Augmenter la durée" aria-label="Augmenter la durée d’un jour"><span class="wylo-chevron-up" aria-hidden="true"></span></button>
 <button type="button" class="wylo-duration-step" id="wyloDurationMinus" title="Diminuer la durée" aria-label="Diminuer la durée d’un jour"><span class="wylo-chevron-down" aria-hidden="true"></span></button>
 </span></div></div><input type="hidden" id="fsource"><div class="field wide"><label>DESCRIPTION (FACULTATIVE)</label><textarea class="input" id="fdescription"></textarea></div><div class="field wide wylo-link-editor">
-<label id="wyloLinkHeading">LIER LE TICKET À UN AUTRE</label>
+<label id="wyloLinkHeading">LIER LE PRÉSENT TICKET À D’AUTRES TICKETS</label>
 
-  <div id="wyloLinkControls" style="display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;align-items:center!important;gap:8px!important;width:100%!important;min-width:0!important"><input class="input" id="fdepquery" placeholder="Chercher un ticket…" data-wylo-layout="horizontal-27" aria-label="Rechercher un ticket">
-  <input type="hidden" id="fdepId" value="">
-  
-
-  <div class="wylo-link-field wylo-link-type">
-    <select class="input" id="fdepType">
-      <option value="FS">Commence après la fin</option>
-      <option value="SS">Commence au début</option>
-      <option value="SF">Se termine au début</option>
-      <option value="FF">Se termine à la fin</option>
-    </select>
-  </div>
-  <div class="wylo-link-field wylo-link-lag">
+  <div id="wyloLinkControls"><span>Nous devons</span><strong id="wyloLinkSubject"></strong><div class="wylo-link-field wylo-link-type"><select class="input" id="fdepType" aria-label="Moment de la liaison"><option value="SF">avant le début</option><option value="SS">après le début</option><option value="FF">avant la fin</option><option value="FS" selected>après la fin</option></select></div><span>de</span><input class="input" id="fdepquery" placeholder="Intitulé ou numéro du ticket…" data-wylo-layout="horizontal-27" aria-label="Rechercher un ticket"><input type="hidden" id="fdepId" value=""><span>avec</span><div class="wylo-link-field wylo-link-lag">
     <div class="wylo-lag-composite">
-      <input class="input" id="fdepLag" type="number" value="0" aria-label="Nombre de jours de décalage" title="Décalage positif ou négatif en jours">
+      <input class="input" id="fdepLag" type="number" min="0" value="0" aria-label="Nombre de jours de décalage" title="Nombre de jours de décalage">
       <span class="wylo-lag-unit" id="wyloLagUnit">jour de décalage</span>
       <span class="wylo-lag-spinner">
         <button type="button" class="wylo-lag-step" id="wyloLagPlus" aria-label="Ajouter un jour" title="Ajouter un jour"><span class="wylo-chevron-up" aria-hidden="true"></span></button>
@@ -2958,8 +2954,7 @@ html.wylo-light #modal .schedule-warning{
       </span>
     </div>
   </div>
-  <button class="pill subtle wylo-link-add" id="faddDep" type="button">Ajouter le lien</button>
-</div>
+  <button class="pill subtle wylo-link-add" id="faddDep" type="button">Ajouter le lien</button></div>
 <div id="wyloDepResults" aria-label="Tickets correspondant à la recherche" hidden></div>
 <div class="wylo-link-meaning" id="wyloLinkPreview" role="status" aria-live="polite">Choisir un ticket pour afficher la relation.</div>
 <div id="fdepList"></div></div><input type="checkbox" id="flocked" hidden aria-label="Verrouiller la date de début"></div></section>
@@ -3069,23 +3064,13 @@ function updateLinkWording(){
  if(!editing)return;
  const title=$('ftitle').value.trim()||editing.title||'Ticket sans intitulé';
  const target=tasks.find(t=>t.id===Number($('fdepId').value));
- const heading=$('wyloLinkHeading'),preview=$('wyloLinkPreview'),btn=$('faddDep');
- const source=`ticket ${editing.id}`;
- const linked=target?`ticket ${target.id}`:'ticket sélectionné';
- if(heading)heading.textContent=`LIER LE TICKET ${editing.id} À UN AUTRE`;
- const relations={
-  FS:`Le ${source} commence après la fin du ${linked}`,
-  SS:`Le ${source} commence au début du ${linked}`,
-  SF:`Le ${source} se termine avant le début du ${linked}`,
-  FF:`Le ${source} se termine à la fin du ${linked}`
- };
- const opts=$('fdepType').options;
- Array.from(opts).forEach(o=>{if(relations[o.value])o.textContent=relations[o.value]});
+ const preview=$('wyloLinkPreview'),btn=$('faddDep');
+ $('wyloLinkSubject').textContent='« '+wyloTicketReference({id:editing.id,title})+' »';
  if(btn)btn.disabled=!target;
  if(!preview)return;
  if(!target){preview.textContent='Choisir un ticket pour afficher la relation.';return}
  const type=$('fdepType').value;
- const lag=Number($('fdepLag').value)||0;
+ const lag=wyloSentenceLag(type,$('fdepLag').value);
  const subject=wyloTicketReference({id:editing.id,title});
  const object=wyloTicketReference(target);
  const verb=type==='FF'||type==='SF'?'se termine':'commence';
@@ -3103,13 +3088,14 @@ function updateLinkWording(){
  const second=document.createElement('strong');second.textContent=object;
  preview.append(first,document.createTextNode(` ${verb} ${timing} `),second,document.createTextNode('.'));
 }
+function wyloSentenceLag(type,value){const n=Math.abs(Number(value)||0);return type==='SF'||type==='FF'?-n:n;}
 function updateLagUnit(){
- const val=Number($('fdepLag').value)||0;
+ const val=Math.abs(Number($('fdepLag').value)||0);
  $('wyloLagUnit').textContent=val>1?'jours de décalage':'jour de décalage';
 }
 function changeLagBy(delta){
  const control=$('fdepLag');
- control.value=String((Number(control.value)||0)+delta);
+ control.value=String(Math.max(0,(Number(control.value)||0)+delta));
  control.dispatchEvent(new Event('input',{bubbles:true}));
  control.focus({preventScroll:true});
 }
@@ -3234,7 +3220,7 @@ function removeTask(){if(!editing||!confirm('Supprimer définitivement ce ticket
 function addDependency(){
  const id=Number($('fdepId').value);
  if(!id){alertBox('Choisis un ticket à relier.');return}
- const type=$('fdepType').value,lag=Number($('fdepLag').value)||0;
+ const type=$('fdepType').value,lag=wyloSentenceLag(type,$('fdepLag').value);
  if(editing.after.some(d=>Number(d.id)===id)){alertBox('Cette dépendance existe déjà.');return}
  editing.after.push({id,type,lag});
  editDepList();$('fdepquery').value='';fillDepSelect();planLinkChanged();
