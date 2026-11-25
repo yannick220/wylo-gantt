@@ -3050,7 +3050,7 @@ function fillDepSelect(all=false){
   if(!matches.length){const empty=document.createElement('div');empty.className='wylo-dep-empty';empty.textContent='Aucun ticket correspondant.';results.appendChild(empty);}
   for(const t of matches){
    const btn=document.createElement('button');btn.type='button';btn.className='wylo-dep-result';btn.textContent=wyloTicketReference(t);
-   btn.onclick=()=>{selected.value=String(t.id);input.value=wyloTicketReference(t);results.replaceChildren();results.hidden=true;browse.setAttribute('aria-expanded','false');updateLinkWording();};
+   btn.onclick=()=>{selected.value=String(t.id);input.value=wyloTicketReference({...t,title:(t.title||'').charAt(0).toLocaleLowerCase('fr')+(t.title||'').slice(1)});results.replaceChildren();results.hidden=true;browse.setAttribute('aria-expanded','false');updateLinkWording();};
    results.appendChild(btn);
   }
  }
