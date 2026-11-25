@@ -3978,6 +3978,7 @@ function start(){load();familyFilters();renderChoiceFilters();setDbFilters();upd
         item.setAttribute('aria-selected',String(option.selected));
         item.disabled=option.disabled;
         item.addEventListener('click',()=>{
+          if(select.id==='wyloViewSelect'&&option.selected){close();return;}
           menu.querySelectorAll('.wylo-select-option').forEach(optionButton=>optionButton.setAttribute('aria-selected',String(optionButton===item)));close(item,option.index);
         });
         menu.appendChild(item);
