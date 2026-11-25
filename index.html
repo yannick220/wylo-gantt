@@ -3041,6 +3041,14 @@ html.wylo-light .wylo-kanban-poles .dot{filter:invert(1)}
 .wylo-select-menu.wylo-view-select-menu .wylo-select-option,.wylo-select-trigger.wylo-view-select-ghost{font-family:"Montserrat Alternates",Montserrat,Arial,sans-serif!important;font-size:clamp(18px,1.65vw,26px)!important;font-weight:800!important;letter-spacing:-1.2px!important}
 .wylo-select-menu.wylo-view-select-menu .wylo-select-option{padding:0 8px!important}
 @media(max-width:1160px){.wylo-select-menu.wylo-view-select-menu .wylo-select-option,.wylo-select-trigger.wylo-view-select-ghost{font-size:18px!important}}
+</style><style>
+#wyloKanban{height:100%;box-sizing:border-box}
+#wyloKanban .wylo-kanban-card{display:flex;flex-direction:row;align-items:center;gap:12px;min-height:66px;padding:9px 12px;border-radius:28px}
+#wyloKanban .wylo-kanban-id{flex:0 0 auto;min-width:46px;height:46px;max-width:66px;padding:0 9px;border-radius:999px;font-size:11px;font-weight:750;font-variant-numeric:tabular-nums}
+#wyloKanban .wylo-kanban-id[data-digits="6"]{font-size:10px}
+#wyloKanban .wylo-kanban-id[data-digits="7"],#wyloKanban .wylo-kanban-id[data-digits="8"]{font-size:8px}
+#wyloKanban .wylo-kanban-id[data-digits="9"],#wyloKanban .wylo-kanban-id[data-digits="10"]{font-size:7px}
+#wyloKanban .wylo-kanban-title{flex:1;min-width:0;font-size:12px;font-weight:400;line-height:1.4;white-space:normal;overflow-wrap:anywhere}
 </style></head><body><style>#wyloCloudGate{position:fixed;inset:0;z-index:2147483647;background:#202027;display:grid;place-items:center;color:#f6f6fa;font-family:inherit}#wyloCloudGate[hidden],#wyloCloudLogin[hidden],#wyloCloudLogout[hidden]{display:none!important}#wyloCloudGate>div{max-width:420px;padding:28px;text-align:center}#wyloCloudGate button{margin-top:18px;padding:12px 20px;border-radius:24px;background:#fff;color:#222;border:0;cursor:pointer;font:inherit}</style><div id="wyloCloudGate" role="dialog" aria-modal="true"><div><h2>WYLO</h2><p id="wyloCloudMessage">Connexion à Firebase…</p><button id="wyloCloudLogin" hidden>Se connecter avec Google</button></div></div>
 <div class="app"><header class="top"><div class="header-identity"><div class="wylo-settings-wrap" id="wyloSettingsWrap">
 <button class="pill fullscreen wylo-settings-trigger" id="wyloSettingsToggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="wyloSettingsMenu" title="Menu"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
@@ -3117,7 +3125,7 @@ function renderKanban(){
   if(!items.length){const empty=document.createElement('p');empty.className='wylo-kanban-empty';empty.textContent='Aucun ticket';list.appendChild(empty);}
   for(const t of items){
    const card=document.createElement('button');card.type='button';card.className='wylo-kanban-card';card.draggable=true;card.dataset.ticketId=String(t.id);card.setAttribute('aria-label','Ouvrir le ticket '+t.id+' : '+t.title);card.title='Ouvrir le ticket · Glisser pour changer son état';
-   card.innerHTML='<span class="wylo-kanban-card-top"><span class="wylo-kanban-id">'+escape(t.id)+'</span><span class="wylo-kanban-priority">'+escape(t.priority)+'</span></span><strong class="wylo-kanban-title">'+escape(t.title)+'</strong><span class="wylo-kanban-poles">'+poleNames(t.category).map(n=>'<span><i class="dot" style="background:'+COLORS[n]+'"></i>'+escape(n)+'</span>').join('')+'</span><span class="wylo-kanban-owners">'+escape(contributorNames(t.owner).join(' · '))+'</span>'+(t.start||t.end?'<span class="wylo-kanban-dates">'+(t.start?formatDbDate(t.start):'—')+' → '+(t.end?formatDbDate(t.end):'—')+'</span>':'');
+   card.innerHTML='<span class="wylo-kanban-id" data-digits="'+String(t.id).length+'">'+String(t.id)+'</span><span class="wylo-kanban-title">'+escape(t.title)+'</span>';
    card.onclick=()=>openTask(t.id);
    card.addEventListener('dragstart',e=>{wyloDraggedTicket=t.id;e.dataTransfer.effectAllowed='move';e.dataTransfer.setData('text/plain',String(t.id));card.classList.add('wylo-dragging');});
    card.addEventListener('dragend',()=>{wyloDraggedTicket=null;card.classList.remove('wylo-dragging');board.querySelectorAll('.wylo-drop-target').forEach(el=>el.classList.remove('wylo-drop-target'));});
