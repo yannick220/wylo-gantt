@@ -3030,13 +3030,24 @@ html.wylo-light .wylo-kanban-poles .dot{filter:invert(1)}
 .top .brand #wyloViewMenu[hidden]{display:none!important}
 .top .brand #wyloViewAlternative{display:block;width:100%}
 .top .brand #wyloViewAlternative:hover{opacity:.75}
+</style><style>
+.top{height:auto!important;min-height:92px!important;padding-block:12px!important}
+.top .header-identity{width:100%;min-width:0!important}
+.top .header-identity .brand{flex:1 1 auto!important;min-width:0!important;white-space:normal!important;overflow-wrap:anywhere;line-height:1.22}
+.top .brand .wylo-view-select-wrap{display:inline-flex!important;vertical-align:middle;width:calc(var(--wylo-fit-width,100px))!important;min-width:0!important;max-width:100%;height:42px;flex:none}
+.top .brand .wylo-view-select-wrap .wylo-select-trigger{font:inherit!important;letter-spacing:inherit!important;background:transparent!important;border-color:transparent!important;padding:0 8px!important;gap:6px!important;color:inherit!important}
+.top .brand .wylo-view-select-wrap .wylo-select-trigger[aria-expanded=true]{color:transparent!important}
+.top .brand .wylo-view-select-wrap .wylo-select-trigger[aria-expanded=true] .wylo-select-chevron{visibility:hidden}
+.wylo-select-menu.wylo-view-select-menu .wylo-select-option,.wylo-select-trigger.wylo-view-select-ghost{font-family:"Montserrat Alternates",Montserrat,Arial,sans-serif!important;font-size:clamp(18px,1.65vw,26px)!important;font-weight:800!important;letter-spacing:-1.2px!important}
+.wylo-select-menu.wylo-view-select-menu .wylo-select-option{padding:0 8px!important}
+@media(max-width:1160px){.wylo-select-menu.wylo-view-select-menu .wylo-select-option,.wylo-select-trigger.wylo-view-select-ghost{font-size:18px!important}}
 </style></head><body><style>#wyloCloudGate{position:fixed;inset:0;z-index:2147483647;background:#202027;display:grid;place-items:center;color:#f6f6fa;font-family:inherit}#wyloCloudGate[hidden],#wyloCloudLogin[hidden],#wyloCloudLogout[hidden]{display:none!important}#wyloCloudGate>div{max-width:420px;padding:28px;text-align:center}#wyloCloudGate button{margin-top:18px;padding:12px 20px;border-radius:24px;background:#fff;color:#222;border:0;cursor:pointer;font:inherit}</style><div id="wyloCloudGate" role="dialog" aria-modal="true"><div><h2>WYLO</h2><p id="wyloCloudMessage">Connexion à Firebase…</p><button id="wyloCloudLogin" hidden>Se connecter avec Google</button></div></div>
 <div class="app"><header class="top"><div class="header-identity"><div class="wylo-settings-wrap" id="wyloSettingsWrap">
 <button class="pill fullscreen wylo-settings-trigger" id="wyloSettingsToggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="wyloSettingsMenu" title="Menu"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
 <div class="wylo-settings-menu" id="wyloSettingsMenu" role="group" aria-label="Menu principal" hidden>
 <button class="pill wylo-setting-item" id="wyloThemeToggle" type="button" aria-pressed="false"><span class="wylo-setting-icon" id="wyloThemeIcon"></span><span id="wyloThemeLabel">Mode clair</span></button>
 <button class="pill wylo-setting-item" id="fullscreen" type="button" title="Agrandir l’écran" aria-pressed="false"><span class="wylo-setting-icon" id="wyloFullscreenIcon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9V3h6 M15 3h6v6 M21 15v6h-6 M9 21H3v-6"/></svg></span><span id="wyloFullscreenLabel">Agrandir l’écran</span></button><button class="pill wylo-setting-item" id="wyloCloudLogout" type="button" hidden><span class="wylo-setting-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 17l5-5-5-5m5 5H3m11-8h5a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-5"/></svg></span><span>Se déconnecter</span></button>
-</div></div><div class="brand">WYLO <span class="wylo-view-picker" id="wyloViewPicker"><button type="button" id="wyloViewToggle" aria-expanded="false" aria-controls="wyloViewMenu"><span id="wyloViewLabel">Gantt</span><span class="wylo-view-chevron" aria-hidden="true">›</span></button><span id="wyloViewMenu" hidden><button type="button" id="wyloViewAlternative">Kanban</button></span></span></div></div><nav class="controls" aria-label="Contrôles du calendrier"><div class="control-set nav-set" role="group" aria-label="Navigation chronologique"><button class="pill" id="previous" title="Reculer dans le temps" aria-label="Reculer">‹</button><button class="pill" id="today" title="Revenir à aujourd’hui">Aujourd’hui</button><button class="pill" id="next" title="Avancer dans le temps" aria-label="Avancer">›</button></div><div class="control-set scale-set" role="group" aria-label="Échelle"><button class="pill" data-scale="day">Jour</button><button class="pill active" data-scale="week">Semaine</button><button class="pill" data-scale="month">Mois</button><button class="pill" data-scale="year">Année</button></div></nav><div class="header-db-slot"><button class="side-btn side-catalogue" id="openDbSide" title="Ouvrir la base de données des tickets" aria-label="Ouvrir la base de données des tickets"><b id="allCount">0</b><span>tickets</span></button></div></header>
+</div></div><div class="brand"><span class="wylo-project-name">WYLO</span> <select id="wyloViewSelect" aria-label="Affichage du projet"><option value="gantt">Gantt</option><option value="kanban">Kanban</option></select></div></div><nav class="controls" aria-label="Contrôles du calendrier"><div class="control-set nav-set" role="group" aria-label="Navigation chronologique"><button class="pill" id="previous" title="Reculer dans le temps" aria-label="Reculer">‹</button><button class="pill" id="today" title="Revenir à aujourd’hui">Aujourd’hui</button><button class="pill" id="next" title="Avancer dans le temps" aria-label="Avancer">›</button></div><div class="control-set scale-set" role="group" aria-label="Échelle"><button class="pill" data-scale="day">Jour</button><button class="pill active" data-scale="week">Semaine</button><button class="pill" data-scale="month">Mois</button><button class="pill" data-scale="year">Année</button></div></nav><div class="header-db-slot"><button class="side-btn side-catalogue" id="openDbSide" title="Ouvrir la base de données des tickets" aria-label="Ouvrir la base de données des tickets"><b id="allCount">0</b><span>tickets</span></button></div></header>
 <div class="workspace" id="workspace"><button class="side-collapse-toggle" type="button" id="toggleSidebar" aria-controls="rightSidebar" aria-expanded="true" title="Masquer les filtres" aria-label="Masquer les filtres"><span id="sidebarArrow">›</span></button><main class="main"><section class="timebar"><div class="labels-head">TICKETS PLANIFIÉES<div class="label-resizer" id="labelResizer" role="separator" aria-label="Redimensionner la colonne des tickets" aria-orientation="vertical" tabindex="0" title="Glisser pour agrandir ou réduire la colonne de gauche"></div></div><div class="axis-head"><div class="axis-major" id="axisMajor"></div><div class="axis-days" id="axisDays"></div></div></section><section class="viewport" id="viewport"><div class="gantt-inner" id="ganttInner"><div class="gantt-grid" id="ganttRows"></div></div></section><div class="dep-floating dep-row"><span class="side-caption dep-caption">DÉPENDANCES</span><button type="button" class="dep-check" id="depToggle" aria-label="Afficher les dépendances" aria-pressed="false" title="Afficher ou masquer les dépendances"><span class="dep-switch-knob" aria-hidden="true"></span></button></div><section id="wyloKanban" aria-label="Tableau Kanban" hidden></section></main>
 <aside class="side" id="rightSidebar"><div class="competence-filter-block"><p class="side-caption">PÔLES</p><div class="families" id="families"></div></div><div class="secondary-filter-block"><p class="side-caption">CONTRIBUTEURS</p><div class="filter-chips" id="contributorFilters" aria-label="Filtrer par contributeur"></div></div><div class="secondary-filter-block"><p class="side-caption">PRIORITÉS</p><div class="filter-chips" id="priorityFilters" aria-label="Filtrer par priorité"></div></div><div class="secondary-filter-block"><p class="side-caption">ÉTATS</p><div class="filter-chips" id="stateFilters" aria-label="Filtrer par état"></div></div></aside></div></div>
 <div class="overlay" id="overlay"></div><section class="database" id="database" aria-label="Base de données des tickets"><div class="db-head"><div class="db-title-group"><div class="db-summary"><div class="db-stat"><strong id="dbTitleCount">0</strong><span>tickets au total</span></div><div class="db-stat"><strong id="unplannedCount">0</strong><span>tickets restant à programmer</span></div></div></div><div class="db-header-actions"><button class="pill subtle" id="dbExport" title="Exporter la base en JSON" type="button">Exporter JSON</button><button class="pill subtle db-reset-head db-icon-action" id="dbReset" aria-label="Réinitialiser les données partagées" title="Réinitialiser les données partagées" type="button"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11a9 9 0 1 1 3.3 7"/><path d="M3 4v7h7"/></svg></button><button class="pill close db-close-icon" id="closeDb" aria-label="Fermer la base de données" title="Fermer">×</button></div></div>
@@ -3092,8 +3103,7 @@ document.addEventListener('pointerdown',e=>{if(!$('wyloContributors').contains(e
 $('wyloContributors').addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('wyloContributorMenu').hidden){e.stopPropagation();wyloContributorMenu(false);$('wyloContributorTrigger').focus();}});
 function updateCounts(){$('allCount').textContent=tasks.length.toLocaleString('fr-FR');$('dbTitleCount').textContent=tasks.length.toLocaleString('fr-FR');$('unplannedCount').textContent=tasks.filter(t=>!t.start||!t.end).length.toLocaleString('fr-FR');}
 let wyloView='gantt',wyloDraggedTicket=null;
-function wyloSetView(view){wyloView=view;document.documentElement.classList.toggle('wylo-kanban-mode',view==='kanban');$('wyloKanban').hidden=view!=='kanban';$('wyloViewLabel').textContent=view==='kanban'?'Kanban':'Gantt';$('wyloViewAlternative').textContent=view==='kanban'?'Gantt':'Kanban';wyloSetViewMenu(false);renderGantt();}
-function wyloSetViewMenu(open){$('wyloViewMenu').hidden=!open;$('wyloViewToggle').setAttribute('aria-expanded',String(open));}
+function wyloSetView(view){wyloView=view;document.documentElement.classList.toggle('wylo-kanban-mode',view==='kanban');$('wyloKanban').hidden=view!=='kanban';renderGantt();}
 function wyloMoveKanban(id,status){const t=tasks.find(x=>Number(x.id)===Number(id));if(!t||!STATUSES.includes(status)||t.status===status)return;t.status=status;persist();renderDatabase();renderGantt();}
 function renderKanban(){
  const board=$('wyloKanban'),positions=new Map([...board.querySelectorAll('.wylo-kanban-list')].map(el=>[el.dataset.status,el.scrollTop])),horizontal=board.scrollLeft;
@@ -3121,10 +3131,7 @@ function renderKanban(){
  }
  board.scrollLeft=horizontal;
 }
-$('wyloViewToggle').addEventListener('click',()=>wyloSetViewMenu($('wyloViewMenu').hidden));
-$('wyloViewAlternative').addEventListener('click',()=>{wyloSetView(wyloView==='kanban'?'gantt':'kanban');$('wyloViewToggle').focus();});
-document.addEventListener('pointerdown',e=>{if(!$('wyloViewPicker').contains(e.target))wyloSetViewMenu(false);});
-$('wyloViewPicker').addEventListener('keydown',e=>{if(e.key==='Escape'){wyloSetViewMenu(false);$('wyloViewToggle').focus();}else if(e.key==='ArrowDown'){e.preventDefault();wyloSetViewMenu(true);$('wyloViewAlternative').focus();}});
+$('wyloViewSelect').addEventListener('change',()=>wyloSetView($('wyloViewSelect').value));
 function visibleTasks(){const left=iso(timelineLeft),right=iso(new Date(timelineLeft.getTime()+185*86400000));return tasks.filter(t=>poleNames(t.category).some(n=>familyEnabled.has(n))&&statusEnabled.has(t.status)&&priorityEnabled.has(t.priority)&&(contributorEnabled.size===CONTRIBUTORS.length||contributorNames(t.owner).some(n=>contributorEnabled.has(n)))&&t.start&&t.end&&(showAllScheduled||(t.end>=left&&t.start<=right))).sort((a,b)=>a.start.localeCompare(b.start)||a.id-b.id)}
 function familyFilters(){const el=$('families');el.innerHTML='';for(const c of CATS){const b=document.createElement('button');b.className='family'+(familyEnabled.has(c)?' active':' off');b.setAttribute('aria-pressed',String(familyEnabled.has(c)));b.innerHTML=`<i class="dot" style="background:${COLORS[c]}"></i><span>${c}</span>`;b.onclick=()=>{familyEnabled.has(c)?familyEnabled.delete(c):familyEnabled.add(c);familyFilters();renderGantt()};el.appendChild(b)}}
 
@@ -3762,7 +3769,7 @@ function start(){load();familyFilters();renderChoiceFilters();setDbFilters();upd
    originaux, leurs valeurs et leurs écouteurs change. */
 (function(){
   let active=null;
-  const managed=Array.from(document.querySelectorAll('.database select, .modal select'));
+  const managed=Array.from(document.querySelectorAll('.database select, .modal select, #wyloViewSelect'));
   const close=(chosenItem=null, chosenIndex=-1)=>{
     if(!active)return;
     const old=active;active=null;
@@ -3812,7 +3819,7 @@ function start(){load();familyFilters();renderChoiceFilters();setDbFilters();upd
         ghost.setAttribute('aria-expanded','false');
         ghost.tabIndex=-1;
         ghost.classList.remove('wylo-handoff-trigger');
-        ghost.classList.add('wylo-selection-dissolve');
+        ghost.classList.add('wylo-selection-dissolve');if(old.select.id==='wyloViewSelect')ghost.classList.add('wylo-view-select-ghost');
         Object.assign(ghost.style,{
           left:rect.left+'px',top:rect.top+'px',
           width:rect.width+'px',height:rect.height+'px'
@@ -3851,7 +3858,7 @@ function start(){load();familyFilters();renderChoiceFilters();setDbFilters();upd
     }
   };
   managed.forEach(select=>{
-    const wrap=document.createElement('div');wrap.className='wylo-select-wrap';
+    const wrap=document.createElement('div');wrap.className='wylo-select-wrap';if(select.id==='wyloViewSelect')wrap.classList.add('wylo-view-select-wrap');
     select.parentNode.insertBefore(wrap,select);wrap.appendChild(select);
     select.classList.add('wylo-native-select');select.tabIndex=-1;
     const trigger=document.createElement('button');trigger.type='button';
@@ -3889,7 +3896,7 @@ function start(){load();familyFilters();renderChoiceFilters();setDbFilters();upd
         });
         menu.appendChild(item);
       });
-      menu.classList.add('wylo-anchored-menu');
+      menu.classList.add('wylo-anchored-menu');if(select.id==='wyloViewSelect')menu.classList.add('wylo-view-select-menu');
       const hasAll=opts.length>1&&/^tout(?:s|es)?\b/i.test(opts[0].textContent.trim());
       if(hasAll){const separator=document.createElement('div');separator.className='wylo-all-separator';separator.setAttribute('role','presentation');menu.firstElementChild.after(separator);}
       document.body.appendChild(menu);
@@ -3897,7 +3904,7 @@ function start(){load();familyFilters();renderChoiceFilters();setDbFilters();upd
       // 1px de bordure + 4px de marge interne de chaque côté :
       // largeur du cartouche = largeur du bouton + 10px.
       const outerGutter=5;
-      const width=Math.min(Math.max(180,box.width+outerGutter*2),window.innerWidth-20);
+      const width=Math.min(Math.max(select.id==='wyloViewSelect'?0:180,box.width+outerGutter*2),window.innerWidth-20);
       const optionGap=4;
       const totalHeight=opts.length*42+Math.max(0,opts.length-1)*optionGap+10+(hasAll?5:0);
       const height=Math.min(totalHeight,Math.max(95,window.innerHeight-20),380);
