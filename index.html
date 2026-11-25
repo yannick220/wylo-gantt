@@ -3230,17 +3230,6 @@ html.wylo-light .wylo-kanban-poles .dot{filter:invert(1)}
  #modal>.formgrid>.wylo-four-fields{grid-template-columns:repeat(2,minmax(0,1fr))!important}
 }
 @media(prefers-reduced-motion:reduce){.workspace>.side{transition:none!important}}
-</style><style>
-/* Les deux modes gardent le même dessin, y compris pendant le déplacement. */
-.wylo-select-menu.wylo-anchored-menu.wylo-view-select-menu .wylo-select-option,
-.wylo-select-menu.wylo-anchored-menu.wylo-view-select-menu .wylo-select-option[aria-selected="true"],
-.wylo-select-menu.wylo-anchored-menu.wylo-view-select-menu .wylo-select-option:not([aria-selected="true"]),
-.wylo-select-menu.wylo-anchored-menu.wylo-view-select-menu .wylo-select-option:hover,
-.wylo-select-menu.wylo-anchored-menu.wylo-view-select-menu .wylo-select-option:focus-visible{
- background:transparent!important;color:#fff!important;border:1px solid #65656e!important;
- box-shadow:none!important;transition:none!important;
-}
-.wylo-select-menu.wylo-anchored-menu.wylo-view-select-menu .wylo-view-label{color:inherit!important}
 </style></head><body><style>#wyloCloudGate{position:fixed;inset:0;z-index:2147483647;background:#202027;display:grid;place-items:center;color:#f6f6fa;font-family:inherit}#wyloCloudGate[hidden],#wyloCloudLogin[hidden],#wyloCloudLogout[hidden]{display:none!important}#wyloCloudGate>div{max-width:420px;padding:28px;text-align:center}#wyloCloudGate button{margin-top:18px;padding:12px 20px;border-radius:24px;background:#fff;color:#222;border:0;cursor:pointer;font:inherit}</style><div id="wyloCloudGate" role="dialog" aria-modal="true"><div><h2>WYLO</h2><p id="wyloCloudMessage">Connexion à Firebase…</p><button id="wyloCloudLogin" hidden>Se connecter avec Google</button></div></div>
 <div class="app"><header class="top"><div class="header-identity"><div class="wylo-settings-wrap" id="wyloSettingsWrap">
 <button class="pill fullscreen wylo-settings-trigger" id="wyloSettingsToggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="wyloSettingsMenu" title="Menu"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
@@ -4072,8 +4061,18 @@ function start(){load();familyFilters();renderChoiceFilters();setDbFilters();upd
           if(completed)return;completed=true;
           if(previous)previous.style.visibility='hidden';
           remove(true);
-          old.menu.remove();
-          old.trigger.classList.remove('wylo-view-swapping');
+          const finalStyle=getComputedStyle(old.trigger);
+          chosenItem.style.setProperty('transition','background-color 280ms ease-in-out,color 280ms ease-in-out,border-color 280ms ease-in-out','important');
+          chosenItem.style.setProperty('border','1px solid transparent','important');
+          chosenItem.style.setProperty('background-color','#fff','important');
+          chosenItem.style.setProperty('color','#202027','important');
+          void chosenItem.offsetWidth;
+          requestAnimationFrame(()=>{
+            chosenItem.style.setProperty('background-color',finalStyle.backgroundColor,'important');
+            chosenItem.style.setProperty('color',finalStyle.color,'important');
+            chosenItem.style.setProperty('border-color',finalStyle.borderTopColor,'important');
+            setTimeout(()=>{old.menu.remove();old.trigger.classList.remove('wylo-view-swapping');},310);
+          });
         };
         slide.finished.then(settle).catch(()=>{});setTimeout(settle,470);return;
       }
