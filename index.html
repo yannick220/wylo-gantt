@@ -3281,7 +3281,37 @@ function renderKanban(){
 }
 $('wyloViewSelect').addEventListener('change',()=>wyloSetView($('wyloViewSelect').value));
 function visibleTasks(){const left=iso(timelineLeft),right=iso(new Date(timelineLeft.getTime()+185*86400000));return tasks.filter(t=>poleNames(t.category).some(n=>familyEnabled.has(n))&&statusEnabled.has(t.status)&&priorityEnabled.has(t.priority)&&(contributorEnabled.size===CONTRIBUTORS.length||contributorNames(t.owner).some(n=>contributorEnabled.has(n)))&&t.start&&(showAllScheduled||((!t.end||t.end>=left)&&t.start<=right))).sort((a,b)=>a.start.localeCompare(b.start)||a.id-b.id)}
-function familyFilters(){const el=$('families');el.innerHTML='';for(const c of CATS){const b=document.createElement('button');b.className='family'+(familyEnabled.has(c)?' active':' off');b.setAttribute('aria-pressed',String(familyEnabled.has(c)));b.innerHTML=`<i class="dot" style="background:${COLORS[c]}"></i><span>${c}</span>`;b.onclick=()=>{familyEnabled.has(c)?familyEnabled.delete(c):familyEnabled.add(c);familyFilters();renderGantt()};el.appendChild(b)}}
+let wyloFilterMotion=0;
+function wyloAnimateFilters(){
+ const token=++wyloFilterMotion;
+ if(matchMedia('(prefers-reduced-motion: reduce)').matches){renderGantt();return;}
+ const kanban=wyloView==='kanban',host=kanban?$('wyloKanban'):$('ganttRows'),selector=kanban?'.wylo-kanban-card':'.gantt-row',id=el=>el.dataset.ticketId||el.dataset.taskId;
+ // Capture the actual positions before rebuilding, including interrupted animations.
+ const old=new Map([...host.querySelectorAll(selector)].filter(el=>!el.classList.contains('wylo-filter-ghost')&&el.getBoundingClientRect().height>0).map(el=>[id(el),{rect:el.getBoundingClientRect(),clone:el.cloneNode(true),opacity:Number(getComputedStyle(el).opacity)}]));
+ document.querySelectorAll('.wylo-filter-ghost').forEach(el=>el.remove());
+ renderGantt();
+ const next=[...host.querySelectorAll(selector)].filter(el=>el.getBoundingClientRect().height>0),ids=new Set(next.map(id));
+ const timing={duration:360,easing:'cubic-bezier(.22,1,.36,1)'};
+ for(const el of next){
+  const r=el.getBoundingClientRect(),prior=old.get(id(el));
+  if(prior){const dy=prior.rect.top-r.top;if(Math.abs(dy)>.5)el.animate([{transform:'translateY('+dy+'px)'},{transform:'translateY(0)'}],timing);}
+  else el.animate([{transform:'translateY(-12px)',opacity:0,clipPath:'inset(0 0 100% 0)'},{transform:'translateY(0)',opacity:1,clipPath:'inset(0)'}],timing);
+ }
+ const bounds=host.getBoundingClientRect();
+ for(const [key,{rect,clone,opacity}] of old){
+  if(ids.has(key)||rect.bottom<bounds.top||rect.top>bounds.bottom)continue;
+  clone.classList.add('wylo-filter-ghost');clone.removeAttribute('id');clone.setAttribute('aria-hidden','true');clone.inert=true;
+  Object.assign(clone.style,{position:'fixed',left:rect.left+'px',top:rect.top+'px',width:rect.width+'px',height:rect.height+'px',minHeight:'0',margin:'0',zIndex:'5',pointerEvents:'none',overflow:'hidden',opacity:String(opacity)});
+  document.body.appendChild(clone);
+  const animation=clone.animate([{transform:'translateY(0)',opacity,clipPath:'inset(0)'},{transform:'translateY(-12px)',opacity:0,clipPath:'inset(0 0 100% 0)'}],timing);
+  animation.finished.then(()=>clone.remove()).catch(()=>clone.remove());
+ }
+ if(!kanban&&depVisible){
+  const grid=$('ganttRows'),paths=[...grid.querySelectorAll('.dep-link')],circuit=wyloFocusTicket!==null?wyloDependencyCircuit(tasks,wyloFocusTicket):null,initial=paths.map(p=>Number(getComputedStyle(p).opacity));
+  const start=performance.now();function frame(now){if(token!==wyloFilterMotion||!grid.isConnected||paths.some(p=>!p.isConnected))return;wyloUpdateFocusPaths(grid,paths,circuit,1,initial);if(now-start<380)requestAnimationFrame(frame);}requestAnimationFrame(frame);
+ }
+}
+function familyFilters(){const el=$('families');el.innerHTML='';for(const c of CATS){const b=document.createElement('button');b.className='family'+(familyEnabled.has(c)?' active':' off');b.setAttribute('aria-pressed',String(familyEnabled.has(c)));b.innerHTML=`<i class="dot" style="background:${COLORS[c]}"></i><span>${c}</span>`;b.onclick=()=>{familyEnabled.has(c)?familyEnabled.delete(c):familyEnabled.add(c);familyFilters();wyloAnimateFilters()};el.appendChild(b)}}
 
 function renderChoiceFilters(){
  const groups=[['stateFilters',STATUSES,statusEnabled],['priorityFilters',PRIORITIES,priorityEnabled],['contributorFilters',CONTRIBUTORS,contributorEnabled]];
@@ -3291,7 +3321,7 @@ function renderChoiceFilters(){
    const b=document.createElement('button');
    b.type='button';b.className='choice-filter'+(enabled.has(value)?' active':' off');
    b.textContent=value;b.setAttribute('aria-pressed',String(enabled.has(value)));
-   b.onclick=()=>{enabled.has(value)?enabled.delete(value):enabled.add(value);renderChoiceFilters();renderGantt()};
+   b.onclick=()=>{enabled.has(value)?enabled.delete(value):enabled.add(value);renderChoiceFilters();wyloAnimateFilters()};
    host.appendChild(b);
   }
  }
