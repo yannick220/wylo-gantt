@@ -3904,8 +3904,8 @@ function start(){load();familyFilters();renderChoiceFilters();setDbFilters();upd
         const timing={duration:420,easing:'cubic-bezier(.22,1,.36,1)',fill:'forwards'};
         old.menu.classList.add('wylo-view-swap');
         const moves=[chosenItem.animate([{transform:'translate(0,0)'},{transform:'translate('+dx+'px,'+dy+'px)'}],timing)];
-        if(previous)moves.push(previous.animate([{transform:'translate(0,0)',opacity:1},{transform:'translate(0,38px)',opacity:1}],timing));
-        moves.push(old.menu.animate([{height:menu.height+'px',maxHeight:menu.height+'px'},{height:(menu.height+38)+'px',maxHeight:(menu.height+38)+'px'}],timing));
+        if(previous)moves.push(previous.animate([{transform:'translate(0,0)',opacity:1},{transform:'translate(0,41px)',opacity:1}],timing));
+        moves.push(old.menu.animate([{height:menu.height+'px',maxHeight:menu.height+'px'},{height:(menu.height+41)+'px',maxHeight:(menu.height+41)+'px'}],timing));
         let completed=false;
         const finish=()=>{if(completed)return;completed=true;remove(true);old.menu.classList.add('wylo-view-swap-fade');setTimeout(()=>{old.menu.remove();old.trigger.classList.remove('wylo-view-swapping');},240);};
         Promise.all(moves.map(m=>m.finished.catch(()=>{}))).then(finish);setTimeout(finish,480);return;
