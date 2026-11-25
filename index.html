@@ -3278,7 +3278,7 @@ function renderGantt(previousPeriod){cancelAnimationFrame(wyloFocusFrame);const 
   depDrawNext=false;
   if(shouldDraw&&linkCount&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
    // Démarrer après insertion dans le DOM ; SVG et longueurs sont alors mesurables.
-   requestAnimationFrame(()=>requestAnimationFrame(()=>wyloAnimateLinks(svg)));
+   wyloAnimateLinks(svg);
   }
  }
   wyloApplyFocus();
@@ -3344,7 +3344,7 @@ function wyloRoundedRoute(points,radius){
 function wyloAnimateLinks(svg){
  if(!svg.isConnected)return;
  const paths=[...svg.querySelectorAll('path.dep-link')];
- const lengths=paths.map(p=>{const n=p.getTotalLength();p.style.strokeDasharray=`${n} ${n}`;p.style.strokeDashoffset=String(n);return n;});
+ const lengths=paths.map(p=>{const n=p.getTotalLength();p.style.strokeDasharray=`${n} ${n}`;p.style.strokeDashoffset=String(n);return n;}); paths.forEach(p=>{p.style.visibility='hidden';});
  const duration=1100;
  let start=null;
  function frame(now){
@@ -3352,7 +3352,7 @@ function wyloAnimateLinks(svg){
   if(start===null)start=now;
   const x=Math.min(1,(now-start)/duration);
   const ease=1-Math.pow(1-x,3);
-  paths.forEach((p,i)=>p.style.strokeDashoffset=String(lengths[i]*(1-ease)));
+  paths.forEach((p,i)=>{p.style.strokeDashoffset=String(lengths[i]*(1-ease));if(x>0)p.style.visibility='visible';});
   if(x<1)requestAnimationFrame(frame);
   else paths.forEach(p=>{p.style.strokeDasharray='';p.style.strokeDashoffset='';});
  }
