@@ -2966,6 +2966,10 @@ html.wylo-light #modal .schedule-warning{
 #modal #wyloContributorMenu button:hover:not([aria-pressed=true]){background:#41414a}
 @media(max-width:700px){#modal .wylo-four-fields{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 @media(max-width:440px){#modal .wylo-four-fields{grid-template-columns:minmax(0,1fr)!important}}
+</style><style>
+.wylo-select-menu.wylo-anchored-menu .wylo-select-option:not(:last-child){margin-bottom:4px!important}
+#modal #wyloContributorMenu:not([hidden]){display:flex;flex-direction:column;gap:4px}
+#modal #wyloContributorMenu button{flex:0 0 39px}
 </style></head><body><style>#wyloCloudGate{position:fixed;inset:0;z-index:2147483647;background:#202027;display:grid;place-items:center;color:#f6f6fa;font-family:inherit}#wyloCloudGate[hidden],#wyloCloudLogin[hidden],#wyloCloudLogout[hidden]{display:none!important}#wyloCloudGate>div{max-width:420px;padding:28px;text-align:center}#wyloCloudGate button{margin-top:18px;padding:12px 20px;border-radius:24px;background:#fff;color:#222;border:0;cursor:pointer;font:inherit}</style><div id="wyloCloudGate" role="dialog" aria-modal="true"><div><h2>WYLO</h2><p id="wyloCloudMessage">Connexion à Firebase…</p><button id="wyloCloudLogin" hidden>Se connecter avec Google</button></div></div>
 <div class="app"><header class="top"><div class="header-identity"><div class="wylo-settings-wrap" id="wyloSettingsWrap">
 <button class="pill fullscreen wylo-settings-trigger" id="wyloSettingsToggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="wyloSettingsMenu" title="Menu"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
@@ -3784,10 +3788,11 @@ function start(){load();familyFilters();renderChoiceFilters();setDbFilters();upd
       // largeur du cartouche = largeur du bouton + 10px.
       const outerGutter=5;
       const width=Math.min(Math.max(180,box.width+outerGutter*2),window.innerWidth-20);
-      const totalHeight=opts.length*42+10;
+      const optionGap=4;
+      const totalHeight=opts.length*42+Math.max(0,opts.length-1)*optionGap+10;
       const height=Math.min(totalHeight,Math.max(95,window.innerHeight-20),380);
       const selectedIndex=Math.max(0,select.selectedIndex);
-      const selectedNaturalY=5+selectedIndex*42;
+      const selectedNaturalY=5+selectedIndex*(42+optionGap);
       // Positionner la ligne blanche sur l'ancien bouton, quitte à faire déborder
       // les autres choix de part et d'autre de celui-ci.
       const top=Math.max(10,Math.min(box.top-selectedNaturalY,window.innerHeight-height-10));
