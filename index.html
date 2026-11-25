@@ -3144,6 +3144,27 @@ html.wylo-light .wylo-kanban-poles .dot{filter:invert(1)}
 @media(max-width:1160px){.top .header-identity .brand .wylo-view-select-wrap .wylo-select-trigger,.top .header-identity .brand .wylo-view-select-wrap .wylo-select-value,.wylo-select-menu.wylo-anchored-menu.wylo-view-select-menu .wylo-select-option{font-size:18px!important}}
 .top .header-identity .brand .wylo-view-select-wrap .wylo-select-trigger{justify-content:center!important;color:#fff!important;box-sizing:border-box!important}
 .wylo-select-menu.wylo-anchored-menu.wylo-view-select-menu .wylo-select-option,.wylo-select-menu.wylo-anchored-menu.wylo-view-select-menu .wylo-select-option[aria-selected="true"],.wylo-select-menu.wylo-anchored-menu.wylo-view-select-menu .wylo-select-option:not([aria-selected="true"]){border:1px solid transparent!important;padding:0 10px!important;text-align:center!important}
+</style><style>
+/* Le texte des options est désormais un clone du libellé du titre,
+   et non plus du texte anonyme soumis aux styles natifs des boutons. */
+.wylo-select-menu.wylo-anchored-menu.wylo-view-select-menu,
+.wylo-select-menu.wylo-anchored-menu.wylo-view-select-menu.is-visible{
+ transform:none!important;scale:none!important;will-change:auto!important;
+}
+.wylo-select-menu.wylo-anchored-menu.wylo-view-select-menu .wylo-view-label,
+.top .header-identity .brand .wylo-view-select-wrap .wylo-select-value{
+ display:block!important;flex:0 0 auto!important;width:max-content!important;
+ max-width:none!important;min-width:0!important;height:auto!important;
+ max-height:none!important;min-height:0!important;overflow:visible!important;
+ white-space:nowrap!important;transform:none!important;scale:none!important;
+ font-optical-sizing:none!important;font-size-adjust:none!important;
+ font-synthesis:none!important;vertical-align:baseline!important;
+ -webkit-text-size-adjust:100%!important;text-size-adjust:100%!important;
+}
+.wylo-select-menu.wylo-anchored-menu.wylo-view-select-menu .wylo-select-option{
+ -webkit-appearance:none!important;appearance:none!important;
+ overflow:visible!important;align-items:center!important;
+}
 </style></head><body><style>#wyloCloudGate{position:fixed;inset:0;z-index:2147483647;background:#202027;display:grid;place-items:center;color:#f6f6fa;font-family:inherit}#wyloCloudGate[hidden],#wyloCloudLogin[hidden],#wyloCloudLogout[hidden]{display:none!important}#wyloCloudGate>div{max-width:420px;padding:28px;text-align:center}#wyloCloudGate button{margin-top:18px;padding:12px 20px;border-radius:24px;background:#fff;color:#222;border:0;cursor:pointer;font:inherit}</style><div id="wyloCloudGate" role="dialog" aria-modal="true"><div><h2>WYLO</h2><p id="wyloCloudMessage">Connexion à Firebase…</p><button id="wyloCloudLogin" hidden>Se connecter avec Google</button></div></div>
 <div class="app"><header class="top"><div class="header-identity"><div class="wylo-settings-wrap" id="wyloSettingsWrap">
 <button class="pill fullscreen wylo-settings-trigger" id="wyloSettingsToggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="wyloSettingsMenu" title="Menu"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
@@ -4047,7 +4068,7 @@ function start(){load();familyFilters();renderChoiceFilters();setDbFilters();upd
       const opts=Array.from(select.options);if(isView)opts.sort((a,b)=>Number(b.selected)-Number(a.selected));
       opts.forEach((option,i)=>{
         const item=document.createElement('button');item.type='button';item.className='wylo-select-option';
-        item.textContent=option.textContent;item.setAttribute('role','option');
+        if(isView){const label=value.cloneNode(false);label.textContent=option.textContent;label.classList.add('wylo-view-label');const computed=getComputedStyle(value);for(const p of ['font-family','font-size','font-weight','font-style','font-stretch','font-kerning','font-feature-settings','font-variation-settings','font-optical-sizing','font-size-adjust','letter-spacing','line-height','-webkit-font-smoothing'])label.style.setProperty(p,computed.getPropertyValue(p),'important');item.appendChild(label);}else item.textContent=option.textContent;item.setAttribute('role','option');
         item.setAttribute('aria-selected',String(option.selected));
         item.disabled=option.disabled;
         item.addEventListener('click',()=>{
