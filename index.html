@@ -3123,6 +3123,9 @@ html.wylo-light .wylo-kanban-poles .dot{filter:invert(1)}
 .top .header-identity .brand .wylo-view-select-wrap .wylo-select-chevron{display:none!important}
 .top .header-identity .brand .wylo-view-select-wrap .wylo-select-trigger[aria-expanded=true],.top .header-identity .brand .wylo-view-select-wrap .wylo-select-trigger.wylo-view-swapping{visibility:hidden!important}
 .wylo-select-menu.wylo-anchored-menu.wylo-view-select-menu{gap:12px!important}
+</style><style>
+.wylo-select-menu.wylo-anchored-menu.wylo-view-select-menu.wylo-view-swap .wylo-select-option:not([aria-selected="true"]){position:relative;z-index:1}
+.wylo-select-menu.wylo-anchored-menu.wylo-view-select-menu.wylo-view-swap .wylo-select-option[aria-selected="true"]{position:relative;z-index:3}
 </style></head><body><style>#wyloCloudGate{position:fixed;inset:0;z-index:2147483647;background:#202027;display:grid;place-items:center;color:#f6f6fa;font-family:inherit}#wyloCloudGate[hidden],#wyloCloudLogin[hidden],#wyloCloudLogout[hidden]{display:none!important}#wyloCloudGate>div{max-width:420px;padding:28px;text-align:center}#wyloCloudGate button{margin-top:18px;padding:12px 20px;border-radius:24px;background:#fff;color:#222;border:0;cursor:pointer;font:inherit}</style><div id="wyloCloudGate" role="dialog" aria-modal="true"><div><h2>WYLO</h2><p id="wyloCloudMessage">Connexion à Firebase…</p><button id="wyloCloudLogin" hidden>Se connecter avec Google</button></div></div>
 <div class="app"><header class="top"><div class="header-identity"><div class="wylo-settings-wrap" id="wyloSettingsWrap">
 <button class="pill fullscreen wylo-settings-trigger" id="wyloSettingsToggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="wyloSettingsMenu" title="Menu"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
@@ -3911,8 +3914,7 @@ function start(){load();familyFilters();renderChoiceFilters();setDbFilters();upd
         const timing={duration:420,easing:'cubic-bezier(.22,1,.36,1)',fill:'forwards'};
         old.menu.classList.add('wylo-view-swap');
         const moves=[chosenItem.animate([{transform:'translate(0,0)'},{transform:'translate('+dx+'px,'+dy+'px)'}],timing)];
-        if(previous)moves.push(previous.animate([{transform:'translate(0,0)',opacity:1},{transform:'translate(0,41px)',opacity:1}],timing));
-        moves.push(old.menu.animate([{height:menu.height+'px',maxHeight:menu.height+'px'},{height:(menu.height+41)+'px',maxHeight:(menu.height+41)+'px'}],timing));
+        if(previous)moves.push(previous.animate([{opacity:1,offset:0},{opacity:1,offset:.15},{opacity:0,offset:.85},{opacity:0,offset:1}],timing));
         let completed=false;
         const finish=()=>{if(completed)return;completed=true;remove(true);old.menu.classList.add('wylo-view-swap-fade');setTimeout(()=>{old.menu.remove();old.trigger.classList.remove('wylo-view-swapping');},240);};
         Promise.all(moves.map(m=>m.finished.catch(()=>{}))).then(finish);setTimeout(finish,480);return;
