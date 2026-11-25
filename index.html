@@ -3299,7 +3299,7 @@ function importJSON(file){if(!file)return;const reader=new FileReader();reader.o
 let scaleTimer=0;
 function setScale(v){if(scale===v)return;const previous=periodDays();const inner=$('ganttInner'),vp=$('viewport');const oldTotal=Number($('axisDays').dataset.totalDays);const currentWidth=inner.getBoundingClientRect().width-labelWidth;const available=Math.max(320,vp.clientWidth-labelWidth);const effectivePrevious=oldTotal>0&&currentWidth>0&&visibleTasks().length?oldTotal*available/currentWidth:previous;scale=v;document.querySelectorAll('[data-scale]').forEach(b=>b.classList.toggle('active',b.dataset.scale===v));renderGantt(effectivePrevious)}
 function periodDays(){return scale==='day'?1:scale==='week'?7:scale==='month'?31:365}
-function renderGantt(previousPeriod){cancelAnimationFrame(wyloFocusFrame);const main=document.querySelector('.main');clearTimeout(scaleTimer);main.classList.remove('scale-motion');updateTodayButton();updateCounts();const all=visibleTasks();const vp=$('viewport'),content=$('ganttInner');$('axisMajor').textContent=timelineLeft.toLocaleDateString('fr-FR',{month:'long',year:'numeric'}).toLocaleUpperCase('fr-FR');const available=Math.max(320,vp.clientWidth-labelWidth),dayWidth=available/periodDays(),totalDays=Math.max(periodDays()*3,Math.max(0,...all.map(t=>dd(t.end,iso(timelineLeft))))+30),totalWidth=totalDays*dayWidth;
+function renderGantt(previousPeriod,deferFocus=false){cancelAnimationFrame(wyloFocusFrame);const main=document.querySelector('.main');clearTimeout(scaleTimer);main.classList.remove('scale-motion');updateTodayButton();updateCounts();const all=visibleTasks();const vp=$('viewport'),content=$('ganttInner');$('axisMajor').textContent=timelineLeft.toLocaleDateString('fr-FR',{month:'long',year:'numeric'}).toLocaleUpperCase('fr-FR');const available=Math.max(320,vp.clientWidth-labelWidth),dayWidth=available/periodDays(),totalDays=Math.max(periodDays()*3,Math.max(0,...all.map(t=>dd(t.end,iso(timelineLeft))))+30),totalWidth=totalDays*dayWidth;
  const axis=$('axisDays');axis.innerHTML='';const axisFragment=document.createDocumentFragment();const formatter=new Intl.DateTimeFormat('fr-FR',scale==='year'?{month:'short'}:{weekday:'long'});const step=scale==='year'?30:scale==='month'?7:1;for(let i=0;i<totalDays;i+=step){const d=new Date(timelineLeft);d.setDate(d.getDate()+i);const c=document.createElement('div');c.className='axis-day';c.dataset.days=String(Math.min(step,totalDays-i));c.style.width=(Math.min(step,totalDays-i)/totalDays*100)+'%';const a=scale==='year'?formatter.format(d).toUpperCase():scale==='month'?'SEMAINE '+Math.ceil((i+1)/7):formatter.format(d).toUpperCase();c.innerHTML=`<span>${escape(a)}</span><b>${scale==='year'?d.getFullYear():pad(d.getDate())}</b>`;axisFragment.appendChild(c)}axis.appendChild(axisFragment);axis.dataset.totalDays=String(totalDays);main.style.setProperty('--span-ratio',String(totalDays/periodDays()));axis.style.removeProperty('width');content.style.removeProperty('min-width');$('ganttRows').style.removeProperty('width');$('ganttRows').innerHTML='';if(!all.length){$('ganttRows').innerHTML=`<div class="empty"><div class="empty-icon">▰</div><h2>Le Gantt est prêt.</h2><p>Les ${tasks.length.toLocaleString('fr-FR')} tickets sont disponibles dans la base de données.<br>Tu peux les classer par pôle ou contributeur, puis renseigner leurs dates et leurs dépendances.<br><b>Seules les tickets planifiés apparaîtront ici.</b></p><button class="pill active" id="openEmpty">Ouvrir la base de données</button></div>`;$('openEmpty').onclick=openDatabase;content.style.width='100%';return}
  content.style.removeProperty('width');const pos=new Map(),fragment=document.createDocumentFragment(),pending=[];for(const [i,t] of all.entries()){const l=dd(t.start,iso(timelineLeft))*dayWidth,w=dayWidth*(dd(t.end,t.start)+1),row=document.createElement('div');row.className='gantt-row';row.style.setProperty('--wylo-ticket-color',poleColor(t.category));row.dataset.taskId=String(t.id);row.dataset.startDay=String(dd(t.start,iso(timelineLeft)));row.dataset.duration=String(dd(t.end,t.start)+1);row.innerHTML=`<div class="gantt-label" title="Modifier le ticket ${t.id}"><span class="gantt-task-id" data-digits="${String(t.id).length}">${t.id}</span><span class="gantt-task-title">${escape(t.title)}</span></div><div class="gantt-timeline"><span class="gantt-rail"></span><button class="gantt-bar${t.status==='Réalisée'?' is-complete':''}" style="left:${(l+wyloBarInset(dayWidth,w))/totalWidth*100}%;width:${Math.max(.1,w-2*wyloBarInset(dayWidth,w))/totalWidth*100}%;background:${poleColor(t.category)}" title="${escape(wyloTicketReference(t))} — ${t.start} → ${t.end}"></button></div>`;const badge=row.querySelector('.gantt-task-id');badge.setAttribute('role','button');badge.tabIndex=0;badge.title='Ouvrir la fiche du ticket '+t.id;badge.setAttribute('aria-label',badge.title);badge.onclick=e=>{e.stopPropagation();openTask(t.id)};badge.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();e.stopPropagation();openTask(t.id)}};row.querySelector('.gantt-label').onclick=()=>openTask(t.id);const bar=row.querySelector('.gantt-bar');bar.title+=' — Cliquer pour afficher ou masquer le circuit de dépendances';bar.setAttribute('aria-label','Afficher ou masquer le circuit de dépendances du ticket '+t.id);bar.setAttribute('aria-pressed','false');bar.onclick=()=>wyloToggleFocus(t.id);fragment.appendChild(row);pending.push({row,t,l,w})} $('ganttRows').appendChild(fragment);
  if(depVisible){const grid=$('ganttRows').getBoundingClientRect();for(const {row,t} of pending){const bar=row.querySelector('.gantt-bar').getBoundingClientRect(),timeline=row.querySelector('.gantt-timeline').getBoundingClientRect();const ratio=totalWidth/Math.max(1,timeline.width);pos.set(t.id,{x:(bar.left-timeline.left)*ratio,w:bar.width*ratio,y:bar.top+bar.height/2-grid.top,h:bar.height});}}
@@ -3335,7 +3335,7 @@ function renderGantt(previousPeriod){cancelAnimationFrame(wyloFocusFrame);const 
    wyloAnimateLinks(svg);
   }
  }
-  wyloApplyFocus();
+  if(!deferFocus)wyloApplyFocus();
   main.style.setProperty('--gantt-scrollbar',Math.max(0,vp.offsetWidth-vp.clientWidth)+'px');
  if(previousPeriod && !matchMedia('(prefers-reduced-motion: reduce)').matches){
   main.style.setProperty('--span-ratio',String(totalDays/previousPeriod));
@@ -3440,8 +3440,10 @@ function wyloExitFocus(){
 function wyloToggleFocus(id){
  if(wyloFocusTicket===id){wyloExitFocus();return}
  if(wyloFocusTicket===null)wyloFocusPriorDep=depVisible;
- if(!depVisible){wyloSetDepSwitch(true);depDrawNext=false;renderGantt();}
- wyloFocusTicket=id;wyloApplyFocus(true);
+ const opening=!depVisible;
+ wyloFocusTicket=id;
+ if(opening){wyloSetDepSwitch(true);depDrawNext=false;renderGantt(undefined,true);for(const path of $('ganttRows').querySelectorAll('.dep-link'))path.style.opacity='0';}
+ wyloApplyFocus(true);
 
 }
 function wyloFocusTargets(rows,circuit){
@@ -3465,7 +3467,7 @@ function wyloUpdateFocusPaths(grid,paths,circuit,progress,initialOpacity){
   const a=pos.get(from),b=pos.get(to);
   path.classList.toggle('wylo-focus-link',!!circuit&&active);
   path.classList.remove('wylo-focus-muted');
-  path.style.opacity=String(initialOpacity[i]+(target-initialOpacity[i])*progress);
+  path.style.opacity=String(circuit&&!active?0:initialOpacity[i]+(target-initialOpacity[i])*progress);
   if(a&&b&&Number(path.style.opacity)>0)path.setAttribute('d',wyloDependencyRoute(a,b,path.dataset.kind||'FS',dayWidth,obstacles));
   else path.style.opacity='0';
  }
