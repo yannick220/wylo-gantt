@@ -3157,7 +3157,24 @@ document.addEventListener('pointerdown',e=>{if(!$('wyloContributors').contains(e
 $('wyloContributors').addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('wyloContributorMenu').hidden){e.stopPropagation();wyloContributorMenu(false);$('wyloContributorTrigger').focus();}});
 function updateCounts(){$('allCount').textContent=tasks.length.toLocaleString('fr-FR');$('dbTitleCount').textContent=tasks.length.toLocaleString('fr-FR');$('unplannedCount').textContent=tasks.filter(t=>!t.start||!t.end).length.toLocaleString('fr-FR');}
 let wyloView='gantt',wyloDraggedTicket=null;
-function wyloSetView(view){wyloView=view;document.documentElement.classList.toggle('wylo-kanban-mode',view==='kanban');$('wyloKanban').hidden=view!=='kanban';renderGantt();}
+let wyloViewTransition=0,wyloViewFade=null;
+function wyloSetView(view){
+ const token=++wyloViewTransition,main=document.querySelector('.main');
+ const commit=()=>{wyloView=view;document.documentElement.classList.toggle('wylo-kanban-mode',view==='kanban');$('wyloKanban').hidden=view!=='kanban';renderGantt();};
+ const currentOpacity=Number(getComputedStyle(main).opacity);
+ if(wyloViewFade){wyloViewFade.cancel();wyloViewFade=null;}
+ if(matchMedia('(prefers-reduced-motion: reduce)').matches||!main.animate){commit();main.inert=false;return;}
+ if(view===wyloView){main.inert=false;return;}
+ main.inert=true;
+ const out=main.animate([{opacity:currentOpacity},{opacity:0}],{duration:200,easing:'ease-in-out',fill:'forwards'});wyloViewFade=out;
+ out.finished.then(()=>{
+   if(token!==wyloViewTransition)return;
+   commit();
+   const incoming=main.animate([{opacity:0},{opacity:1}],{duration:280,easing:'ease-out',fill:'forwards'});
+   wyloViewFade=incoming;out.cancel();
+   incoming.finished.then(()=>{if(token!==wyloViewTransition)return;incoming.cancel();wyloViewFade=null;main.inert=false;}).catch(()=>{});
+ }).catch(()=>{});
+}
 function wyloMoveKanban(id,status){const t=tasks.find(x=>Number(x.id)===Number(id));if(!t||!STATUSES.includes(status)||t.status===status)return;t.status=status;persist();renderDatabase();renderGantt();}
 function renderKanban(){
  const board=$('wyloKanban'),positions=new Map([...board.querySelectorAll('.wylo-kanban-list')].map(el=>[el.dataset.status,el.scrollTop])),horizontal=board.scrollLeft;
